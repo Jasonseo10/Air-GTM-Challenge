@@ -1,0 +1,122 @@
+{
+  "description": "Lead scoring rules. Edit this file to tune scoring without touching code. Each rule has an id (for audit trails), a human description, a condition, and a point value. The pipeline emits per-lead score breakdowns so GTM can see why a lead got the score it did.",
+  "rules": [
+    {
+      "id": "title_c_level",
+      "description": "C-level titles (CEO, CTO, etc.) are high-value buyers",
+      "field": "seniority_level",
+      "op": "equals",
+      "value": "C-Level",
+      "points": 30
+    },
+    {
+      "id": "title_vp",
+      "description": "VP-level has budget authority",
+      "field": "seniority_level",
+      "op": "equals",
+      "value": "VP",
+      "points": 20
+    },
+    {
+      "id": "title_director",
+      "description": "Directors and Heads of X",
+      "field": "seniority_level",
+      "op": "equals",
+      "value": "Director",
+      "points": 15
+    },
+    {
+      "id": "title_marketing",
+      "description": "Marketing-related titles — Air's creative ops ICP",
+      "field": "title",
+      "op": "contains_any",
+      "value": ["Marketing", "Mktg"],
+      "points": 15
+    },
+    {
+      "id": "company_size_enterprise",
+      "description": "Enterprise accounts (1000+ employees)",
+      "field": "company_size_min",
+      "op": "gte",
+      "value": 1000,
+      "points": 25
+    },
+    {
+      "id": "company_size_mid_market",
+      "description": "Mid-market (201-999 employees)",
+      "field": "company_size_min",
+      "op": "between",
+      "value": [201, 999],
+      "points": 15
+    },
+    {
+      "id": "industry_saas",
+      "description": "SaaS and related — high product-market fit",
+      "field": "industry",
+      "op": "in",
+      "value": ["SaaS", "Marketing Technology", "Developer Tools", "Creative Operations"],
+      "points": 10
+    },
+    {
+      "id": "source_product_signup",
+      "description": "Product signups are the hottest signal — they've used the product",
+      "field": "source",
+      "op": "equals",
+      "value": "Product Signup",
+      "points": 20
+    },
+    {
+      "id": "source_referral",
+      "description": "Referrals convert well",
+      "field": "source",
+      "op": "equals",
+      "value": "Referral",
+      "points": 10
+    },
+    {
+      "id": "source_event",
+      "description": "Event attendees have shown intent",
+      "field": "source",
+      "op": "equals",
+      "value": "Event",
+      "points": 8
+    },
+    {
+      "id": "country_tier_1",
+      "description": "Tier-1 GTM markets",
+      "field": "country",
+      "op": "in",
+      "value": ["United States", "Canada", "United Kingdom"],
+      "points": 5
+    },
+    {
+      "id": "has_phone",
+      "description": "Reachable by phone — SDR-ready",
+      "field": "phone",
+      "op": "is_present",
+      "value": null,
+      "points": 5
+    },
+    {
+      "id": "penalty_personal_email",
+      "description": "Personal email domain — less likely to be a real buyer intent",
+      "field": "email_domain",
+      "op": "in",
+      "value": ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com"],
+      "points": -10
+    },
+    {
+      "id": "penalty_data_quality",
+      "description": "Missing critical fields — harder to act on",
+      "field": "data_quality_issue_count",
+      "op": "gte",
+      "value": 3,
+      "points": -5
+    }
+  ],
+  "tiers": {
+    "hot": 60,
+    "warm": 30,
+    "cold": 0
+  }
+}
