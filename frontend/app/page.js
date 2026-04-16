@@ -49,15 +49,15 @@ function scoreLead(lead, W) {
   if (pv >= 20) { b.pageVisits = pvW; }
   else if (pv >= 10) { b.pageVisits = Math.round(pvW * 0.7); }
   else if (pv >= 3) { b.pageVisits = Math.round(pvW * 0.4); }
-  else { b.pageVisits = Math.round(pvW * 0.1); }
+  else { b.pageVisits = Math.round(pvW * 0.15); }
 
   // 2. Signup / Payment Intent
   const siW = W.signupIntent.w;
   const src = (lead.source || "").toLowerCase();
   if (lead.has_signup_intent && src.includes("product signup")) { b.signupIntent = siW; }
   else if (lead.has_signup_intent) { b.signupIntent = Math.round(siW * 0.7); }
-  else if (src.includes("event") || src.includes("referral")) { b.signupIntent = Math.round(siW * 0.35); }
-  else { b.signupIntent = Math.round(siW * 0.1); }
+  else if (src.includes("event") || src.includes("referral")) { b.signupIntent = Math.round(siW * 0.4); }
+  else { b.signupIntent = Math.round(siW * 0.15); }
 
   // 3. Free-Credit Usage
   const cu = lead.credit_usage_pct || 0;
@@ -65,7 +65,7 @@ function scoreLead(lead, W) {
   if (cu >= 80) { b.creditUsage = cuW; }
   else if (cu >= 50) { b.creditUsage = Math.round(cuW * 0.7); }
   else if (cu >= 20) { b.creditUsage = Math.round(cuW * 0.4); }
-  else { b.creditUsage = Math.round(cuW * 0.1); }
+  else { b.creditUsage = Math.round(cuW * 0.15); }
 
   // 4. Asset Upload Volume
   const au = lead.asset_uploads || 0;
@@ -128,23 +128,23 @@ function scoreLead(lead, W) {
 }
 
 function tierOf(score) {
-  if (score >= 85) return "HOT";
-  if (score >= 70) return "WARM";
-  if (score >= 55) return "COOL";
+  if (score >= 75) return "HOT";
+  if (score >= 55) return "WARM";
+  if (score >= 35) return "COOL";
   return "LOW";
 }
 
 function tierColor(score) {
-  if (score >= 85) return C.hot;
-  if (score >= 70) return C.mid;
-  if (score >= 55) return C.cool;
+  if (score >= 75) return C.hot;
+  if (score >= 55) return C.mid;
+  if (score >= 35) return C.cool;
   return C.low;
 }
 
 function tierBg(score) {
-  if (score >= 85) return C.hotBg;
-  if (score >= 70) return C.midBg;
-  if (score >= 55) return C.coolBg;
+  if (score >= 75) return C.hotBg;
+  if (score >= 55) return C.midBg;
+  if (score >= 35) return C.coolBg;
   return C.lowBg;
 }
 
@@ -222,7 +222,7 @@ function StatCard({ label, value, sub, i }) {
 
 /* ════════════════════ LEAD ROW ════════════════════ */
 
-function LeadRow({ lead, sc, i, onClick }) {
+function LeadRow({ lead, sc, i, onClick, isDuplicate }) {
   const tier = tierOf(sc.s);
   const tc = tierColor(sc.s);
   const tbg = tierBg(sc.s);
@@ -230,16 +230,19 @@ function LeadRow({ lead, sc, i, onClick }) {
   return (
     <div onClick={onClick} style={{
       display: "grid", gridTemplateColumns: "1fr auto", gap: 16, alignItems: "center",
-      padding: "18px 22px", background: C.surface, border: `1px solid ${C.border}`, borderRadius: 14,
+      padding: "18px 22px", background: C.surface, border: `1px solid ${isDuplicate ? C.warm : C.border}`, borderRadius: 14,
       cursor: "pointer", transition: "all .2s", animation: `slideUp .35s ease ${i * 0.03}s both`,
     }}
       onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.accent; e.currentTarget.style.boxShadow = "0 2px 16px rgba(45,90,61,.06)"; }}
-      onMouseLeave={(e) => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.boxShadow = "none"; }}
+      onMouseLeave={(e) => { e.currentTarget.style.borderColor = isDuplicate ? C.warm : C.border; e.currentTarget.style.boxShadow = "none"; }}
     >
       <div>
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
           <span style={{ fontSize: 16, fontWeight: 700, fontFamily: F.body, color: C.text }}>{lead.name || "(no name)"}</span>
           <Pill color={tc} bg={tbg} style={{ fontSize: 9, fontWeight: 800, letterSpacing: ".06em" }}>{tier}</Pill>
+          {isDuplicate && (
+            <Pill color={C.warm} bg={C.warmLight} style={{ fontSize: 9, fontWeight: 700, letterSpacing: ".04em" }}>DUPLICATE</Pill>
+          )}
           {lead.seniority_level && lead.seniority_level !== "Unknown" && (
             <span style={{ fontSize: 11, color: C.textLt }}>{lead.seniority_level}</span>
           )}
@@ -263,7 +266,7 @@ function LeadRow({ lead, sc, i, onClick }) {
 
 /* ════════════════════ DETAIL PANEL ════════════════════ */
 
-function DetailPanel({ lead, sc, W, onBack }) {
+function DetailPanel({ lead, sc, W, onBack, onExportLead }) {
   const fields = [
     ["Email", lead.email],
     ["Phone", lead.phone],
@@ -293,7 +296,10 @@ function DetailPanel({ lead, sc, W, onBack }) {
     <div style={{ animation: "slideUp .4s ease both" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
         <div style={{ fontSize: 12, color: C.textLt, fontFamily: F.mono, letterSpacing: ".04em" }}>LEAD DETAIL</div>
-        <Btn v="ghost" onClick={onBack}>Back to Results</Btn>
+        <div style={{ display: "flex", gap: 8 }}>
+          <Btn v="soft" onClick={onExportLead}>Export Lead</Btn>
+          <Btn v="ghost" onClick={onBack}>Back to Results</Btn>
+        </div>
       </div>
 
       <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 16, padding: 28 }}>
@@ -583,41 +589,78 @@ function ReviewPanel({ reviewData, onConfirm, onBack }) {
 
 /* ════════════════════ EXPORT PANEL ════════════════════ */
 
-function ExportPanel({ leads, scored, sfCsv, sfJson, onBack }) {
-  const [format, setFormat] = useState("csv");
+function downloadBlob(content, filename, type) {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
-  function downloadBlob(content, filename, type) {
-    const blob = new Blob([content], { type });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    a.click();
-    URL.revokeObjectURL(url);
+/* Build a Salesforce-style CSV from scored lead objects. */
+function buildCsv(scoredItems) {
+  const SF_FIELDS = [
+    "FirstName", "LastName", "Email", "Phone", "Title", "Company",
+    "Industry", "NumberOfEmployees", "LeadSource", "Country",
+    "ICP_Score__c", "ICP_Tier__c",
+  ];
+  const rows = scoredItems.map(({ l, sc }) => {
+    const nameParts = (l.name || "").split(" ");
+    return [
+      nameParts[0] || "", nameParts.slice(1).join(" ") || "",
+      l.email || "", l.phone || "", l.title || "", l.company || "",
+      l.industry || "", l.company_size_min || "", l.source || "", l.country || "",
+      sc.s, tierOf(sc.s),
+    ].map((v) => `"${String(v).replace(/"/g, '""')}"`).join(",");
+  });
+  return [SF_FIELDS.join(","), ...rows].join("\n");
+}
+
+/* Quick-download a list of scored leads in a given format. */
+function downloadLeads(scoredItems, format, filenamePrefix) {
+  if (format === "csv") {
+    downloadBlob(buildCsv(scoredItems), `${filenamePrefix}.csv`, "text/csv");
+  } else {
+    const payload = scoredItems.map(({ l, sc }) => ({
+      ...l, icp_score: sc.s, icp_tier: tierOf(sc.s), icp_breakdown: sc.b,
+    }));
+    downloadBlob(JSON.stringify(payload, null, 2), `${filenamePrefix}.json`, "application/json");
   }
+}
+
+function ExportPanel({ scored, sfCsv, sfJson, exportItems, exportLabel, onBack }) {
+  const [format, setFormat] = useState("csv");
+  const items = exportItems || scored;
+  const label = exportLabel || `Export All ${items.length} Leads`;
 
   function handleDownload() {
     if (format === "csv") {
-      if (sfCsv) {
+      // Use server-generated SF CSV for full export if available.
+      if (!exportItems && sfCsv) {
         downloadBlob(sfCsv, "salesforce_leads.csv", "text/csv");
+      } else {
+        downloadBlob(buildCsv(items), exportItems ? "filtered_leads.csv" : "salesforce_leads.csv", "text/csv");
       }
     } else {
-      const payload = sfJson || scored.map(({ l, sc }) => ({
-        ...l,
-        icp_score: sc.s,
-        icp_tier: tierOf(sc.s),
-        icp_breakdown: sc.b,
-      }));
-      downloadBlob(JSON.stringify(payload, null, 2), "leads_export.json", "application/json");
+      if (!exportItems && sfJson) {
+        downloadBlob(JSON.stringify(sfJson, null, 2), "leads_export.json", "application/json");
+      } else {
+        const payload = items.map(({ l, sc }) => ({
+          ...l, icp_score: sc.s, icp_tier: tierOf(sc.s), icp_breakdown: sc.b,
+        }));
+        downloadBlob(JSON.stringify(payload, null, 2), exportItems ? "filtered_leads.json" : "leads_export.json", "application/json");
+      }
     }
   }
 
   const previewData = format === "csv"
-    ? (sfCsv || "").split("\n").slice(0, 8).join("\n")
+    ? ((!exportItems && sfCsv) ? sfCsv : buildCsv(items)).split("\n").slice(0, 8).join("\n")
     : JSON.stringify(
-        (sfJson?.records || scored.slice(0, 3).map(({ l, sc }) => ({
+        items.slice(0, 3).map(({ l, sc }) => ({
           ...l, icp_score: sc.s, icp_tier: tierOf(sc.s),
-        }))),
+        })),
         null, 2
       ).slice(0, 800);
 
@@ -630,7 +673,7 @@ function ExportPanel({ leads, scored, sfCsv, sfJson, onBack }) {
 
       <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 16, padding: 28 }}>
         <div style={{ fontSize: 22, fontWeight: 400, fontFamily: F.body, color: C.text, marginBottom: 6 }}>
-          Export {leads.length} Leads
+          {label}
         </div>
         <p style={{ fontSize: 13, color: C.textMd, marginBottom: 24, lineHeight: 1.6 }}>
           Download scored leads for Salesforce ingestion or further processing.
@@ -693,6 +736,8 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [manualReview, setManualReview] = useState(false);
   const [reviewData, setReviewData] = useState(null);
+  const [exportItems, setExportItems] = useState(null);
+  const [exportLabel, setExportLabel] = useState("");
   const fileRef = useRef(null);
 
   // Score all leads with current weights.
@@ -701,10 +746,10 @@ export default function App() {
   // Filter + sort.
   const filtered = scored
     .filter((x) => {
-      if (filter === "hot" && x.sc.s < 85) return false;
-      if (filter === "warm" && (x.sc.s < 70 || x.sc.s >= 85)) return false;
-      if (filter === "cool" && (x.sc.s < 55 || x.sc.s >= 70)) return false;
-      if (filter === "low" && x.sc.s >= 55) return false;
+      if (filter === "hot" && x.sc.s < 75) return false;
+      if (filter === "warm" && (x.sc.s < 55 || x.sc.s >= 75)) return false;
+      if (filter === "cool" && (x.sc.s < 35 || x.sc.s >= 55)) return false;
+      if (filter === "low" && x.sc.s >= 35) return false;
       if (search) {
         const q = search.toLowerCase();
         const hay = [x.l.name, x.l.email, x.l.company, x.l.title].filter(Boolean).join(" ").toLowerCase();
@@ -724,6 +769,12 @@ export default function App() {
   }
 
   const totalWeight = Object.values(W).reduce((a, b) => a + b.w, 0);
+
+  // Find emails that appear more than once (unmerged duplicates).
+  const duplicateEmails = new Set();
+  const emailCounts = {};
+  leads.forEach((l) => { emailCounts[l.email] = (emailCounts[l.email] || 0) + 1; });
+  Object.entries(emailCounts).forEach(([email, count]) => { if (count > 1) duplicateEmails.add(email); });
 
   // Drop handler
   const handleDrop = useCallback((e) => {
@@ -1054,7 +1105,7 @@ export default function App() {
             {/* Stat cards */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14, marginBottom: 24 }}>
               <StatCard i={0} label="Total Leads" value={scored.length} />
-              <StatCard i={1} label="Avg ICP Score" value={Math.round(scored.reduce((a, x) => a + x.sc.s, 0) / scored.length)} sub={`${scored.filter((x) => x.sc.s >= 85).length} hot leads`} />
+              <StatCard i={1} label="Avg ICP Score" value={Math.round(scored.reduce((a, x) => a + x.sc.s, 0) / scored.length)} sub={`${scored.filter((x) => x.sc.s >= 75).length} hot leads`} />
               <StatCard i={2} label="Enriched" value={leads.filter((l) => l.enrichment_status === "ok").length} sub={`of ${leads.length} total`} />
               <StatCard i={3} label="Avg Credit Usage" value={Math.round(leads.reduce((a, l) => a + (l.credit_usage_pct || 0), 0) / leads.length) + "%"} sub="product engagement" />
             </div>
@@ -1084,7 +1135,10 @@ export default function App() {
                 )}
                 <div style={{ width: 1, height: 20, background: C.border, margin: "0 4px" }} />
                 <Btn v="ghost" onClick={() => setShowW(!showW)} style={{ fontSize: 11 }}>{showW ? "Hide Weights" : "Weights"}</Btn>
-                <Btn v="primary" onClick={() => setStage("export")} style={{ fontSize: 11 }}>Export</Btn>
+                <Btn v="primary" onClick={() => { setExportItems(null); setExportLabel(""); setStage("export"); }} style={{ fontSize: 11 }}>Export All</Btn>
+                {filtered.length !== scored.length && (
+                  <Btn v="soft" onClick={() => { setExportItems(filtered); setExportLabel(`Export ${filtered.length} Filtered Leads`); setStage("export"); }} style={{ fontSize: 11 }}>Export Filtered ({filtered.length})</Btn>
+                )}
                 <Btn v="ghost" onClick={reset} style={{ fontSize: 11 }}>Reset</Btn>
               </div>
             </div>
@@ -1109,7 +1163,7 @@ export default function App() {
             {/* Lead list */}
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               {filtered.map(({ l, sc }, i) => (
-                <LeadRow key={l.email} lead={l} sc={sc} i={i} onClick={() => { setSel(l); setStage("detail"); }} />
+                <LeadRow key={`${l.email}-${l.source_row_numbers?.[0] || i}`} lead={l} sc={sc} i={i} isDuplicate={duplicateEmails.has(l.email)} onClick={() => { setSel(l); setStage("detail"); }} />
               ))}
             </div>
             {filtered.length === 0 && (
@@ -1124,12 +1178,17 @@ export default function App() {
 
         {/* ════════════ DETAIL STAGE ════════════ */}
         {stage === "detail" && sel && (
-          <DetailPanel lead={sel} sc={scoreLead(sel, W)} W={W} onBack={() => { setSel(null); setStage("results"); }} />
+          <DetailPanel lead={sel} sc={scoreLead(sel, W)} W={W} onBack={() => { setSel(null); setStage("results"); }} onExportLead={() => {
+            const sc2 = scoreLead(sel, W);
+            setExportItems([{ l: sel, sc: sc2 }]);
+            setExportLabel(`Export Lead: ${sel.name || sel.email}`);
+            setStage("export");
+          }} />
         )}
 
         {/* ════════════ EXPORT STAGE ════════════ */}
         {stage === "export" && (
-          <ExportPanel leads={leads} scored={scored} sfCsv={sfCsv} sfJson={sfJson} onBack={() => setStage("results")} />
+          <ExportPanel scored={scored} sfCsv={sfCsv} sfJson={sfJson} exportItems={exportItems} exportLabel={exportLabel} onBack={() => { setExportItems(null); setExportLabel(""); setStage("results"); }} />
         )}
 
         {/* ── FOOTER ── */}
