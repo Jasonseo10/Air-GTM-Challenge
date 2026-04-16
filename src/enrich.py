@@ -188,35 +188,35 @@ def _synthesize_product_signals(lead: dict) -> dict:
         has_signup_intent = ((h >> 6) % 10) < 1   # ~10%
 
     # --- credit_usage_pct (0-100) ---
-    # Only non-zero if they've signed up; correlates with engagement.
+    # Product signups have highest usage; others get baseline from trials/freemium.
     if has_signup_intent:
-        credit_usage_pct = 20 + (h >> 2) % 75     # 20-94
+        credit_usage_pct = 30 + (h >> 2) % 65     # 30-94
         if "product signup" in source:
             credit_usage_pct = min(credit_usage_pct + 15, 100)
     else:
-        credit_usage_pct = 0
+        # Freemium / trial users who haven't fully committed.
+        credit_usage_pct = 5 + (h >> 2) % 30      # 5-34
 
     # --- asset_uploads (0-500) ---
     # Correlated with credit usage and company size.
-    if credit_usage_pct > 0:
-        asset_uploads = int(credit_usage_pct * 1.8) + (h >> 8) % 120
-        if size_min >= 200:
-            asset_uploads += 80 + (h >> 10) % 100
-        asset_uploads = min(asset_uploads, 500)
-    else:
-        asset_uploads = 0
+    asset_uploads = int(credit_usage_pct * 1.5) + (h >> 8) % 80
+    if size_min >= 200:
+        asset_uploads += 60 + (h >> 10) % 100
+    if has_signup_intent:
+        asset_uploads += 40 + (h >> 12) % 60
+    asset_uploads = min(asset_uploads, 500)
 
     # --- teammate_invites (0-20) ---
-    # Larger companies invite more teammates.
+    # Larger companies invite more teammates; even non-signups may
+    # have teammates from shared trial links.
+    teammate_invites = (h >> 5) % 3                # 0-2 baseline
     if has_signup_intent:
-        teammate_invites = 1 + (h >> 5) % 6
-        if size_min >= 1000:
-            teammate_invites += 5 + (h >> 9) % 6
-        elif size_min >= 200:
-            teammate_invites += 2 + (h >> 7) % 4
-        teammate_invites = min(teammate_invites, 20)
-    else:
-        teammate_invites = 0
+        teammate_invites += 2 + (h >> 11) % 5
+    if size_min >= 1000:
+        teammate_invites += 4 + (h >> 9) % 5
+    elif size_min >= 200:
+        teammate_invites += 2 + (h >> 7) % 3
+    teammate_invites = min(teammate_invites, 20)
 
     # --- active_channels (1-8) ---
     # Larger / more mature companies use more channels.
