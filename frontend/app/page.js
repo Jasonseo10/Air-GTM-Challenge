@@ -1,25 +1,47 @@
 "use client";
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
+import {
+  Upload, Search, SlidersHorizontal, ArrowLeft, Download, CheckCircle2, X,
+  ArrowRight, AlertCircle, GitMerge, RotateCcw, ChevronRight, FileText,
+  Plus, Minus,
+} from "lucide-react";
+import PipelineOrbital from "./components/PipelineOrbital";
+import { Card } from "@/app/components/ui/card";
+import { Button } from "@/app/components/ui/button";
+import { Badge, Dot } from "@/app/components/ui/badge";
+import { cn } from "@/lib/utils";
 
-/* ════════════════════ DESIGN TOKENS ════════════════════ */
-const C = {
-  bg: "#FAFAF7", surface: "#FFFFFF", surfaceAlt: "#F5F4F0",
-  border: "#E8E6DF", borderLight: "#F0EEE8",
-  text: "#1A1A18", textMd: "#5C5B56", textLt: "#9C9A93",
-  accent: "#2D5A3D", accentLight: "#E8F0EB", accentMd: "#4A8B62",
-  warm: "#C4713B", warmLight: "#FFF3EB",
-  hot: "#2D5A3D", hotBg: "#E8F0EB",
-  mid: "#B8860B", midBg: "#FFF8E7",
-  cool: "#8B7355", coolBg: "#F5F0EA",
-  low: "#A0522D", lowBg: "#FBF0EB",
-  danger: "#C0392B", dangerBg: "#FDE8E5",
-};
-const F = {
-  body: "var(--font-inter), -apple-system, sans-serif",
-  mono: "var(--font-mono), 'Menlo', monospace",
-};
+async function readErr(res, fallback) {
+  const text = await res.text();
+  try { return JSON.parse(text).error || fallback; }
+  catch { return text.slice(0, 200) || `${fallback} (HTTP ${res.status})`; }
+}
 
-/* ════════════════════ ICP SCORING (client-side) ════════════════════ */
+/* ════════════ PIPELINE STAGES (for orbital viz) ════════════ */
+const PIPELINE_STAGES = [
+  {
+    id: 1, title: "Upload", icon: "upload", duration: "< 1s",
+    description: "Drop a messy CSV. Normalization (lowercasing, trimming, country-code standardization) and hash-based dedupe run automatically on ingest.",
+    relatedIds: [2],
+  },
+  {
+    id: 2, title: "Enrich", icon: "enrich", duration: "~1-3s",
+    description: "Mock Clearbit/ZoomInfo-style API adds company size, industry, and estimated revenue. Retries with exponential backoff on transient failures.",
+    relatedIds: [1, 3],
+  },
+  {
+    id: 3, title: "Score", icon: "score", duration: "~20ms",
+    description: "10 ICP criteria weighted to 100%. Each lead gets a 0-100 score and a tier (HOT / WARM / COOL / LOW). Adjust weights live on the results screen.",
+    relatedIds: [2, 4],
+  },
+  {
+    id: 4, title: "Export", icon: "export", duration: "instant",
+    description: "Salesforce Bulk API CSV + REST composite JSON. Export all, only the current filter, or a single lead from its detail view.",
+    relatedIds: [3],
+  },
+];
+
+/* ════════════ ICP SCORING ════════════ */
 
 const TARGET_INDUSTRIES = new Set([
   "SaaS", "Marketing Technology", "Creative Operations",
@@ -42,86 +64,67 @@ const DEF_W = {
 function scoreLead(lead, W) {
   let total = 0;
   const b = {};
+  const pv = lead.pricing_page_views || 0; const pvW = W.pageVisits.w;
+  if (pv >= 20) b.pageVisits = pvW;
+  else if (pv >= 10) b.pageVisits = Math.round(pvW * 0.7);
+  else if (pv >= 3) b.pageVisits = Math.round(pvW * 0.4);
+  else b.pageVisits = Math.round(pvW * 0.15);
 
-  // 1. Pricing / Demo Page Visits
-  const pv = lead.pricing_page_views || 0;
-  const pvW = W.pageVisits.w;
-  if (pv >= 20) { b.pageVisits = pvW; }
-  else if (pv >= 10) { b.pageVisits = Math.round(pvW * 0.7); }
-  else if (pv >= 3) { b.pageVisits = Math.round(pvW * 0.4); }
-  else { b.pageVisits = Math.round(pvW * 0.15); }
-
-  // 2. Signup / Payment Intent
   const siW = W.signupIntent.w;
   const src = (lead.source || "").toLowerCase();
-  if (lead.has_signup_intent && src.includes("product signup")) { b.signupIntent = siW; }
-  else if (lead.has_signup_intent) { b.signupIntent = Math.round(siW * 0.7); }
-  else if (src.includes("event") || src.includes("referral")) { b.signupIntent = Math.round(siW * 0.4); }
-  else { b.signupIntent = Math.round(siW * 0.15); }
+  if (lead.has_signup_intent && src.includes("product signup")) b.signupIntent = siW;
+  else if (lead.has_signup_intent) b.signupIntent = Math.round(siW * 0.7);
+  else if (src.includes("event") || src.includes("referral")) b.signupIntent = Math.round(siW * 0.4);
+  else b.signupIntent = Math.round(siW * 0.15);
 
-  // 3. Free-Credit Usage
-  const cu = lead.credit_usage_pct || 0;
-  const cuW = W.creditUsage.w;
-  if (cu >= 80) { b.creditUsage = cuW; }
-  else if (cu >= 50) { b.creditUsage = Math.round(cuW * 0.7); }
-  else if (cu >= 20) { b.creditUsage = Math.round(cuW * 0.4); }
-  else { b.creditUsage = Math.round(cuW * 0.15); }
+  const cu = lead.credit_usage_pct || 0; const cuW = W.creditUsage.w;
+  if (cu >= 80) b.creditUsage = cuW;
+  else if (cu >= 50) b.creditUsage = Math.round(cuW * 0.7);
+  else if (cu >= 20) b.creditUsage = Math.round(cuW * 0.4);
+  else b.creditUsage = Math.round(cuW * 0.15);
 
-  // 4. Asset Upload Volume
-  const au = lead.asset_uploads || 0;
-  const auW = W.assetUploads.w;
-  if (au >= 200) { b.assetUploads = auW; }
-  else if (au >= 50) { b.assetUploads = Math.round(auW * 0.7); }
-  else if (au >= 10) { b.assetUploads = Math.round(auW * 0.4); }
-  else { b.assetUploads = Math.round(auW * 0.1); }
+  const au = lead.asset_uploads || 0; const auW = W.assetUploads.w;
+  if (au >= 200) b.assetUploads = auW;
+  else if (au >= 50) b.assetUploads = Math.round(auW * 0.7);
+  else if (au >= 10) b.assetUploads = Math.round(auW * 0.4);
+  else b.assetUploads = Math.round(auW * 0.1);
 
-  // 5. Team Collaboration
-  const ti = lead.teammate_invites || 0;
-  const tiW = W.teamCollab.w;
-  if (ti >= 10) { b.teamCollab = tiW; }
-  else if (ti >= 5) { b.teamCollab = Math.round(tiW * 0.7); }
-  else if (ti >= 2) { b.teamCollab = Math.round(tiW * 0.4); }
-  else { b.teamCollab = Math.round(tiW * 0.15); }
+  const ti = lead.teammate_invites || 0; const tiW = W.teamCollab.w;
+  if (ti >= 10) b.teamCollab = tiW;
+  else if (ti >= 5) b.teamCollab = Math.round(tiW * 0.7);
+  else if (ti >= 2) b.teamCollab = Math.round(tiW * 0.4);
+  else b.teamCollab = Math.round(tiW * 0.15);
 
-  // 6. Company Size
-  const sz = lead.company_size_min || 0;
-  const szW = W.companySize.w;
-  if (sz >= 1000) { b.companySize = szW; }
-  else if (sz >= 201) { b.companySize = Math.round(szW * 0.7); }
-  else if (sz >= 51) { b.companySize = Math.round(szW * 0.4); }
-  else { b.companySize = Math.round(szW * 0.15); }
+  const sz = lead.company_size_min || 0; const szW = W.companySize.w;
+  if (sz >= 1000) b.companySize = szW;
+  else if (sz >= 201) b.companySize = Math.round(szW * 0.7);
+  else if (sz >= 51) b.companySize = Math.round(szW * 0.4);
+  else b.companySize = Math.round(szW * 0.15);
 
-  // 7. Industry Match
-  const ind = lead.industry || "";
-  const indW = W.industryMatch.w;
-  if (TARGET_INDUSTRIES.has(ind)) { b.industryMatch = indW; }
-  else { b.industryMatch = Math.round(indW * 0.2); }
+  const ind = lead.industry || ""; const indW = W.industryMatch.w;
+  if (TARGET_INDUSTRIES.has(ind)) b.industryMatch = indW;
+  else b.industryMatch = Math.round(indW * 0.2);
 
-  // 8. Marketing / Creative Team
   const mcW = W.mktgCreative.w;
   const hasMktg = lead.has_marketing_title || false;
   const sen = (lead.seniority_level || "").toLowerCase();
   const seniorRoles = ["c-level", "vp", "director"];
-  if (hasMktg && seniorRoles.includes(sen)) { b.mktgCreative = mcW; }
-  else if (hasMktg) { b.mktgCreative = Math.round(mcW * 0.6); }
-  else if (seniorRoles.includes(sen)) { b.mktgCreative = Math.round(mcW * 0.4); }
-  else { b.mktgCreative = Math.round(mcW * 0.1); }
+  if (hasMktg && seniorRoles.includes(sen)) b.mktgCreative = mcW;
+  else if (hasMktg) b.mktgCreative = Math.round(mcW * 0.6);
+  else if (seniorRoles.includes(sen)) b.mktgCreative = Math.round(mcW * 0.4);
+  else b.mktgCreative = Math.round(mcW * 0.1);
 
-  // 9. Channel Expansion
-  const ch = lead.active_channels || 0;
-  const chW = W.channelExpansion.w;
-  if (ch >= 6) { b.channelExpansion = chW; }
-  else if (ch >= 4) { b.channelExpansion = Math.round(chW * 0.7); }
-  else if (ch >= 2) { b.channelExpansion = Math.round(chW * 0.4); }
-  else { b.channelExpansion = Math.round(chW * 0.15); }
+  const ch = lead.active_channels || 0; const chW = W.channelExpansion.w;
+  if (ch >= 6) b.channelExpansion = chW;
+  else if (ch >= 4) b.channelExpansion = Math.round(chW * 0.7);
+  else if (ch >= 2) b.channelExpansion = Math.round(chW * 0.4);
+  else b.channelExpansion = Math.round(chW * 0.15);
 
-  // 10. Creative Hiring
-  const cj = lead.creative_job_postings || 0;
-  const cjW = W.creativeHiring.w;
-  if (cj >= 8) { b.creativeHiring = cjW; }
-  else if (cj >= 3) { b.creativeHiring = Math.round(cjW * 0.7); }
-  else if (cj >= 1) { b.creativeHiring = Math.round(cjW * 0.4); }
-  else { b.creativeHiring = Math.round(cjW * 0.1); }
+  const cj = lead.creative_job_postings || 0; const cjW = W.creativeHiring.w;
+  if (cj >= 8) b.creativeHiring = cjW;
+  else if (cj >= 3) b.creativeHiring = Math.round(cjW * 0.7);
+  else if (cj >= 1) b.creativeHiring = Math.round(cjW * 0.4);
+  else b.creativeHiring = Math.round(cjW * 0.1);
 
   Object.values(b).forEach((v) => { total += v; });
   return { s: Math.round(total), b };
@@ -133,64 +136,56 @@ function tierOf(score) {
   if (score >= 35) return "COOL";
   return "LOW";
 }
-
-function tierColor(score) {
-  if (score >= 75) return C.hot;
-  if (score >= 55) return C.mid;
-  if (score >= 35) return C.cool;
-  return C.low;
+function tierVariant(score) {
+  if (score >= 75) return "hot";
+  if (score >= 55) return "warm";
+  if (score >= 35) return "cool";
+  return "low";
+}
+function tierStroke(score) {
+  if (score >= 75) return "hsl(var(--hot))";
+  if (score >= 55) return "hsl(var(--warm))";
+  if (score >= 35) return "hsl(var(--cool))";
+  return "hsl(var(--low))";
+}
+function tierDotClass(score) {
+  if (score >= 75) return "bg-hot";
+  if (score >= 55) return "bg-warm";
+  if (score >= 35) return "bg-cool";
+  return "bg-low";
 }
 
-function tierBg(score) {
-  if (score >= 75) return C.hotBg;
-  if (score >= 55) return C.midBg;
-  if (score >= 35) return C.coolBg;
-  return C.lowBg;
-}
+/* ════════════ ATOMS ════════════ */
 
-/* ════════════════════ ATOMS ════════════════════ */
-
-function Pill({ children, color = C.textMd, bg = C.surfaceAlt, style: sx }) {
+function SectionLabel({ children, className }) {
   return (
-    <span style={{ fontSize: 11, fontFamily: F.body, fontWeight: 500, color, background: bg, padding: "4px 11px", borderRadius: 100, whiteSpace: "nowrap", border: `1px solid ${C.borderLight}`, ...sx }}>
-      {children}
-    </span>
-  );
-}
-
-function Btn({ children, onClick, v = "ghost", disabled, style: sx }) {
-  const map = {
-    ghost:   { color: C.textMd, background: "transparent", border: `1px solid ${C.border}` },
-    primary: { color: "#fff", background: disabled ? C.textLt : C.accent, border: "none", fontWeight: 700 },
-    soft:    { color: C.accent, background: C.accentLight, border: "1px solid transparent" },
-  };
-  return (
-    <button onClick={onClick} disabled={disabled} style={{ fontSize: 12, fontFamily: F.body, fontWeight: 600, borderRadius: 8, padding: "8px 16px", cursor: disabled ? "not-allowed" : "pointer", transition: "all .2s", letterSpacing: ".01em", ...map[v], ...sx }}>
-      {children}
-    </button>
-  );
-}
-
-function Label({ children }) {
-  return (
-    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: C.textLt, fontFamily: F.mono, marginBottom: 10 }}>
+    <div className={cn("font-mono text-2xs uppercase tracking-[0.14em] text-muted-foreground", className)}>
       {children}
     </div>
   );
 }
 
-function ScoreRing({ val, size = 44 }) {
-  const r = size / 2 - 4, circ = 2 * Math.PI * r;
-  const color = tierColor(val);
+function ScoreRing({ val, size = 40 }) {
+  const r = size / 2 - 3;
+  const circ = 2 * Math.PI * r;
+  const stroke = tierStroke(val);
   return (
-    <div style={{ position: "relative", width: size, height: size, flexShrink: 0 }}>
+    <div className="relative flex-shrink-0" style={{ width: size, height: size }}>
       <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={C.borderLight} strokeWidth={3} />
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={color} strokeWidth={3}
-          strokeDasharray={circ} strokeDashoffset={circ * (1 - val / 100)} strokeLinecap="round"
-          style={{ transition: "stroke-dashoffset .8s cubic-bezier(.16,1,.3,1)" }} />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="hsl(var(--border))" strokeWidth={2} />
+        <circle
+          cx={size / 2} cy={size / 2} r={r}
+          fill="none" stroke={stroke} strokeWidth={2}
+          strokeDasharray={circ}
+          strokeDashoffset={circ * (1 - val / 100)}
+          strokeLinecap="round"
+          style={{ transition: "stroke-dashoffset .8s cubic-bezier(.16,1,.3,1)" }}
+        />
       </svg>
-      <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: size > 50 ? 16 : 13, fontWeight: 800, fontFamily: F.mono, color }}>
+      <span
+        className="absolute inset-0 flex items-center justify-center font-medium tabular-nums text-foreground"
+        style={{ fontSize: size > 50 ? 15 : 12 }}
+      >
         {val}
       </span>
     </div>
@@ -199,72 +194,101 @@ function ScoreRing({ val, size = 44 }) {
 
 function Slider({ label, value, onChange }) {
   return (
-    <div style={{ marginBottom: 14 }}>
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
-        <span style={{ fontSize: 12, color: C.text, fontFamily: F.body, fontWeight: 500 }}>{label}</span>
-        <span style={{ fontSize: 12, fontFamily: F.mono, color: C.accent, fontWeight: 600 }}>{value}%</span>
+    <div>
+      <div className="mb-1.5 flex items-center justify-between">
+        <span className="text-xs text-foreground/75">{label}</span>
+        <span className="font-mono text-2xs tabular-nums text-foreground">{value}%</span>
       </div>
-      <input type="range" min={0} max={50} value={value} onChange={(e) => onChange(Number(e.target.value))}
-        style={{ width: "100%" }} />
+      <input
+        type="range" min={0} max={50} value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="w-full"
+      />
     </div>
   );
 }
 
-function StatCard({ label, value, sub, i }) {
+function Field({ label, children, className }) {
   return (
-    <div style={{ padding: "20px 22px", background: C.surface, border: `1px solid ${C.border}`, borderRadius: 14, animation: `slideUp .4s ease ${i * 0.06}s both` }}>
-      <div style={{ fontSize: 30, fontWeight: 300, fontFamily: F.body, color: C.text, lineHeight: 1 }}>{value}</div>
-      <div style={{ fontSize: 12, color: C.textMd, fontFamily: F.body, marginTop: 6, fontWeight: 500 }}>{label}</div>
-      {sub && <div style={{ fontSize: 11, color: C.textLt, fontFamily: F.mono, marginTop: 2 }}>{sub}</div>}
+    <div className={className}>
+      <div className="mb-0.5 font-mono text-2xs uppercase tracking-[0.12em] text-muted-foreground">
+        {label}
+      </div>
+      <div className="text-sm text-foreground">
+        {children || <span className="text-muted-foreground/60">—</span>}
+      </div>
     </div>
   );
 }
 
-/* ════════════════════ LEAD ROW ════════════════════ */
+function Stat({ label, value, sub, i = 0 }) {
+  return (
+    <div
+      className="animate-in border-l border-border pl-5"
+      style={{ animationDelay: `${i * 40}ms` }}
+    >
+      <div className="mb-1.5 font-mono text-2xs uppercase tracking-[0.14em] text-muted-foreground">
+        {label}
+      </div>
+      <div className="text-3xl font-medium tabular-nums tracking-tight text-foreground">
+        {value}
+      </div>
+      {sub && (
+        <div className="mt-1 text-xs text-muted-foreground">{sub}</div>
+      )}
+    </div>
+  );
+}
+
+/* ════════════ LEAD ROW ════════════ */
 
 function LeadRow({ lead, sc, i, onClick, isDuplicate }) {
   const tier = tierOf(sc.s);
-  const tc = tierColor(sc.s);
-  const tbg = tierBg(sc.s);
+  const variant = tierVariant(sc.s);
 
   return (
-    <div onClick={onClick} style={{
-      display: "grid", gridTemplateColumns: "1fr auto", gap: 16, alignItems: "center",
-      padding: "18px 22px", background: C.surface, border: `1px solid ${isDuplicate ? C.warm : C.border}`, borderRadius: 14,
-      cursor: "pointer", transition: "all .2s", animation: `slideUp .35s ease ${i * 0.03}s both`,
-    }}
-      onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.accent; e.currentTarget.style.boxShadow = "0 2px 16px rgba(45,90,61,.06)"; }}
-      onMouseLeave={(e) => { e.currentTarget.style.borderColor = isDuplicate ? C.warm : C.border; e.currentTarget.style.boxShadow = "none"; }}
+    <button
+      onClick={onClick}
+      className="animate-in group grid w-full grid-cols-[auto_1fr_auto_auto] items-center gap-5 border-b border-border py-4 text-left transition-colors hover:bg-muted/60"
+      style={{ animationDelay: `${i * 18}ms` }}
     >
-      <div>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
-          <span style={{ fontSize: 16, fontWeight: 700, fontFamily: F.body, color: C.text }}>{lead.name || "(no name)"}</span>
-          <Pill color={tc} bg={tbg} style={{ fontSize: 9, fontWeight: 800, letterSpacing: ".06em" }}>{tier}</Pill>
+      <Dot className={cn("h-1.5 w-1.5 flex-shrink-0", tierDotClass(sc.s))} />
+
+      <div className="min-w-0">
+        <div className="mb-0.5 flex flex-wrap items-center gap-2">
+          <span className="truncate font-medium text-foreground">
+            {lead.name || "(no name)"}
+          </span>
           {isDuplicate && (
-            <Pill color={C.warm} bg={C.warmLight} style={{ fontSize: 9, fontWeight: 700, letterSpacing: ".04em" }}>DUPLICATE</Pill>
+            <Badge variant="warm" className="text-2xs">Duplicate</Badge>
           )}
           {lead.seniority_level && lead.seniority_level !== "Unknown" && (
-            <span style={{ fontSize: 11, color: C.textLt }}>{lead.seniority_level}</span>
+            <span className="text-xs text-muted-foreground">{lead.seniority_level}</span>
           )}
         </div>
-        <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 6 }}>
-          {lead.company && <Pill>{lead.company}</Pill>}
-          {lead.title && <Pill>{lead.title}</Pill>}
-          {lead.industry && lead.industry !== "Personal / Unknown" && <Pill>{lead.industry}</Pill>}
-          {lead.company_size_band && lead.company_size_band !== "Unknown" && <Pill>{lead.company_size_band} emp</Pill>}
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+          {lead.company && <span className="text-foreground/70">{lead.company}</span>}
+          {lead.title && <span>· {lead.title}</span>}
+          {lead.industry && lead.industry !== "Personal / Unknown" && <span>· {lead.industry}</span>}
+          {lead.country && <span>· {lead.country}</span>}
         </div>
-        <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-          <span style={{ fontSize: 11, fontFamily: F.mono, color: C.textLt }}>{lead.email}</span>
-          {lead.source && <Pill color={C.accent} bg={C.accentLight} style={{ fontSize: 9 }}>{lead.source}</Pill>}
-          {lead.country && <Pill style={{ fontSize: 9 }}>{lead.country}</Pill>}
+        <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+          <span className="font-mono text-muted-foreground">{lead.email}</span>
+          {lead.source && <span className="text-muted-foreground">via {lead.source}</span>}
         </div>
       </div>
-      <ScoreRing val={sc.s} />
-    </div>
+
+      <Badge variant={variant} className="uppercase tracking-[0.1em]">{tier}</Badge>
+
+      <div className="flex items-center gap-3">
+        <ScoreRing val={sc.s} />
+        <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" strokeWidth={1.75} />
+      </div>
+    </button>
   );
 }
 
-/* ════════════════════ DETAIL PANEL ════════════════════ */
+/* ════════════ DETAIL PANEL ════════════ */
 
 function DetailPanel({ lead, sc, W, onBack, onExportLead }) {
   const fields = [
@@ -273,7 +297,7 @@ function DetailPanel({ lead, sc, W, onBack, onExportLead }) {
     ["Title", lead.title],
     ["Company", lead.company],
     ["Industry", lead.industry],
-    ["Company Size", lead.company_size_band],
+    ["Size", lead.company_size_band],
     ["Revenue", lead.estimated_revenue],
     ["Country", lead.country],
     ["Source", lead.source],
@@ -293,120 +317,143 @@ function DetailPanel({ lead, sc, W, onBack, onExportLead }) {
   ];
 
   return (
-    <div style={{ animation: "slideUp .4s ease both" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-        <div style={{ fontSize: 12, color: C.textLt, fontFamily: F.mono, letterSpacing: ".04em" }}>LEAD DETAIL</div>
-        <div style={{ display: "flex", gap: 8 }}>
-          <Btn v="soft" onClick={onExportLead}>Export Lead</Btn>
-          <Btn v="ghost" onClick={onBack}>Back to Results</Btn>
+    <div className="animate-in">
+      <div className="mb-8 flex items-center justify-between">
+        <SectionLabel>Lead detail</SectionLabel>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={onExportLead}>
+            <Download className="h-3.5 w-3.5" strokeWidth={1.75} />
+            Export
+          </Button>
+          <Button variant="ghost" onClick={onBack}>
+            <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.75} />
+            Back
+          </Button>
         </div>
       </div>
 
-      <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 16, padding: 28 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
-          <div>
-            <div style={{ fontSize: 28, fontWeight: 400, fontFamily: F.body, color: C.text, marginBottom: 4 }}>{lead.name || "(no name)"}</div>
-            <div style={{ fontSize: 13, color: C.textLt, fontFamily: F.mono }}>
-              {lead.title}{lead.company ? ` · ${lead.company}` : ""}
+      <div className="mb-12 flex items-start justify-between gap-8 border-b border-border pb-10">
+        <div className="min-w-0">
+          <h2 className="text-4xl font-medium tracking-tight text-foreground md:text-5xl">
+            {lead.name || "(no name)"}
+          </h2>
+          <p className="mt-3 text-base text-muted-foreground">
+            {lead.title}
+            {lead.company ? <span className="mx-2 text-border">·</span> : ""}
+            {lead.company}
+          </p>
+        </div>
+        <ScoreRing val={sc.s} size={72} />
+      </div>
+
+      <div className="mb-12 grid grid-cols-2 gap-x-8 gap-y-6 md:grid-cols-4">
+        {fields.map(([k, v]) => (
+          <Field key={k} label={k}>{v}</Field>
+        ))}
+      </div>
+
+      <SectionLabel className="mb-4">Product usage signals</SectionLabel>
+      <div className="mb-12 grid grid-cols-2 gap-x-8 gap-y-5 border-t border-border pt-6 md:grid-cols-4 lg:grid-cols-7">
+        {signals.map(([k, v]) => (
+          <div key={k}>
+            <div className="mb-1 font-mono text-2xs uppercase tracking-[0.12em] text-muted-foreground">
+              {k}
+            </div>
+            <div className="text-xl font-medium tabular-nums text-foreground">
+              {v}
             </div>
           </div>
-          <ScoreRing val={sc.s} size={64} />
-        </div>
+        ))}
+      </div>
 
-        {/* Lead info grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, marginBottom: 28 }}>
-          {fields.map(([k, v]) => (
-            <div key={k}>
-              <div style={{ fontSize: 10, color: C.textLt, fontFamily: F.mono, letterSpacing: ".06em", marginBottom: 3 }}>{k.toUpperCase()}</div>
-              {v ? (
-                <div style={{ fontSize: 13, color: C.text, fontFamily: F.body, lineHeight: 1.5 }}>{v}</div>
-              ) : (
-                <div style={{ fontSize: 12, color: C.textLt, fontFamily: F.mono, fontStyle: "italic" }}>--</div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Product signals */}
-        <Label>Product Usage Signals</Label>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14, marginBottom: 28 }}>
-          {signals.map(([k, v]) => (
-            <div key={k} style={{ padding: "12px 14px", background: C.surfaceAlt, borderRadius: 10, border: `1px solid ${C.borderLight}` }}>
-              <div style={{ fontSize: 10, color: C.textLt, fontFamily: F.mono, letterSpacing: ".06em", marginBottom: 4 }}>{k.toUpperCase()}</div>
-              <div style={{ fontSize: 18, fontWeight: 600, fontFamily: F.mono, color: C.text }}>{v}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Score breakdown */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 28 }}>
-          <div>
-            <Label>ICP Score Breakdown</Label>
+      <div className="grid gap-12 lg:grid-cols-2">
+        <div>
+          <SectionLabel className="mb-4">ICP score breakdown</SectionLabel>
+          <div className="space-y-3">
             {Object.entries(W).map(([k, cfg]) => {
               const earned = sc.b[k] || 0;
               const max = cfg.w;
               const pct = max > 0 ? (earned / max) * 100 : 0;
-              const barCol = pct >= 80 ? C.accent : pct >= 50 ? C.mid : C.low;
+              const barColor = pct >= 80 ? "hsl(var(--primary))" : pct >= 50 ? "hsl(var(--warm))" : "hsl(var(--low))";
               return (
-                <div key={k} style={{ marginBottom: 10 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 3 }}>
-                    <span style={{ fontSize: 11, color: C.textMd, fontFamily: F.body }}>{cfg.label}</span>
-                    <span style={{ fontSize: 11, fontFamily: F.mono, color: C.text, fontWeight: 600 }}>{earned}/{max}</span>
+                <div key={k}>
+                  <div className="mb-1 flex items-center justify-between">
+                    <span className="text-xs text-foreground/75">{cfg.label}</span>
+                    <span className="font-mono text-2xs tabular-nums text-foreground">
+                      {earned}<span className="text-muted-foreground">/{max}</span>
+                    </span>
                   </div>
-                  <div style={{ width: "100%", height: 5, background: C.surfaceAlt, borderRadius: 3, overflow: "hidden" }}>
-                    <div style={{ width: `${pct}%`, height: "100%", borderRadius: 3, background: barCol, transition: "width .6s ease" }} />
+                  <div className="h-[2px] w-full overflow-hidden bg-muted">
+                    <div
+                      className="h-full"
+                      style={{
+                        width: `${pct}%`,
+                        background: barColor,
+                        transition: "width .7s cubic-bezier(.16,1,.3,1)",
+                      }}
+                    />
                   </div>
                 </div>
               );
             })}
-            <div style={{ marginTop: 14, padding: "12px 16px", background: C.accentLight, borderRadius: 10, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontSize: 13, fontWeight: 600, color: C.text }}>Total Score</span>
-              <span style={{ fontSize: 20, fontWeight: 800, fontFamily: F.mono, color: C.accent }}>{sc.s}</span>
-            </div>
           </div>
+          <div className="mt-6 flex items-baseline justify-between border-t border-border pt-4">
+            <span className="text-sm text-foreground">Total score</span>
+            <span className="text-4xl font-medium tabular-nums text-primary">{sc.s}</span>
+          </div>
+        </div>
 
-          <div>
-            <Label>Data Quality Issues</Label>
-            {(lead.data_quality_issues || []).length > 0 ? (
-              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                {lead.data_quality_issues.map((issue, i) => (
-                  <div key={i} style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                    <span style={{ fontSize: 10, color: C.warm, fontFamily: F.mono, fontWeight: 700 }}>{String(i + 1).padStart(2, "0")}</span>
-                    <span style={{ fontSize: 12, color: C.text, fontFamily: F.body }}>{issue.replace(/_/g, " ")}</span>
+        <div>
+          <SectionLabel className="mb-4">Data quality</SectionLabel>
+          {(lead.data_quality_issues || []).length > 0 ? (
+            <div className="space-y-2">
+              {lead.data_quality_issues.map((issue, i) => (
+                <div key={i} className="flex items-center gap-3 py-1.5">
+                  <span className="font-mono text-2xs text-muted-foreground">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-sm capitalize text-foreground">
+                    {issue.replace(/_/g, " ")}
+                  </span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <CheckCircle2 className="h-3.5 w-3.5 text-primary" strokeWidth={1.75} />
+              No issues detected
+            </div>
+          )}
+
+          {lead.score_breakdown && lead.score_breakdown.length > 0 && (
+            <>
+              <SectionLabel className="mb-4 mt-10">Scoring rules fired</SectionLabel>
+              <div className="space-y-1.5">
+                {lead.score_breakdown.map((rule, i) => (
+                  <div key={i} className="flex items-center justify-between border-b border-border/60 py-2 text-xs">
+                    <span className="text-foreground/80">{rule.description || rule.rule_id}</span>
+                    <span
+                      className={cn(
+                        "font-mono tabular-nums",
+                        rule.points > 0 ? "text-primary" : "text-muted-foreground",
+                      )}
+                    >
+                      {rule.points > 0 ? "+" : ""}{rule.points}
+                    </span>
                   </div>
                 ))}
               </div>
-            ) : (
-              <div style={{ fontSize: 12, color: C.textLt, fontStyle: "italic" }}>No issues detected</div>
-            )}
-
-            {lead.score_breakdown && lead.score_breakdown.length > 0 && (
-              <>
-                <div style={{ marginTop: 22 }} />
-                <Label>Pipeline Scoring Rules Fired</Label>
-                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                  {lead.score_breakdown.map((rule, i) => (
-                    <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "8px 10px", background: C.surfaceAlt, borderRadius: 8 }}>
-                      <span style={{ fontSize: 11, color: C.textMd }}>{rule.description || rule.rule_id}</span>
-                      <span style={{ fontSize: 11, fontFamily: F.mono, fontWeight: 700, color: rule.points > 0 ? C.accent : C.low }}>
-                        {rule.points > 0 ? "+" : ""}{rule.points}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
+            </>
+          )}
         </div>
       </div>
     </div>
   );
 }
 
-/* ════════════════════ REVIEW PANEL ════════════════════ */
+/* ════════════ REVIEW PANEL ════════════ */
 
 function ReviewPanel({ reviewData, onConfirm, onBack }) {
-  // Track decisions: merges and deletions.
   const [mergeDecisions, setMergeDecisions] = useState(() => {
     const d = {};
     (reviewData.duplicate_groups || []).forEach((g) => { d[g.email] = "approve"; });
@@ -428,12 +475,10 @@ function ReviewPanel({ reviewData, onConfirm, onBack }) {
       if (decision === "approve") approved.push(email);
       else rejected.push(email);
     });
-
     const restored = [];
     Object.entries(dropDecisions).forEach(([idx, decision]) => {
       if (decision === "restore") restored.push(droppedRows[Number(idx)]);
     });
-
     onConfirm({ approved_merges: approved, rejected_merges: rejected, restored_drops: restored });
   }
 
@@ -443,163 +488,174 @@ function ReviewPanel({ reviewData, onConfirm, onBack }) {
   const confirmedDrops = Object.values(dropDecisions).filter((v) => v === "confirm").length;
 
   return (
-    <div style={{ animation: "slideUp .4s ease both" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-        <div style={{ fontSize: 12, color: C.textLt, fontFamily: F.mono, letterSpacing: ".04em" }}>REVIEW MERGES &amp; DELETIONS</div>
-        <div style={{ display: "flex", gap: 8 }}>
-          <Btn v="ghost" onClick={onBack}>Back to Upload</Btn>
-          <Btn v="primary" onClick={handleConfirm}>
-            Confirm &amp; Run Pipeline
-          </Btn>
+    <div className="animate-in">
+      <div className="mb-8 flex items-center justify-between">
+        <SectionLabel>Review merges &amp; deletions</SectionLabel>
+        <div className="flex gap-2">
+          <Button variant="ghost" onClick={onBack}>
+            <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.75} />
+            Back
+          </Button>
+          <Button variant="primary" onClick={handleConfirm}>
+            Confirm &amp; run
+            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.75} />
+          </Button>
         </div>
       </div>
 
-      {/* Summary bar */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12, marginBottom: 24 }}>
-        <StatCard i={0} label="Total Rows" value={reviewData.total_rows} />
-        <StatCard i={1} label="Valid Leads" value={reviewData.valid_leads} />
-        <StatCard i={2} label="Duplicate Groups" value={dupGroups.length} sub={`${approvedCount} merge, ${rejectedCount} keep separate`} />
-        <StatCard i={3} label="Dropped Rows" value={droppedRows.length} sub={`${restoredCount} restore, ${confirmedDrops} confirm drop`} />
+      <div className="mb-12 grid grid-cols-2 gap-6 border-y border-border py-8 md:grid-cols-4">
+        <Stat i={0} label="Total rows" value={reviewData.total_rows} />
+        <Stat i={1} label="Valid leads" value={reviewData.valid_leads} sub="passed validation" />
+        <Stat i={2} label="Duplicate groups" value={dupGroups.length} sub={`${approvedCount} merge · ${rejectedCount} keep`} />
+        <Stat i={3} label="Dropped rows" value={droppedRows.length} sub={`${restoredCount} restore · ${confirmedDrops} drop`} />
       </div>
 
-      {/* Duplicate groups */}
       {dupGroups.length > 0 && (
-        <div style={{ marginBottom: 28 }}>
-          <Label>Duplicate Groups ({dupGroups.length})</Label>
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <section className="mb-16">
+          <SectionLabel className="mb-5">Duplicate groups · {dupGroups.length}</SectionLabel>
+          <div className="space-y-4">
             {dupGroups.map((group) => {
               const decision = mergeDecisions[group.email];
               return (
-                <div key={group.email} style={{
-                  background: C.surface, border: `1px solid ${decision === "approve" ? C.accent : C.border}`,
-                  borderRadius: 14, padding: 20, transition: "border-color .2s",
-                }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+                <Card
+                  key={group.email}
+                  className={cn(
+                    "overflow-hidden transition-colors",
+                    decision === "approve" ? "border-primary/40" : "",
+                  )}
+                >
+                  <div className="flex items-center justify-between border-b border-border px-5 py-4">
                     <div>
-                      <span style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{group.email}</span>
-                      <span style={{ fontSize: 12, color: C.textLt, marginLeft: 10 }}>{group.rows.length} rows</span>
+                      <span className="font-medium text-foreground">{group.email}</span>
+                      <span className="ml-3 font-mono text-xs text-muted-foreground">{group.rows.length} rows</span>
                     </div>
-                    <div style={{ display: "flex", gap: 6 }}>
-                      <Btn v={decision === "approve" ? "soft" : "ghost"}
+                    <div className="flex gap-1">
+                      <Button
+                        size="sm"
+                        variant={decision === "approve" ? "soft" : "ghost"}
                         onClick={() => setMergeDecisions((p) => ({ ...p, [group.email]: "approve" }))}
-                        style={{ fontSize: 11 }}>
+                      >
+                        <GitMerge className="h-3 w-3" strokeWidth={1.75} />
                         Merge
-                      </Btn>
-                      <Btn v={decision === "reject" ? "soft" : "ghost"}
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant={decision === "reject" ? "outline" : "ghost"}
                         onClick={() => setMergeDecisions((p) => ({ ...p, [group.email]: "reject" }))}
-                        style={{ fontSize: 11, color: decision === "reject" ? C.warm : undefined }}>
-                        Keep Separate
-                      </Btn>
+                      >
+                        Keep separate
+                      </Button>
                     </div>
                   </div>
-
-                  {/* Show the rows side by side */}
-                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  <div className="divide-y divide-border">
                     {group.rows.map((row, ri) => (
-                      <div key={ri} style={{
-                        display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8,
-                        padding: "10px 14px", background: C.surfaceAlt, borderRadius: 8, fontSize: 12,
-                      }}>
-                        <div><span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>NAME</span><br />{row.name || "--"}</div>
-                        <div><span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>COMPANY</span><br />{row.company || "--"}</div>
-                        <div><span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>TITLE</span><br />{row.title || "--"}</div>
-                        <div><span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>SOURCE</span><br />{row.source || "--"}</div>
+                      <div key={ri} className="grid grid-cols-2 gap-6 px-5 py-3 md:grid-cols-4">
+                        {[["Name", row.name], ["Company", row.company], ["Title", row.title], ["Source", row.source]].map(([lbl, val]) => (
+                          <div key={lbl}>
+                            <div className="mb-0.5 font-mono text-2xs uppercase tracking-[0.12em] text-muted-foreground">{lbl}</div>
+                            <div className="truncate text-xs text-foreground">{val || "—"}</div>
+                          </div>
+                        ))}
                       </div>
                     ))}
                   </div>
-
                   {decision === "approve" && (
-                    <div style={{ marginTop: 10, padding: "10px 14px", background: C.accentLight, borderRadius: 8, fontSize: 12 }}>
-                      <span style={{ fontFamily: F.mono, fontSize: 10, color: C.accent, fontWeight: 700 }}>MERGED RESULT</span>
-                      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8, marginTop: 6 }}>
-                        <div>{group.proposed_merge.name || "--"}</div>
-                        <div>{group.proposed_merge.company || "--"}</div>
-                        <div>{group.proposed_merge.title || "--"}</div>
-                        <div>{group.proposed_merge.source || "--"}</div>
+                    <div className="animate-fade grid grid-cols-2 gap-6 border-t border-primary/20 bg-primary-soft px-5 py-3 md:grid-cols-4">
+                      <div className="col-span-2 mb-0 font-mono text-2xs uppercase tracking-[0.12em] text-primary md:col-span-4">
+                        Merged result
                       </div>
+                      {[group.proposed_merge.name, group.proposed_merge.company, group.proposed_merge.title, group.proposed_merge.source].map((v, i) => (
+                        <div key={i} className="truncate text-xs text-foreground">{v || "—"}</div>
+                      ))}
                     </div>
                   )}
-                </div>
+                </Card>
               );
             })}
           </div>
-        </div>
+        </section>
       )}
 
-      {/* Dropped rows */}
       {droppedRows.length > 0 && (
-        <div style={{ marginBottom: 28 }}>
-          <Label>Dropped Rows &mdash; Invalid/Missing Email ({droppedRows.length})</Label>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <section className="mb-16">
+          <SectionLabel className="mb-5">Dropped rows · {droppedRows.length}</SectionLabel>
+          <div className="divide-y divide-border border-y border-border">
             {droppedRows.map((drop, i) => {
               const decision = dropDecisions[i];
               return (
-                <div key={i} style={{
-                  background: C.surface, border: `1px solid ${decision === "restore" ? C.warm : C.border}`,
-                  borderRadius: 10, padding: "14px 18px", display: "flex", justifyContent: "space-between",
-                  alignItems: "center", transition: "border-color .2s",
-                }}>
-                  <div style={{ display: "flex", gap: 20, fontSize: 12, flexWrap: "wrap" }}>
+                <div
+                  key={i}
+                  className={cn(
+                    "flex flex-wrap items-center justify-between gap-4 py-4 transition-colors",
+                    decision === "restore" && "bg-warm/[0.04]",
+                  )}
+                >
+                  <div className="flex flex-wrap items-center gap-6 text-xs">
                     <div>
-                      <span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>ROW</span>
-                      <div>{drop.row_num}</div>
+                      <div className="mb-0.5 font-mono text-2xs uppercase tracking-[0.12em] text-muted-foreground">Row</div>
+                      <div className="font-mono text-foreground">{drop.row_num}</div>
                     </div>
                     <div>
-                      <span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>NAME</span>
-                      <div>{drop.raw.Name || "--"}</div>
+                      <div className="mb-0.5 font-mono text-2xs uppercase tracking-[0.12em] text-muted-foreground">Name</div>
+                      <div className="text-foreground">{drop.raw.Name || "—"}</div>
                     </div>
                     <div>
-                      <span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>EMAIL (RAW)</span>
-                      <div style={{ fontFamily: F.mono, color: C.low }}>{drop.raw.Email || "(empty)"}</div>
+                      <div className="mb-0.5 font-mono text-2xs uppercase tracking-[0.12em] text-muted-foreground">Email (raw)</div>
+                      <div className="font-mono text-hot">{drop.raw.Email || "(empty)"}</div>
                     </div>
                     <div>
-                      <span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>REASON</span>
-                      <div>{drop.reason.replace(/_/g, " ")}</div>
+                      <div className="mb-0.5 font-mono text-2xs uppercase tracking-[0.12em] text-muted-foreground">Reason</div>
+                      <div className="capitalize text-foreground">{drop.reason.replace(/_/g, " ")}</div>
                     </div>
                   </div>
-                  <div style={{ display: "flex", gap: 6 }}>
-                    <Btn v={decision === "confirm" ? "soft" : "ghost"}
+                  <div className="flex gap-1">
+                    <Button
+                      size="sm"
+                      variant={decision === "confirm" ? "soft" : "ghost"}
                       onClick={() => setDropDecisions((p) => ({ ...p, [i]: "confirm" }))}
-                      style={{ fontSize: 11 }}>
+                    >
                       Drop
-                    </Btn>
-                    <Btn v={decision === "restore" ? "soft" : "ghost"}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={decision === "restore" ? "outline" : "ghost"}
                       onClick={() => setDropDecisions((p) => ({ ...p, [i]: "restore" }))}
-                      style={{ fontSize: 11, color: decision === "restore" ? C.warm : undefined }}>
+                    >
+                      <RotateCcw className="h-3 w-3" strokeWidth={1.75} />
                       Restore
-                    </Btn>
+                    </Button>
                   </div>
                 </div>
               );
             })}
           </div>
-        </div>
+        </section>
       )}
 
-      {/* Bottom confirm */}
-      <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, paddingTop: 12, borderTop: `1px solid ${C.border}` }}>
-        <Btn v="ghost" onClick={onBack}>Back</Btn>
-        <Btn v="primary" onClick={handleConfirm} style={{ padding: "12px 28px", fontSize: 14 }}>
-          Confirm &amp; Run Pipeline
-        </Btn>
+      <div className="flex items-center justify-end gap-2">
+        <Button variant="ghost" onClick={onBack}>
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.75} />
+          Back
+        </Button>
+        <Button variant="primary" size="lg" onClick={handleConfirm}>
+          Confirm &amp; run pipeline
+          <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
+        </Button>
       </div>
     </div>
   );
 }
 
-/* ════════════════════ EXPORT PANEL ════════════════════ */
+/* ════════════ EXPORT ════════════ */
 
 function downloadBlob(content, filename, type) {
   const blob = new Blob([content], { type });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  a.click();
+  a.href = url; a.download = filename; a.click();
   URL.revokeObjectURL(url);
 }
 
-/* Build a Salesforce-style CSV from scored lead objects. */
 function buildCsv(scoredItems) {
   const SF_FIELDS = [
     "FirstName", "LastName", "Email", "Phone", "Title", "Company",
@@ -618,38 +674,19 @@ function buildCsv(scoredItems) {
   return [SF_FIELDS.join(","), ...rows].join("\n");
 }
 
-/* Quick-download a list of scored leads in a given format. */
-function downloadLeads(scoredItems, format, filenamePrefix) {
-  if (format === "csv") {
-    downloadBlob(buildCsv(scoredItems), `${filenamePrefix}.csv`, "text/csv");
-  } else {
-    const payload = scoredItems.map(({ l, sc }) => ({
-      ...l, icp_score: sc.s, icp_tier: tierOf(sc.s), icp_breakdown: sc.b,
-    }));
-    downloadBlob(JSON.stringify(payload, null, 2), `${filenamePrefix}.json`, "application/json");
-  }
-}
-
 function ExportPanel({ scored, sfCsv, sfJson, exportItems, exportLabel, onBack }) {
   const [format, setFormat] = useState("csv");
   const items = exportItems || scored;
-  const label = exportLabel || `Export All ${items.length} Leads`;
+  const label = exportLabel || `Export all ${items.length} leads`;
 
   function handleDownload() {
     if (format === "csv") {
-      // Use server-generated SF CSV for full export if available.
-      if (!exportItems && sfCsv) {
-        downloadBlob(sfCsv, "salesforce_leads.csv", "text/csv");
-      } else {
-        downloadBlob(buildCsv(items), exportItems ? "filtered_leads.csv" : "salesforce_leads.csv", "text/csv");
-      }
+      if (!exportItems && sfCsv) downloadBlob(sfCsv, "salesforce_leads.csv", "text/csv");
+      else downloadBlob(buildCsv(items), exportItems ? "filtered_leads.csv" : "salesforce_leads.csv", "text/csv");
     } else {
-      if (!exportItems && sfJson) {
-        downloadBlob(JSON.stringify(sfJson, null, 2), "leads_export.json", "application/json");
-      } else {
-        const payload = items.map(({ l, sc }) => ({
-          ...l, icp_score: sc.s, icp_tier: tierOf(sc.s), icp_breakdown: sc.b,
-        }));
+      if (!exportItems && sfJson) downloadBlob(JSON.stringify(sfJson, null, 2), "leads_export.json", "application/json");
+      else {
+        const payload = items.map(({ l, sc }) => ({ ...l, icp_score: sc.s, icp_tier: tierOf(sc.s), icp_breakdown: sc.b }));
         downloadBlob(JSON.stringify(payload, null, 2), exportItems ? "filtered_leads.json" : "leads_export.json", "application/json");
       }
     }
@@ -658,65 +695,78 @@ function ExportPanel({ scored, sfCsv, sfJson, exportItems, exportLabel, onBack }
   const previewData = format === "csv"
     ? ((!exportItems && sfCsv) ? sfCsv : buildCsv(items)).split("\n").slice(0, 8).join("\n")
     : JSON.stringify(
-        items.slice(0, 3).map(({ l, sc }) => ({
-          ...l, icp_score: sc.s, icp_tier: tierOf(sc.s),
-        })),
-        null, 2
+        items.slice(0, 3).map(({ l, sc }) => ({ ...l, icp_score: sc.s, icp_tier: tierOf(sc.s) })),
+        null, 2,
       ).slice(0, 800);
 
   return (
-    <div style={{ animation: "slideUp .4s ease both" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-        <div style={{ fontSize: 12, color: C.textLt, fontFamily: F.mono, letterSpacing: ".04em" }}>EXPORT</div>
-        <Btn v="ghost" onClick={onBack}>Back to Results</Btn>
+    <div className="animate-in">
+      <div className="mb-8 flex items-center justify-between">
+        <SectionLabel>Export</SectionLabel>
+        <Button variant="ghost" onClick={onBack}>
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.75} />
+          Back
+        </Button>
       </div>
 
-      <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 16, padding: 28 }}>
-        <div style={{ fontSize: 22, fontWeight: 400, fontFamily: F.body, color: C.text, marginBottom: 6 }}>
-          {label}
-        </div>
-        <p style={{ fontSize: 13, color: C.textMd, marginBottom: 24, lineHeight: 1.6 }}>
-          Download scored leads for Salesforce ingestion or further processing.
-        </p>
+      <h2 className="mb-3 text-4xl font-medium tracking-tight text-foreground md:text-5xl">
+        {label}
+      </h2>
+      <p className="mb-10 max-w-lg text-sm leading-relaxed text-muted-foreground">
+        Download scored leads for Salesforce ingestion or further processing. CSV ships in Bulk API 2.0 schema. JSON bundles scores and breakdown.
+      </p>
 
-        {/* Format toggle */}
-        <Label>Format</Label>
-        <div style={{ display: "flex", gap: 8, marginBottom: 24 }}>
-          <Btn v={format === "csv" ? "soft" : "ghost"} onClick={() => setFormat("csv")} style={{ borderRadius: 8 }}>
-            CSV for Salesforce
-          </Btn>
-          <Btn v={format === "json" ? "soft" : "ghost"} onClick={() => setFormat("json")} style={{ borderRadius: 8 }}>
-            JSON
-          </Btn>
-        </div>
+      <SectionLabel className="mb-3">Format</SectionLabel>
+      <div className="mb-8 grid grid-cols-2 gap-3">
+        <button
+          onClick={() => setFormat("csv")}
+          className={cn(
+            "flex items-center justify-between rounded-lg border px-5 py-4 text-left transition-colors",
+            format === "csv" ? "border-primary bg-primary-soft" : "border-border hover:border-foreground/30",
+          )}
+        >
+          <div>
+            <div className="text-sm font-medium text-foreground">CSV</div>
+            <div className="text-xs text-muted-foreground">Salesforce Bulk API 2.0</div>
+          </div>
+          {format === "csv" && <CheckCircle2 className="h-4 w-4 text-primary" strokeWidth={1.75} />}
+        </button>
+        <button
+          onClick={() => setFormat("json")}
+          className={cn(
+            "flex items-center justify-between rounded-lg border px-5 py-4 text-left transition-colors",
+            format === "json" ? "border-primary bg-primary-soft" : "border-border hover:border-foreground/30",
+          )}
+        >
+          <div>
+            <div className="text-sm font-medium text-foreground">JSON</div>
+            <div className="text-xs text-muted-foreground">Scores + full breakdown</div>
+          </div>
+          {format === "json" && <CheckCircle2 className="h-4 w-4 text-primary" strokeWidth={1.75} />}
+        </button>
+      </div>
 
-        <div style={{ marginBottom: 8 }}>
-          <Label>{format === "csv" ? "Salesforce Bulk API CSV Preview" : "JSON Preview"}</Label>
-        </div>
-        <div style={{
-          background: C.surfaceAlt, border: `1px solid ${C.borderLight}`, borderRadius: 10,
-          padding: 16, maxHeight: 280, overflow: "auto", marginBottom: 24,
-        }}>
-          <pre style={{ fontSize: 11, fontFamily: F.mono, color: C.textMd, whiteSpace: "pre-wrap", lineHeight: 1.7 }}>
-            {previewData || "No data available. Run the pipeline first."}
-          </pre>
-        </div>
+      <SectionLabel className="mb-3">Preview</SectionLabel>
+      <div className="mb-8 max-h-80 overflow-auto rounded-lg border border-border bg-surface p-5">
+        <pre className="whitespace-pre-wrap font-mono text-xs leading-relaxed text-foreground/80">
+          {previewData || "No data available. Run the pipeline first."}
+        </pre>
+      </div>
 
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-          <Btn v="primary" onClick={handleDownload} disabled={!previewData}
-            style={{ padding: "12px 28px", fontSize: 14, borderRadius: 10 }}>
-            Download {format.toUpperCase()}
-          </Btn>
-          <span style={{ fontSize: 12, color: C.textLt }}>
-            {format === "csv" ? "Salesforce Bulk API 2.0 compatible" : "Includes ICP scores and breakdown"}
-          </span>
-        </div>
+      <div className="flex flex-wrap items-center gap-4">
+        <Button variant="primary" size="lg" onClick={handleDownload} disabled={!previewData}>
+          <Download className="h-4 w-4" strokeWidth={1.75} />
+          Download {format.toUpperCase()}
+        </Button>
+        <span className="text-xs text-muted-foreground">
+          {format === "csv" ? "Salesforce Bulk API 2.0 compatible" : "Includes ICP scores and breakdown"}
+        </span>
       </div>
     </div>
   );
 }
 
-/* ════════════════════ APP ════════════════════ */
+/* ════════════ APP ════════════ */
 
 export default function App() {
   const [leads, setLeads] = useState([]);
@@ -738,12 +788,19 @@ export default function App() {
   const [reviewData, setReviewData] = useState(null);
   const [exportItems, setExportItems] = useState(null);
   const [exportLabel, setExportLabel] = useState("");
+  const [orbitOpen, setOrbitOpen] = useState(false);
+  const [orbitInitialId, setOrbitInitialId] = useState(null);
   const fileRef = useRef(null);
 
-  // Score all leads with current weights.
+  useEffect(() => {
+    if (!orbitOpen) return;
+    const onKey = (e) => { if (e.key === "Escape") setOrbitOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [orbitOpen]);
+
   const scored = leads.map((l) => ({ l, sc: scoreLead(l, W) }));
 
-  // Filter + sort.
   const filtered = scored
     .filter((x) => {
       if (filter === "hot" && x.sc.s < 75) return false;
@@ -764,222 +821,182 @@ export default function App() {
       return b.sc.s - a.sc.s;
     });
 
-  function updW(k, v) {
-    setW((p) => ({ ...p, [k]: { ...p[k], w: v } }));
-  }
-
+  function updW(k, v) { setW((p) => ({ ...p, [k]: { ...p[k], w: v } })); }
   const totalWeight = Object.values(W).reduce((a, b) => a + b.w, 0);
 
-  // Find emails that appear more than once (unmerged duplicates).
   const duplicateEmails = new Set();
   const emailCounts = {};
   leads.forEach((l) => { emailCounts[l.email] = (emailCounts[l.email] || 0) + 1; });
   Object.entries(emailCounts).forEach(([email, count]) => { if (count > 1) duplicateEmails.add(email); });
 
-  // Drop handler
   const handleDrop = useCallback((e) => {
-    e.preventDefault();
-    setDragOver(false);
+    e.preventDefault(); setDragOver(false);
     const file = e.dataTransfer.files[0];
-    if (file && file.name.endsWith(".csv")) {
-      setCsvFile(file);
-    }
+    if (file && file.name.endsWith(".csv")) setCsvFile(file);
   }, []);
 
   async function runPipeline() {
-    setBusy(true);
-    setProg(0);
-    setError(null);
-
+    setBusy(true); setProg(0); setError(null);
     const progInterval = setInterval(() => {
       setProg((p) => Math.min(p + Math.random() * 12, 92));
     }, 300);
-
     try {
       if (manualReview) {
-        // Step 1: Get review data (duplicates + drops) without running full pipeline.
         let res;
         if (csvFile) {
-          const form = new FormData();
-          form.append("file", csvFile);
+          const form = new FormData(); form.append("file", csvFile);
           res = await fetch("/api/pipeline/review", { method: "POST", body: form });
         } else {
           res = await fetch("/api/pipeline/review", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({}),
+            method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({}),
           });
         }
-
-        clearInterval(progInterval);
-        setProg(100);
-
-        if (!res.ok) {
-          const err = await res.json();
-          throw new Error(err.error || "Review step failed");
-        }
-
+        clearInterval(progInterval); setProg(100);
+        if (!res.ok) throw new Error(await readErr(res, "Review step failed"));
         const data = await res.json();
-        setReviewData(data);
-        setStage("review");
+        setReviewData(data); setStage("review");
       } else {
-        // Auto mode: run full pipeline directly.
         let res;
         if (csvFile) {
-          const form = new FormData();
-          form.append("file", csvFile);
-          form.append("seed", "42");
+          const form = new FormData(); form.append("file", csvFile); form.append("seed", "42");
           res = await fetch("/api/pipeline", { method: "POST", body: form });
         } else {
           res = await fetch("/api/pipeline", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ seed: 42 }),
+            method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ seed: 42 }),
           });
         }
-
-        clearInterval(progInterval);
-        setProg(100);
-
-        if (!res.ok) {
-          const err = await res.json();
-          throw new Error(err.error || "Pipeline failed");
-        }
-
+        clearInterval(progInterval); setProg(100);
+        if (!res.ok) throw new Error(await readErr(res, "Pipeline failed"));
         const data = await res.json();
-        setLeads(data.leads || []);
-        setSfCsv(data.salesforce_csv || "");
-        setSfJson(data.salesforce_json || null);
-        setStage("results");
+        setLeads(data.leads || []); setSfCsv(data.salesforce_csv || "");
+        setSfJson(data.salesforce_json || null); setStage("results");
       }
     } catch (err) {
       setError(err.message);
     } finally {
-      setBusy(false);
-      clearInterval(progInterval);
+      setBusy(false); clearInterval(progInterval);
     }
   }
 
   async function handleReviewConfirm(decisions) {
-    setBusy(true);
-    setProg(0);
-    setError(null);
-
+    setBusy(true); setProg(0); setError(null);
     const progInterval = setInterval(() => {
       setProg((p) => Math.min(p + Math.random() * 10, 92));
     }, 300);
-
     try {
       const res = await fetch("/api/pipeline/finalize", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...decisions,
-          seed: 42,
-        }),
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...decisions, seed: 42 }),
       });
-
-      clearInterval(progInterval);
-      setProg(100);
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error || "Finalize failed");
-      }
-
+      clearInterval(progInterval); setProg(100);
+      if (!res.ok) throw new Error(await readErr(res, "Finalize failed"));
       const data = await res.json();
-      setLeads(data.leads || []);
-      setSfCsv(data.salesforce_csv || "");
-      setSfJson(data.salesforce_json || null);
-      setReviewData(null);
-      setStage("results");
+      setLeads(data.leads || []); setSfCsv(data.salesforce_csv || "");
+      setSfJson(data.salesforce_json || null); setReviewData(null); setStage("results");
     } catch (err) {
       setError(err.message);
     } finally {
-      setBusy(false);
-      clearInterval(progInterval);
+      setBusy(false); clearInterval(progInterval);
     }
   }
 
   function reset() {
     setLeads([]); setSel(null); setCsvFile(null); setStage("upload");
     setProg(0); setShowW(false); setError(null); setSearch("");
-    setFilter("all"); setSfCsv(""); setSfJson(null);
-    setReviewData(null);
+    setFilter("all"); setSfCsv(""); setSfJson(null); setReviewData(null);
   }
 
-  // Stage mapping for progress indicator
   const steps = manualReview
-    ? ["Upload CSV", "Review", "Pipeline Results", "Lead Detail", "Export"]
-    : ["Upload CSV", "Pipeline Results", "Lead Detail", "Export"];
+    ? ["Upload", "Review", "Results", "Detail", "Export"]
+    : ["Upload", "Results", "Detail", "Export"];
   const stageMap = manualReview
     ? { upload: 0, processing: 0, review: 1, results: 2, detail: 3, export: 4 }
     : { upload: 0, processing: 0, results: 1, detail: 2, export: 3 };
   const ci = stageMap[stage] ?? 0;
 
   return (
-    <div style={{ minHeight: "100vh", background: C.bg, color: C.text, fontFamily: F.body }}>
-      {/* ── TOPBAR ── */}
-      <div style={{ borderBottom: `1px solid ${C.border}`, background: "rgba(250,250,247,.85)", backdropFilter: "blur(12px)", position: "sticky", top: 0, zIndex: 10 }}>
-        <div style={{ maxWidth: 1120, margin: "0 auto", padding: "14px 32px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <div style={{ width: 30, height: 30, borderRadius: 8, background: C.accent, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 14, fontFamily: F.body, fontWeight: 700 }}>A</div>
-            <div>
-              <div style={{ fontSize: 14, fontWeight: 700, fontFamily: F.body, color: C.text, letterSpacing: ".01em" }}>Air GTM Pipeline</div>
-              <div style={{ fontSize: 10, color: C.textLt, fontFamily: F.mono, letterSpacing: ".04em" }}>LEAD SCORING ENGINE</div>
+    <div className="min-h-screen bg-background">
+      {/* ═══════ TOPBAR ═══════ */}
+      <header className="sticky top-0 z-20 border-b border-border bg-background/85 backdrop-blur">
+        <div className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4 md:px-10">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <span className="text-sm font-semibold">A</span>
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-sm font-semibold tracking-tight text-foreground">Air GTM</span>
+              <span className="hidden text-xs text-muted-foreground md:inline">Lead pipeline</span>
             </div>
           </div>
-          <div style={{ display: "flex", gap: 2 }}>
-            {steps.map((s, i) => (
-              <div key={s} style={{
-                padding: "7px 14px", fontSize: 11, fontWeight: 600, fontFamily: F.body,
-                color: i === ci ? C.accent : i < ci ? C.accentMd : C.textLt,
-                background: i === ci ? C.accentLight : "transparent",
-                borderRadius: 6, display: "flex", alignItems: "center", gap: 7, transition: "all .25s",
-              }}>
-                <span style={{
-                  width: 18, height: 18, borderRadius: "50%", display: "inline-flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 9, fontWeight: 800, fontFamily: F.mono,
-                  background: i < ci ? C.accent : i === ci ? C.accent : "transparent",
-                  color: i <= ci ? "#fff" : C.textLt,
-                  border: i > ci ? `1.5px solid ${C.border}` : "none",
-                }}>{i < ci ? "\u2713" : i + 1}</span>
-                {s}
-              </div>
-            ))}
+          <div className="hidden items-center gap-0.5 md:flex">
+            {steps.map((s, i) => {
+              const stageIdMap = manualReview ? [1, 1, 2, 3, 4] : [1, 2, 3, 4];
+              const orbitStageId = stageIdMap[i] ?? 1;
+              const isActive = i === ci;
+              const isDone = i < ci;
+              return (
+                <button
+                  key={s}
+                  onClick={() => { setOrbitInitialId(orbitStageId); setOrbitOpen(true); }}
+                  title={`View ${s} in pipeline overview`}
+                  className={cn(
+                    "flex items-center gap-2 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors",
+                    isActive && "text-foreground",
+                    isDone && !isActive && "text-primary",
+                    !isActive && !isDone && "text-muted-foreground hover:text-foreground",
+                  )}
+                >
+                  <span
+                    className={cn(
+                      "flex h-4 w-4 items-center justify-center rounded-full font-mono text-2xs",
+                      isActive && "bg-foreground text-background",
+                      isDone && !isActive && "bg-primary text-primary-foreground",
+                      !isActive && !isDone && "border border-border text-muted-foreground",
+                    )}
+                  >
+                    {isDone ? "✓" : i + 1}
+                  </span>
+                  {s}
+                </button>
+              );
+            })}
           </div>
         </div>
-      </div>
+      </header>
 
-      <div style={{ maxWidth: 1120, margin: "0 auto", padding: "40px 32px 100px" }}>
-        {/* ── HEADER ── */}
-        <div style={{ marginBottom: 40, animation: "slideUp .5s ease both" }}>
-          <h1 style={{ fontSize: 36, fontWeight: 700, fontFamily: F.body, color: C.text, lineHeight: 1.2, letterSpacing: "-.02em", marginBottom: 10 }}>
-            Lead Pipeline<br /><span style={{ color: C.accent }}>&amp; ICP Scoring Engine</span>
+      {/* ═══════ MAIN ═══════ */}
+      <main className="mx-auto max-w-[1200px] px-6 py-16 md:px-10 md:py-24">
+        {/* HERO */}
+        <div className="mb-20 max-w-3xl animate-in">
+          <SectionLabel className="mb-6">Air GTM · Engineering challenge</SectionLabel>
+          <h1 className="text-5xl font-medium leading-[1.05] tracking-tight text-foreground md:text-7xl">
+            Lead pipeline <span className="text-primary">&amp;</span> ICP scoring.
           </h1>
-          <p style={{ fontSize: 15, color: C.textMd, maxWidth: 640, lineHeight: 1.65, fontWeight: 400 }}>
-            Upload a CSV, run the enrichment pipeline, adjust ICP scoring weights in real-time, deep-dive any lead, and export Salesforce-ready outputs.
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            Upload a messy CSV. Enrich, dedupe, and score it in one sweep. Tune ICP weights live, deep-dive any lead, export a Salesforce-ready payload.
           </p>
         </div>
 
-        {/* ── ERROR ── */}
+        {/* ERROR */}
         {error && (
-          <div style={{ padding: "14px 20px", background: C.warmLight, border: `1px solid ${C.warm}`, borderRadius: 10, marginBottom: 20, fontSize: 13, color: C.warm, fontFamily: F.body, animation: "slideUp .3s ease both" }}>
-            {error}
-            <button onClick={() => setError(null)} style={{ marginLeft: 12, background: "none", border: "none", color: C.warm, fontWeight: 700, cursor: "pointer", fontSize: 14 }}>&times;</button>
+          <div className="animate-fade mb-10 flex items-start gap-3 rounded-lg border border-hot/25 bg-hot/5 px-5 py-3.5">
+            <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-hot" strokeWidth={1.75} />
+            <span className="flex-1 text-sm text-foreground">{error}</span>
+            <button
+              onClick={() => setError(null)}
+              className="text-muted-foreground transition-colors hover:text-foreground"
+              aria-label="Dismiss"
+            >
+              <X className="h-4 w-4" />
+            </button>
           </div>
         )}
 
-        {/* ════════════ UPLOAD STAGE ════════════ */}
+        {/* ═══ UPLOAD ═══ */}
         {stage === "upload" && !busy && (
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 360px", gap: 24, animation: "slideUp .4s ease both" }}>
-            <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 16, padding: 28 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-                <label style={{ fontSize: 14, fontWeight: 600, color: C.text }}>Lead Data</label>
-                {csvFile && (
-                  <Btn v="ghost" onClick={() => setCsvFile(null)} style={{ fontSize: 11 }}>Clear file</Btn>
-                )}
-              </div>
+          <div className="grid gap-10 animate-in lg:grid-cols-[1fr_340px]">
+            <div>
+              <SectionLabel className="mb-4">Ingest</SectionLabel>
 
               {/* Drop zone */}
               <div
@@ -987,110 +1004,146 @@ export default function App() {
                 onDragLeave={() => setDragOver(false)}
                 onDrop={handleDrop}
                 onClick={() => fileRef.current?.click()}
-                style={{
-                  border: `2px dashed ${dragOver ? C.accent : C.border}`,
-                  borderRadius: 12, padding: "48px 24px", textAlign: "center",
-                  cursor: "pointer", transition: "all .2s",
-                  background: dragOver ? C.accentLight : C.surfaceAlt,
-                  marginBottom: 16,
-                }}
+                className={cn(
+                  "group relative cursor-pointer rounded-xl border border-dashed p-14 text-center transition-colors",
+                  dragOver
+                    ? "border-primary bg-primary-soft"
+                    : "border-border bg-surface hover:border-foreground/30 hover:bg-muted",
+                )}
               >
                 <input
-                  ref={fileRef}
-                  type="file"
-                  accept=".csv"
-                  style={{ display: "none" }}
+                  ref={fileRef} type="file" accept=".csv"
+                  className="hidden"
                   onChange={(e) => { if (e.target.files[0]) setCsvFile(e.target.files[0]); }}
                 />
                 {csvFile ? (
-                  <>
-                    <div style={{ fontSize: 15, fontWeight: 600, color: C.accent, marginBottom: 4 }}>{csvFile.name}</div>
-                    <div style={{ fontSize: 12, color: C.textLt }}>{(csvFile.size / 1024).toFixed(1)} KB</div>
-                  </>
+                  <div className="animate-fade">
+                    <FileText className="mx-auto mb-3 h-6 w-6 text-primary" strokeWidth={1.5} />
+                    <div className="mb-1 text-base font-medium text-foreground">{csvFile.name}</div>
+                    <div className="font-mono text-xs text-muted-foreground">
+                      {(csvFile.size / 1024).toFixed(1)} KB · ready
+                    </div>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setCsvFile(null); }}
+                      className="mt-4 text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+                    >
+                      Clear and choose another
+                    </button>
+                  </div>
                 ) : (
                   <>
-                    <div style={{ fontSize: 28, marginBottom: 8, color: C.textLt }}>+</div>
-                    <div style={{ fontSize: 14, fontWeight: 500, color: C.text, marginBottom: 4 }}>
-                      Drop a CSV here or click to browse
+                    <Upload className="mx-auto mb-3 h-6 w-6 text-muted-foreground transition-transform group-hover:-translate-y-0.5" strokeWidth={1.5} />
+                    <div className="mb-1.5 text-base font-medium text-foreground">
+                      Drop a CSV or click to browse
                     </div>
-                    <div style={{ fontSize: 12, color: C.textLt }}>
-                      Or leave empty to use the default <code style={{ fontFamily: F.mono, background: C.surfaceAlt, padding: "1px 5px", borderRadius: 3, border: `1px solid ${C.borderLight}` }}>messy_leads.csv</code>
+                    <div className="text-xs text-muted-foreground">
+                      Or leave empty to use{" "}
+                      <code className="rounded border border-border bg-card px-1.5 py-0.5 font-mono text-2xs text-foreground">
+                        messy_leads.csv
+                      </code>
                     </div>
                   </>
                 )}
               </div>
 
-              <Btn v="primary" onClick={runPipeline}
-                style={{ width: "100%", padding: "14px", fontSize: 14, borderRadius: 10 }}>
-                Run Pipeline{csvFile ? ` on ${csvFile.name}` : " on Default Data"}
-              </Btn>
+              <Button
+                variant="primary" size="lg"
+                className="mt-5 w-full"
+                onClick={runPipeline}
+              >
+                Run pipeline{csvFile ? ` on ${csvFile.name}` : " on default data"}
+                <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
+              </Button>
 
-              {/* Manual review toggle */}
-              <div style={{
-                marginTop: 14, padding: "12px 16px", background: C.surfaceAlt,
-                borderRadius: 10, border: `1px solid ${C.borderLight}`,
-                display: "flex", justifyContent: "space-between", alignItems: "center",
-              }}>
+              <div className="mt-4 flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3">
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 500, color: C.text }}>Manual Review</div>
-                  <div style={{ fontSize: 11, color: C.textLt, marginTop: 2 }}>
-                    Review merges &amp; deletions before scoring
+                  <div className="flex items-center gap-2">
+                    <GitMerge className="h-3.5 w-3.5 text-muted-foreground" strokeWidth={1.75} />
+                    <span className="text-sm font-medium text-foreground">Manual review</span>
+                  </div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">
+                    Audit merges and deletions before scoring
                   </div>
                 </div>
                 <button
                   onClick={() => setManualReview((v) => !v)}
-                  style={{
-                    width: 44, height: 24, borderRadius: 12, border: "none", cursor: "pointer",
-                    background: manualReview ? C.accent : C.border,
-                    position: "relative", transition: "background .2s",
-                  }}
+                  className={cn(
+                    "relative h-5 w-9 rounded-full transition-colors",
+                    manualReview ? "bg-primary" : "bg-muted",
+                  )}
+                  aria-pressed={manualReview}
                 >
-                  <div style={{
-                    width: 18, height: 18, borderRadius: "50%", background: "#fff",
-                    position: "absolute", top: 3,
-                    left: manualReview ? 23 : 3,
-                    transition: "left .2s", boxShadow: "0 1px 3px rgba(0,0,0,.15)",
-                  }} />
+                  <div
+                    className={cn(
+                      "absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-all",
+                      manualReview ? "left-[18px]" : "left-0.5",
+                    )}
+                  />
                 </button>
               </div>
             </div>
 
-            {/* ICP Weights sidebar */}
-            <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 16, padding: 24 }}>
-              <Label>ICP Scoring Weights</Label>
-              <p style={{ fontSize: 12, color: C.textMd, marginBottom: 16, lineHeight: 1.6 }}>
-                Configure how each signal contributes to lead scoring. Scores update in real-time after pipeline runs.
+            {/* ICP Weights */}
+            <div>
+              <div className="mb-4 flex items-center justify-between">
+                <SectionLabel>ICP weights</SectionLabel>
+                <span
+                  className={cn(
+                    "font-mono text-2xs tabular-nums",
+                    totalWeight === 100 ? "text-primary" : "text-warm",
+                  )}
+                >
+                  {totalWeight}%{totalWeight === 100 ? " ✓" : ""}
+                </span>
+              </div>
+              <p className="mb-6 text-xs leading-relaxed text-muted-foreground">
+                Tune each signal's contribution. Scores recompute live once the pipeline finishes.
               </p>
-              {Object.entries(W).map(([k, cfg]) => (
-                <Slider key={k} label={cfg.label} value={cfg.w} onChange={(v) => updW(k, v)} />
-              ))}
-              <div style={{ marginTop: 8, padding: 12, background: C.surfaceAlt, borderRadius: 10, border: `1px solid ${C.borderLight}` }}>
-                <div style={{ fontSize: 11, fontFamily: F.mono, color: C.textLt }}>
-                  Total: <strong style={{ color: totalWeight === 100 ? C.accent : C.warm }}>{totalWeight}%</strong>
-                  {totalWeight === 100 ? " \u2713" : " \u2014 adjust to 100%"}
+              <div className="space-y-4">
+                {Object.entries(W).map(([k, cfg]) => (
+                  <Slider key={k} label={cfg.label} value={cfg.w} onChange={(v) => updW(k, v)} />
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ═══ PROCESSING ═══ */}
+        {busy && (
+          <div className="animate-fade mx-auto max-w-md py-20">
+            <div className="mb-8 flex items-center gap-4">
+              <div className="relative h-8 w-8">
+                <div className="absolute inset-0 rounded-full border-2 border-border" />
+                <div
+                  className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-primary"
+                  style={{ animationDuration: "0.8s" }}
+                />
+              </div>
+              <div>
+                <div className="text-base font-medium text-foreground">Running pipeline</div>
+                <div className="mt-0.5 font-mono text-2xs uppercase tracking-[0.14em] text-muted-foreground">
+                  normalize · dedupe · enrich · score
                 </div>
               </div>
             </div>
-          </div>
-        )}
-
-        {/* ════════════ PROCESSING ════════════ */}
-        {busy && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 16, padding: 32, animation: "fadeIn .3s ease both" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-              <div style={{ width: 22, height: 22, border: `2.5px solid ${C.border}`, borderTopColor: C.accent, borderRadius: "50%", animation: "spin .7s linear infinite" }} />
-              <div>
-                <div style={{ fontSize: 14, color: C.text, fontWeight: 500 }}>Running pipeline: normalize, dedupe, enrich, score...</div>
-                <div style={{ fontSize: 12, color: C.textLt, fontFamily: F.mono, marginTop: 3 }}>{Math.round(prog)}% complete</div>
-              </div>
+            <div className="mb-2 flex items-center justify-between">
+              <span className="font-mono text-2xs uppercase tracking-[0.14em] text-muted-foreground">
+                Progress
+              </span>
+              <span className="font-mono text-sm font-medium tabular-nums text-foreground">
+                {Math.round(prog)}%
+              </span>
             </div>
-            <div style={{ width: "100%", height: 4, background: C.surfaceAlt, borderRadius: 3, overflow: "hidden" }}>
-              <div style={{ width: `${prog}%`, height: "100%", background: C.accent, borderRadius: 3, transition: "width .3s ease" }} />
+            <div className="h-[2px] w-full overflow-hidden bg-muted">
+              <div
+                className="h-full bg-primary"
+                style={{ width: `${prog}%`, transition: "width .3s ease" }}
+              />
             </div>
           </div>
         )}
 
-        {/* ════════════ REVIEW STAGE ════════════ */}
+        {/* ═══ REVIEW ═══ */}
         {stage === "review" && reviewData && !busy && (
           <ReviewPanel
             reviewData={reviewData}
@@ -1099,60 +1152,113 @@ export default function App() {
           />
         )}
 
-        {/* ════════════ RESULTS STAGE ════════════ */}
+        {/* ═══ RESULTS ═══ */}
         {stage === "results" && leads.length > 0 && (
-          <div style={{ animation: "slideUp .4s ease both" }}>
-            {/* Stat cards */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14, marginBottom: 24 }}>
-              <StatCard i={0} label="Total Leads" value={scored.length} />
-              <StatCard i={1} label="Avg ICP Score" value={Math.round(scored.reduce((a, x) => a + x.sc.s, 0) / scored.length)} sub={`${scored.filter((x) => x.sc.s >= 75).length} hot leads`} />
-              <StatCard i={2} label="Enriched" value={leads.filter((l) => l.enrichment_status === "ok").length} sub={`of ${leads.length} total`} />
-              <StatCard i={3} label="Avg Credit Usage" value={Math.round(leads.reduce((a, l) => a + (l.credit_usage_pct || 0), 0) / leads.length) + "%"} sub="product engagement" />
+          <div className="animate-in">
+            {/* Stats row */}
+            <div className="mb-12 grid grid-cols-2 gap-6 border-y border-border py-8 md:grid-cols-4">
+              <Stat i={0} label="Total leads" value={scored.length} />
+              <Stat
+                i={1}
+                label="Avg ICP score"
+                value={Math.round(scored.reduce((a, x) => a + x.sc.s, 0) / scored.length)}
+                sub={`${scored.filter((x) => x.sc.s >= 75).length} HOT`}
+              />
+              <Stat
+                i={2}
+                label="Enriched"
+                value={leads.filter((l) => l.enrichment_status === "ok").length}
+                sub={`of ${leads.length}`}
+              />
+              <Stat
+                i={3}
+                label="Avg credit use"
+                value={Math.round(leads.reduce((a, l) => a + (l.credit_usage_pct || 0), 0) / leads.length) + "%"}
+                sub="product engagement"
+              />
             </div>
 
             {/* Controls */}
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14, flexWrap: "wrap", gap: 10 }}>
-              <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-                <span style={{ fontSize: 11, color: C.textLt, fontFamily: F.mono, marginRight: 4 }}>FILTER</span>
+            <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center gap-1">
+                <SectionLabel className="mr-2">Filter</SectionLabel>
                 {["all", "hot", "warm", "cool", "low"].map((t) => {
                   const cnt = t === "all" ? scored.length : scored.filter((x) => tierOf(x.sc.s) === t.toUpperCase()).length;
-                  return <Btn key={t} v={filter === t ? "soft" : "ghost"} onClick={() => setFilter(t)} style={{ textTransform: "capitalize", fontSize: 11 }}>{t} ({cnt})</Btn>;
+                  const active = filter === t;
+                  return (
+                    <Button
+                      key={t} size="sm"
+                      variant={active ? "soft" : "ghost"}
+                      onClick={() => setFilter(t)}
+                    >
+                      <span className="capitalize">{t}</span>
+                      <span className="font-mono text-2xs opacity-60">{cnt}</span>
+                    </Button>
+                  );
                 })}
               </div>
-              <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-                <input
-                  type="search" placeholder="Search leads..."
-                  value={search} onChange={(e) => setSearch(e.target.value)}
-                  style={{
-                    background: C.surfaceAlt, border: `1px solid ${C.border}`, borderRadius: 8,
-                    padding: "6px 12px", fontSize: 12, color: C.text, outline: "none", width: 180,
-                    fontFamily: F.body,
-                  }}
-                />
-                <span style={{ fontSize: 11, color: C.textLt, fontFamily: F.mono, marginLeft: 4, marginRight: 4 }}>SORT</span>
-                {[{ k: "score", l: "Score" }, { k: "name", l: "Name" }, { k: "company", l: "Company" }].map((s) =>
-                  <Btn key={s.k} v={sort === s.k ? "soft" : "ghost"} onClick={() => setSort(s.k)} style={{ fontSize: 11 }}>{s.l}</Btn>
-                )}
-                <div style={{ width: 1, height: 20, background: C.border, margin: "0 4px" }} />
-                <Btn v="ghost" onClick={() => setShowW(!showW)} style={{ fontSize: 11 }}>{showW ? "Hide Weights" : "Weights"}</Btn>
-                <Btn v="primary" onClick={() => { setExportItems(null); setExportLabel(""); setStage("export"); }} style={{ fontSize: 11 }}>Export All</Btn>
+
+              <div className="flex flex-wrap items-center gap-1">
+                <div className="relative">
+                  <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" strokeWidth={1.75} />
+                  <input
+                    type="search" placeholder="Search leads"
+                    value={search} onChange={(e) => setSearch(e.target.value)}
+                    className="h-8 w-48 rounded-md border border-border bg-card pl-8 pr-3 text-xs text-foreground outline-none placeholder:text-muted-foreground focus:border-foreground/40"
+                  />
+                </div>
+                <SectionLabel className="ml-2 mr-1">Sort</SectionLabel>
+                {[{ k: "score", l: "Score" }, { k: "name", l: "Name" }, { k: "company", l: "Company" }].map((s) => (
+                  <Button
+                    key={s.k} size="sm"
+                    variant={sort === s.k ? "soft" : "ghost"}
+                    onClick={() => setSort(s.k)}
+                  >
+                    {s.l}
+                  </Button>
+                ))}
+                <div className="mx-1 h-5 w-px bg-border" />
+                <Button size="sm" variant="ghost" onClick={() => setShowW(!showW)}>
+                  <SlidersHorizontal className="h-3 w-3" strokeWidth={1.75} />
+                  {showW ? "Hide" : "Weights"}
+                </Button>
+                <Button
+                  size="sm" variant="primary"
+                  onClick={() => { setExportItems(null); setExportLabel(""); setStage("export"); }}
+                >
+                  <Download className="h-3 w-3" strokeWidth={1.75} />
+                  Export
+                </Button>
                 {filtered.length !== scored.length && (
-                  <Btn v="soft" onClick={() => { setExportItems(filtered); setExportLabel(`Export ${filtered.length} Filtered Leads`); setStage("export"); }} style={{ fontSize: 11 }}>Export Filtered ({filtered.length})</Btn>
+                  <Button
+                    size="sm" variant="soft"
+                    onClick={() => { setExportItems(filtered); setExportLabel(`Export ${filtered.length} filtered leads`); setStage("export"); }}
+                  >
+                    Export filtered ({filtered.length})
+                  </Button>
                 )}
-                <Btn v="ghost" onClick={reset} style={{ fontSize: 11 }}>Reset</Btn>
+                <Button size="sm" variant="ghost" onClick={reset}>
+                  <RotateCcw className="h-3 w-3" strokeWidth={1.75} />
+                  Reset
+                </Button>
               </div>
             </div>
 
-            {/* Inline weights panel */}
+            {/* Inline weights */}
             {showW && (
-              <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 14, padding: 22, marginBottom: 18, animation: "slideUp .3s ease both" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-                  <Label>Adjust ICP Weights &mdash; scores update live</Label>
-                  <div style={{ fontSize: 11, fontFamily: F.mono, color: totalWeight === 100 ? C.accent : C.warm }}>
-                    Total: {totalWeight}%{totalWeight === 100 ? " \u2713" : ""}
-                  </div>
+              <div className="animate-fade mb-8 rounded-xl border border-border bg-card p-6">
+                <div className="mb-4 flex items-center justify-between">
+                  <SectionLabel>Live ICP weights</SectionLabel>
+                  <span
+                    className={cn(
+                      "font-mono text-2xs tabular-nums",
+                      totalWeight === 100 ? "text-primary" : "text-warm",
+                    )}
+                  >
+                    Total {totalWeight}%{totalWeight === 100 ? " ✓" : ""}
+                  </span>
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px 32px" }}>
+                <div className="grid gap-x-8 gap-y-4 md:grid-cols-2">
                   {Object.entries(W).map(([k, cfg]) => (
                     <Slider key={k} label={cfg.label} value={cfg.w} onChange={(v) => updW(k, v)} />
                   ))}
@@ -1161,42 +1267,88 @@ export default function App() {
             )}
 
             {/* Lead list */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <div className="border-t border-border">
               {filtered.map(({ l, sc }, i) => (
-                <LeadRow key={`${l.email}-${l.source_row_numbers?.[0] || i}`} lead={l} sc={sc} i={i} isDuplicate={duplicateEmails.has(l.email)} onClick={() => { setSel(l); setStage("detail"); }} />
+                <LeadRow
+                  key={`${l.email}-${l.source_row_numbers?.[0] || i}`}
+                  lead={l} sc={sc} i={i}
+                  isDuplicate={duplicateEmails.has(l.email)}
+                  onClick={() => { setSel(l); setStage("detail"); }}
+                />
               ))}
             </div>
             {filtered.length === 0 && (
-              <div style={{ textAlign: "center", padding: 48, color: C.textLt, fontFamily: F.body }}>No leads match this filter.</div>
+              <div className="py-16 text-center text-sm text-muted-foreground">
+                No leads match this filter.
+              </div>
             )}
 
-            <div style={{ marginTop: 12, fontSize: 12, color: C.textLt, fontFamily: F.mono }}>
-              Showing {filtered.length} of {scored.length} leads
+            <div className="mt-6 font-mono text-2xs uppercase tracking-[0.14em] text-muted-foreground">
+              Showing {filtered.length} of {scored.length}
             </div>
           </div>
         )}
 
-        {/* ════════════ DETAIL STAGE ════════════ */}
+        {/* ═══ DETAIL ═══ */}
         {stage === "detail" && sel && (
-          <DetailPanel lead={sel} sc={scoreLead(sel, W)} W={W} onBack={() => { setSel(null); setStage("results"); }} onExportLead={() => {
-            const sc2 = scoreLead(sel, W);
-            setExportItems([{ l: sel, sc: sc2 }]);
-            setExportLabel(`Export Lead: ${sel.name || sel.email}`);
-            setStage("export");
-          }} />
+          <DetailPanel
+            lead={sel} sc={scoreLead(sel, W)} W={W}
+            onBack={() => { setSel(null); setStage("results"); }}
+            onExportLead={() => {
+              const sc2 = scoreLead(sel, W);
+              setExportItems([{ l: sel, sc: sc2 }]);
+              setExportLabel(`Export ${sel.name || sel.email}`);
+              setStage("export");
+            }}
+          />
         )}
 
-        {/* ════════════ EXPORT STAGE ════════════ */}
+        {/* ═══ EXPORT ═══ */}
         {stage === "export" && (
-          <ExportPanel scored={scored} sfCsv={sfCsv} sfJson={sfJson} exportItems={exportItems} exportLabel={exportLabel} onBack={() => { setExportItems(null); setExportLabel(""); setStage("results"); }} />
+          <ExportPanel
+            scored={scored} sfCsv={sfCsv} sfJson={sfJson}
+            exportItems={exportItems} exportLabel={exportLabel}
+            onBack={() => { setExportItems(null); setExportLabel(""); setStage("results"); }}
+          />
         )}
 
-        {/* ── FOOTER ── */}
-        <div style={{ marginTop: 72, paddingTop: 22, borderTop: `1px solid ${C.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div style={{ fontSize: 11, color: C.textLt, fontFamily: F.body }}>Air GTM Engineering Challenge</div>
-          <div style={{ fontSize: 10, color: C.textLt, fontFamily: F.mono, letterSpacing: ".04em" }}>CSV &rarr; ENRICH &rarr; SCORE &rarr; EXPORT</div>
+        {/* ═══ FOOTER ═══ */}
+        <footer className="mt-32 flex items-center justify-between border-t border-border pt-6">
+          <div className="text-xs text-muted-foreground">
+            Air GTM · Engineering Challenge
+          </div>
+          <div className="font-mono text-2xs uppercase tracking-[0.18em] text-muted-foreground">
+            csv → enrich → score → export
+          </div>
+        </footer>
+      </main>
+
+      {/* ═══ ORBITAL MODAL ═══ */}
+      {orbitOpen && (
+        <div
+          onClick={() => setOrbitOpen(false)}
+          className="animate-fade fixed inset-0 z-50 flex items-center justify-center bg-foreground/20 p-6 backdrop-blur-sm"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-[760px] overflow-hidden rounded-xl border border-border bg-card shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)]"
+          >
+            <button
+              onClick={() => setOrbitOpen(false)}
+              aria-label="Close"
+              className="absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-md border border-border bg-card text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
+            >
+              <X className="h-4 w-4" strokeWidth={1.75} />
+            </button>
+            <PipelineOrbital
+              key={orbitInitialId}
+              stages={PIPELINE_STAGES}
+              height={520}
+              initialExpandedId={orbitInitialId}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

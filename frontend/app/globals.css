@@ -1,75 +1,137 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html, body {
-  min-height: 100vh;
-  background: #FAFAF7;
-  color: #1A1A18;
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+@layer base {
+  :root {
+    /* Air-inspired: pure white, charcoal, teal accent */
+    --background: 0 0% 100%;                /* #FFFFFF */
+    --foreground: 220 13% 10%;              /* near-black charcoal */
+
+    --card: 0 0% 100%;
+    --surface: 220 14% 98%;                 /* subtle off-white surface */
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --border: 220 13% 91%;                  /* soft gray borders */
+    --input: 220 13% 91%;
+    --ring: 176 82% 38%;
+
+    --primary: 176 82% 38%;                 /* Air teal — ~#11B3A6 */
+    --primary-soft: 176 70% 94%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Tier accents — desaturated, one hue per tier */
+    --hot: 6 78% 57%;                       /* soft coral — HOT */
+    --warm: 32 90% 52%;                     /* amber — WARM */
+    --cool: 176 60% 42%;                    /* teal-mint — COOL */
+    --low: 220 9% 55%;                      /* neutral gray — LOW */
+
+    --radius: 0.625rem;
+  }
 }
 
-button { font-family: inherit; cursor: pointer; }
-input, select, textarea { font-family: inherit; }
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100vh;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-inter), -apple-system, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv11", "ss01", "ss03";
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+input,
+select,
+textarea {
+  font-family: inherit;
+}
 
 ::selection {
-  background: #2D5A3D;
-  color: #fff;
+  background: hsl(var(--primary) / 0.2);
+  color: hsl(var(--foreground));
 }
 
+/* Range slider — minimal flat */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  height: 4px;
-  border-radius: 2px;
-  background: #E8E6DF;
+  height: 2px;
+  border-radius: 1px;
+  background: hsl(var(--border));
   outline: none;
   cursor: pointer;
 }
-
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: #2D5A3D;
-  border: 2px solid #fff;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-  cursor: pointer;
+  background: hsl(var(--primary));
+  border: 2px solid hsl(var(--background));
+  box-shadow: 0 0 0 1px hsl(var(--primary));
   transition: transform 0.15s ease;
 }
-
 input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.15);
 }
-
 input[type="range"]::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: #2D5A3D;
-  border: 2px solid #fff;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-  cursor: pointer;
+  background: hsl(var(--primary));
+  border: 2px solid hsl(var(--background));
+  box-shadow: 0 0 0 1px hsl(var(--primary));
 }
 
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #E8E6DF; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #D0CEC7; }
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 5px;
+  border: 2px solid hsl(var(--background));
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.4);
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+.animate-in {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-fade {
+  animation: fadeIn 0.3s ease both;
 }

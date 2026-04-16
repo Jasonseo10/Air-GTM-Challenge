@@ -39,7 +39,7 @@ Emily,Lee,emily.lee@startup.io,Startup.io,CTO,,LinkedIn,Germany,2025-01-30,SaaS,
 Grace,Smith,grace.smith@air.inc,Startup.io,Marketing Manager,,Referral,,2025-05-02,Creative Operations,51-200,35,Cold,Manager,$10M-$50M,ok,missing_or_invalid_phone; missing_or_unknown_country
 Henry,Smith,henry.smith@business.co,Example Corp,Senior Engineer,,Product Signup,India,2025-06-20,Financial Services,201-500,35,Cold,Senior IC,$50M-$100M,ok,missing_or_invalid_phone
 Henry,Brown,henry.brown@air.inc,Initech,Head of Sales,,Event,,2025-03-25,Creative Operations,51-200,33,Cold,Director,$10M-$50M,ok,missing_or_invalid_phone; missing_or_unknown_country
-Bob,Jones,bob.jones@example.com,Air Inc,Senior Engineer,+1 (123) 456-7890,Website Visitor,United States,2026-04-03,SaaS,501-1000,30,Cold,Senior IC,$50M-$100M,ok,missing_company; missing_or_invalid_created_at; missing_or_invalid_phone; missing_or_unknown_country
+Bob,Jones,bob.jones@example.com,Air Inc,Senior Engineer,+1 (123) 456-7890,Website Visitor,United States,2026-04-04,SaaS,501-1000,30,Cold,Senior IC,$50M-$100M,ok,missing_company; missing_or_invalid_created_at; missing_or_invalid_phone; missing_or_unknown_country
 Ivy,Anderson,ivy.anderson@startup.io,Initech,Data Analyst,,Product Signup,Germany,2024-10-19,SaaS,11-50,30,Cold,IC,$1M-$10M,ok,missing_or_invalid_phone
 Emily,Smith,emily.smith@air.inc,Air Inc,Data Analyst,+1 (123) 456-7890,Referral,United States,2025-05-10,Creative Operations,51-200,30,Cold,IC,$10M-$50M,ok,
 Grace,Martinez,grace.martinez@company.com,Initech,Product Lead,+1 (123) 456-7890,Website Visitor,,2025-07-09,Enterprise Software,1000-5000,30,Cold,Senior IC,$100M-$500M,ok,missing_or_unknown_country
