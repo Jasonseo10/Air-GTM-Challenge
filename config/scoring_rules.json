@@ -1,164 +1,291 @@
 {
-  "description": "ICP lead scoring rules aligned with the dashboard's 10-criteria weighted system. Each rule maps to one of the ICP signals. The pipeline scores 0-100 to match the dashboard's percentage-weight model. Tier thresholds match the dashboard: HOT ≥75, WARM 55-74, COOL 35-54, LOW <35.",
+  "description": "Intent-first ICP scoring for Air. Rules are split into four categories — intent (behavior), fit (firmographic), persona (who the person is), expansion (whitespace + growth). We weight intent signals higher than firmographic because Air is a PLG-adjacent creative tool: buyers validate themselves by using the product before a seller ever engages. Total scores saturate around 100; tier thresholds match the dashboard so the Python pipeline and the UI never disagree on a lead's tier.",
+  "philosophy": {
+    "stance": "intent-first",
+    "reasoning": "For a creative-ops tool with a self-serve surface, a prospect's usage tells us more than their org chart. Firmographic signals are necessary (we need to know they can afford us) but rarely sufficient — enterprise leads with zero product usage are common and usually cold. We therefore give the single largest weight to signup intent, and compound it with credit/asset usage rather than stack it additively.",
+    "tier_thresholds": {
+      "hot": "Worth a same-day personalized outreach",
+      "warm": "Worth nurturing with a sequence",
+      "cool": "Drip / newsletter only",
+      "low": "Deprioritize — recheck in 90 days"
+    }
+  },
   "rules": [
     {
-      "id": "pricing_page_high",
-      "description": "High pricing/demo page engagement (20+ views)",
+      "id": "intent_pricing_page_high",
+      "category": "intent",
+      "description": "20+ pricing/demo page views. Repeated pricing visits are the single strongest pre-contact intent signal — a prospect checking price multiple times has an internal decision in motion.",
       "field": "pricing_page_views",
       "op": "gte",
       "value": 20,
       "points": 10
     },
     {
-      "id": "pricing_page_medium",
-      "description": "Moderate pricing/demo page engagement (10-19 views)",
+      "id": "intent_pricing_page_medium",
+      "category": "intent",
+      "description": "10-19 pricing page views — decision-gathering phase.",
       "field": "pricing_page_views",
       "op": "between",
       "value": [10, 19],
       "points": 7
     },
     {
-      "id": "pricing_page_low",
-      "description": "Some pricing/demo page engagement (3-9 views)",
+      "id": "intent_pricing_page_low",
+      "category": "intent",
+      "description": "3-9 pricing page views — research phase, not yet decision.",
       "field": "pricing_page_views",
       "op": "between",
       "value": [3, 9],
       "points": 4
     },
     {
-      "id": "signup_intent_product",
-      "description": "Product signup with intent signal — strongest buying signal",
+      "id": "intent_signup_product",
+      "category": "intent",
+      "description": "Source is Product Signup. A prospect who gave us their email in exchange for a workspace has self-qualified further than any form-fill can measure.",
       "field": "source",
       "op": "equals",
       "value": "Product Signup",
       "points": 15
     },
     {
-      "id": "signup_intent_event_referral",
-      "description": "Event or referral source shows moderate intent",
-      "field": "source",
-      "op": "in",
-      "value": ["Event", "Referral"],
-      "points": 6
+      "id": "intent_signup_validated",
+      "category": "intent",
+      "description": "Product signup AND >=50% credit usage. A signup alone is cheap; credit usage proves the prospect actually tried the product. This rule stacks on top of intent_signup_product because a *validated* signup is categorically stronger than a dormant one.",
+      "field": "credit_usage_pct",
+      "op": "gte",
+      "value": 50,
+      "points": 8,
+      "when": [
+        {"field": "source", "op": "equals", "value": "Product Signup"}
+      ]
     },
     {
-      "id": "credit_usage_high",
-      "description": "Heavy free-credit usage (80%+) — strong product adoption",
+      "id": "intent_referral_warm",
+      "category": "intent",
+      "description": "Referral source from a business email (not gmail/yahoo). Warm intros outperform product-signups on close rate when the referrer is a current customer at a real company — a referral from a personal email is unverifiable and doesn't get the same lift.",
+      "field": "source",
+      "op": "equals",
+      "value": "Referral",
+      "points": 10,
+      "when": [
+        {"field": "is_business_email", "op": "equals", "value": true}
+      ]
+    },
+    {
+      "id": "intent_event_source",
+      "category": "intent",
+      "description": "Event-sourced lead. Moderate intent — they showed up in person, but event lists are noisy.",
+      "field": "source",
+      "op": "equals",
+      "value": "Event",
+      "points": 5
+    },
+    {
+      "id": "intent_credit_usage_high",
+      "category": "intent",
+      "description": "80%+ credit usage. Near-exhaustion of free credits is a classic PQL (product-qualified lead) signal — they're about to hit a wall and will convert if we reach out this week.",
       "field": "credit_usage_pct",
       "op": "gte",
       "value": 80,
       "points": 10
     },
     {
-      "id": "credit_usage_medium",
-      "description": "Moderate free-credit usage (50-79%)",
+      "id": "intent_credit_usage_medium",
+      "category": "intent",
+      "description": "50-79% credit usage. Actively trialing — good nurture candidate.",
       "field": "credit_usage_pct",
       "op": "between",
       "value": [50, 79],
-      "points": 7
-    },
-    {
-      "id": "asset_uploads_high",
-      "description": "High asset upload volume (200+) — deep feature engagement",
-      "field": "asset_uploads",
-      "op": "gte",
-      "value": 200,
-      "points": 10
-    },
-    {
-      "id": "asset_uploads_medium",
-      "description": "Moderate asset uploads (50-199)",
-      "field": "asset_uploads",
-      "op": "between",
-      "value": [50, 199],
-      "points": 7
-    },
-    {
-      "id": "team_collab_high",
-      "description": "Strong team collaboration (10+ invites) — viral/expansion signal",
-      "field": "teammate_invites",
-      "op": "gte",
-      "value": 10,
-      "points": 10
-    },
-    {
-      "id": "team_collab_medium",
-      "description": "Some team collaboration (5-9 invites)",
-      "field": "teammate_invites",
-      "op": "between",
-      "value": [5, 9],
-      "points": 7
-    },
-    {
-      "id": "company_size_enterprise",
-      "description": "Enterprise accounts (1000+ employees) — ideal ICP fit",
-      "field": "company_size_min",
-      "op": "gte",
-      "value": 1000,
-      "points": 10
-    },
-    {
-      "id": "company_size_mid_market",
-      "description": "Mid-market (201-999 employees)",
-      "field": "company_size_min",
-      "op": "between",
-      "value": [201, 999],
-      "points": 7
-    },
-    {
-      "id": "industry_match",
-      "description": "Target industry — high product-market fit",
-      "field": "industry",
-      "op": "in",
-      "value": ["SaaS", "Marketing Technology", "Creative Operations", "Developer Tools", "E-commerce"],
-      "points": 10
-    },
-    {
-      "id": "marketing_creative_senior",
-      "description": "Senior marketing/creative title — ideal buyer persona",
-      "field": "has_marketing_title",
-      "op": "equals",
-      "value": true,
       "points": 6
     },
     {
-      "id": "seniority_senior",
-      "description": "C-level, VP, or Director — budget authority",
-      "field": "seniority_level",
-      "op": "in",
-      "value": ["C-Level", "VP", "Director"],
-      "points": 4
-    },
-    {
-      "id": "channel_expansion_high",
-      "description": "Active on 6+ channels — growth signal",
-      "field": "active_channels",
+      "id": "intent_asset_uploads_high",
+      "category": "intent",
+      "description": "200+ asset uploads. Heavy upload volume means the prospect has migrated real work into our workspace — they've made a switching-cost investment we can lean on.",
+      "field": "asset_uploads",
       "op": "gte",
-      "value": 6,
-      "points": 10
+      "value": 200,
+      "points": 8
     },
     {
-      "id": "channel_expansion_medium",
-      "description": "Active on 4-5 channels",
-      "field": "active_channels",
+      "id": "intent_asset_uploads_medium",
+      "category": "intent",
+      "description": "50-199 asset uploads — real but not yet committed usage.",
+      "field": "asset_uploads",
       "op": "between",
-      "value": [4, 5],
+      "value": [50, 199],
+      "points": 5
+    },
+    {
+      "id": "intent_team_adoption",
+      "category": "intent",
+      "description": "10+ teammate invites. In a collaboration product this is the viral/expansion signal — the primary user has recruited their team, which means they've already sold the product internally and we just need to close the contract.",
+      "field": "teammate_invites",
+      "op": "gte",
+      "value": 10,
+      "points": 8
+    },
+    {
+      "id": "intent_team_seeding",
+      "category": "intent",
+      "description": "5-9 teammate invites — early team adoption.",
+      "field": "teammate_invites",
+      "op": "between",
+      "value": [5, 9],
+      "points": 5
+    },
+
+    {
+      "id": "fit_enterprise",
+      "category": "fit",
+      "description": "Enterprise firmographic (1000+ employees). Large budget, long sales cycle, higher ACV. Never fire this on top of low activation — see expansion_activated_enterprise for when size + usage compound.",
+      "field": "company_size_min",
+      "op": "gte",
+      "value": 1000,
       "points": 7
     },
     {
-      "id": "creative_hiring_high",
-      "description": "8+ creative job postings — strong growth intent",
+      "id": "fit_mid_market",
+      "category": "fit",
+      "description": "Mid-market (201-999). Air's strongest economic fit — teams large enough to feel the pain of disorganized assets, small enough to buy without a 6-month procurement cycle.",
+      "field": "company_size_min",
+      "op": "between",
+      "value": [201, 999],
+      "points": 9
+    },
+    {
+      "id": "fit_smb_creative",
+      "category": "fit",
+      "description": "SMB (50-200) in a creative-heavy industry. Small enough to be led from the top, right-sized for a creative-ops tool's value prop.",
+      "field": "industry",
+      "op": "in",
+      "value": ["Creative Operations", "Media", "E-commerce", "Marketing Technology"],
+      "points": 5,
+      "when": [
+        {"field": "company_size_min", "op": "between", "value": [50, 200]}
+      ]
+    },
+    {
+      "id": "fit_industry_match",
+      "category": "fit",
+      "description": "Target industry. SaaS, MarTech, Creative Ops, Dev Tools, E-commerce, Media — industries with high creative-asset output where Air's value prop lands without translation.",
+      "field": "industry",
+      "op": "in",
+      "value": ["SaaS", "Marketing Technology", "Creative Operations", "Developer Tools", "E-commerce", "Media"],
+      "points": 8
+    },
+    {
+      "id": "fit_creative_stack_detected",
+      "category": "fit",
+      "description": "Company runs Figma / Adobe / Canva / Frame.io. A detected creative stack is harder evidence of fit than an industry label — teams using these tools have creative volume to manage and recognize Air's category instantly.",
+      "field": "has_creative_stack",
+      "op": "equals",
+      "value": true,
+      "points": 5
+    },
+
+    {
+      "id": "persona_founder_led",
+      "category": "persona",
+      "description": "C-Level or founder at a company under 50 employees. At this scale leadership is still the buyer AND the user — decision-to-close can happen in one call. Above 50 employees the buying motion specializes and a title boost starts double-counting.",
+      "field": "seniority_level",
+      "op": "equals",
+      "value": "C-Level",
+      "points": 8,
+      "when": [
+        {"field": "company_size_min", "op": "lt", "value": 50}
+      ]
+    },
+    {
+      "id": "persona_marketing_creative_senior",
+      "category": "persona",
+      "description": "Senior (C/VP/Director) in a marketing/creative function. Ideal Air buyer — budget authority AND the pain point is on their P&L.",
+      "field": "seniority_level",
+      "op": "in",
+      "value": ["C-Level", "VP", "Director"],
+      "points": 7,
+      "when": [
+        {"field": "has_marketing_title", "op": "equals", "value": true}
+      ]
+    },
+    {
+      "id": "persona_marketing_creative_ic",
+      "category": "persona",
+      "description": "Marketing/creative title without executive seniority. They feel the pain daily and often drive the bottom-up eval — less budget power, more product influence.",
+      "field": "has_marketing_title",
+      "op": "equals",
+      "value": true,
+      "points": 3
+    },
+    {
+      "id": "persona_senior_generic",
+      "category": "persona",
+      "description": "C-Level / VP / Director without a marketing title. Budget authority but not our target user — worth some weight, not a lot.",
+      "field": "seniority_level",
+      "op": "in",
+      "value": ["C-Level", "VP", "Director"],
+      "points": 3
+    },
+
+    {
+      "id": "expansion_channels_high",
+      "category": "expansion",
+      "description": "Active on 6+ channels. Multi-channel companies have bigger creative surface area — every channel is assets that need to be produced, reviewed, and distributed.",
+      "field": "active_channels",
+      "op": "gte",
+      "value": 6,
+      "points": 5
+    },
+    {
+      "id": "expansion_channel_whitespace",
+      "category": "expansion",
+      "description": "Enterprise (1000+) running on fewer than 3 channels. Contrarian signal: a large company with a narrow channel footprint is usually not under-ambitious, it's under-invested — there's whitespace a modern creative-ops tool could unlock. This is the opposite of a fit-and-activity rule; it specifically rewards *unrealized* potential.",
+      "field": "active_channels",
+      "op": "lte",
+      "value": 2,
+      "points": 4,
+      "when": [
+        {"field": "company_size_min", "op": "gte", "value": 1000}
+      ]
+    },
+    {
+      "id": "expansion_creative_hiring_high",
+      "category": "expansion",
+      "description": "8+ open creative roles. Strong hiring = scaling the creative org = rising budget for creative infrastructure.",
       "field": "creative_job_postings",
       "op": "gte",
       "value": 8,
       "points": 5
     },
     {
-      "id": "creative_hiring_medium",
-      "description": "3-7 creative job postings",
+      "id": "expansion_creative_hiring_medium",
+      "category": "expansion",
+      "description": "3-7 open creative roles.",
       "field": "creative_job_postings",
       "op": "between",
       "value": [3, 7],
+      "points": 3
+    },
+    {
+      "id": "expansion_activated_enterprise",
+      "category": "expansion",
+      "description": "Enterprise + high activation. Rare and extremely high-confidence: a 1000+ employee account that has already uploaded 200+ assets and invited 5+ teammates is effectively pre-validated. Stacks on top of fit_enterprise intentionally — the point is that size *and* usage together is a much stronger signal than either alone.",
+      "field": "company_size_min",
+      "op": "gte",
+      "value": 1000,
+      "points": 6,
+      "when": [
+        {"field": "asset_uploads", "op": "gte", "value": 200},
+        {"field": "teammate_invites", "op": "gte", "value": 5}
+      ]
+    },
+    {
+      "id": "expansion_modern_stack",
+      "category": "expansion",
+      "description": "High tech-modernity score (60+). Teams already running a modern creative+martech stack have the operational maturity to actually deploy another tool — lower implementation risk, faster time-to-value.",
+      "field": "tech_modernity_score",
+      "op": "gte",
+      "value": 60,
       "points": 3
     }
   ],

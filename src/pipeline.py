@@ -184,6 +184,8 @@ def build_summary(total_rows: int, dropped_invalid: int, after_dedupe: int,
                   duplicates_collapsed: int, leads: list[dict]) -> str:
     n = len(leads)
     enriched_ok = sum(1 for l in leads if l.get("enrichment_status") == "ok")
+    enriched_no_match = sum(1 for l in leads if l.get("enrichment_status") == "no_match")
+    enriched_failed = sum(1 for l in leads if l.get("enrichment_status") == "failed")
     enrichment_pct = (enriched_ok / n * 100) if n else 0.0
     avg_score = mean(l["score"] for l in leads) if leads else 0.0
 
@@ -212,13 +214,15 @@ def build_summary(total_rows: int, dropped_invalid: int, after_dedupe: int,
     lines.append("")
     lines.append("## Enrichment")
     lines.append(f"- Successfully enriched: **{enriched_ok} / {n} ({enrichment_pct:.1f}%)**")
-    lines.append(f"- Failed (after retry): **{n - enriched_ok}**")
+    lines.append(f"- No match (personal / unknown domain): **{enriched_no_match}**")
+    lines.append(f"- Failed after retry: **{enriched_failed}**")
     lines.append("")
     lines.append("## Scoring")
     lines.append(f"- Average score: **{avg_score:.1f}**")
     lines.append(f"- Hot: **{tiers.get('Hot', 0)}**")
     lines.append(f"- Warm: **{tiers.get('Warm', 0)}**")
-    lines.append(f"- Cold: **{tiers.get('Cold', 0)}**")
+    lines.append(f"- Cool: **{tiers.get('Cool', 0)}**")
+    lines.append(f"- Low: **{tiers.get('Low', 0)}**")
     lines.append("")
     lines.append("## Data Quality Issues (count of leads flagged)")
     for issue, count in issue_counter.most_common():

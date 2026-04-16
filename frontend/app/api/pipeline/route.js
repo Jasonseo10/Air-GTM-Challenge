@@ -3,6 +3,7 @@ import { exec } from "child_process";
 import { promisify } from "util";
 import { readFile, writeFile, mkdir } from "fs/promises";
 import path from "path";
+import { quotedPython } from "../../../lib/python";
 
 const execAsync = promisify(exec);
 
@@ -60,7 +61,7 @@ export async function POST(request) {
   }
 
   const todayArg = today ? `--today ${today}` : "";
-  const cmd = `py run_pipeline.py --input "${csvPath}" --output-dir "${path.join(ROOT, "output")}" --rules "${path.join(ROOT, "config", "scoring_rules.json")}" --seed ${seed} ${todayArg}`;
+  const cmd = `${quotedPython()} run_pipeline.py --input "${csvPath}" --output-dir "${path.join(ROOT, "output")}" --rules "${path.join(ROOT, "config", "scoring_rules.json")}" --seed ${seed} ${todayArg}`;
 
   try {
     const { stdout, stderr } = await execAsync(cmd, {

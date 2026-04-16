@@ -3,6 +3,7 @@ import { exec } from "child_process";
 import { promisify } from "util";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
+import { quotedPython } from "../../../../lib/python";
 
 const execAsync = promisify(exec);
 const ROOT = path.resolve(process.cwd(), "..");
@@ -30,7 +31,7 @@ export async function POST(request) {
       }
     }
 
-    const cmd = `py review_helper.py "${csvPath}" --today 2026-04-15`;
+    const cmd = `${quotedPython()} review_helper.py "${csvPath}" --today 2026-04-15`;
     const { stdout } = await execAsync(cmd, { cwd: ROOT, timeout: 60_000, maxBuffer: 50 * 1024 * 1024 });
     const result = JSON.parse(stdout.trim());
     return NextResponse.json(result);
