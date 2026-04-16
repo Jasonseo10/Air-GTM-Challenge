@@ -9,7 +9,7 @@ Next.js dashboard for real-time ICP scoring and export.
 
 ```bash
 # 1. Run the core pipeline (zero dependencies, stdlib only)
-python run_pipeline.py
+py run_pipeline.py
 
 # 2. Start the interactive dashboard
 cd frontend
@@ -45,10 +45,11 @@ Air GTM Challenge/
 │   └── test_normalize.py        # 29 unit tests covering the trickiest normalizers
 ├── frontend/                    # Next.js interactive dashboard
 │   ├── app/
-│   │   ├── page.js              # main UI (upload, results, detail, export)
+│   │   ├── components/          # UI components (buttons, badges, orbitals)
+│   │   ├── page.js              # main UI (upload, review, results, detail, export)
 │   │   ├── layout.js            # root layout with Inter + DM Mono fonts
 │   │   ├── globals.css          # base styles, animations, scrollbar
-│   │   └── api/pipeline/route.js  # API route — runs Python pipeline via child_process
+│   │   └── api/pipeline/        # API routes to run Python pipeline (review/finalize)
 │   ├── package.json
 │   └── next.config.mjs
 └── .gitignore
@@ -60,10 +61,10 @@ Air GTM Challenge/
 
 ```bash
 # Run the full pipeline with defaults
-python run_pipeline.py
+py run_pipeline.py
 
 # Custom paths / options
-python run_pipeline.py \
+py run_pipeline.py \
     --input data/messy_leads.csv \
     --output-dir output \
     --rules config/scoring_rules.json \
@@ -73,7 +74,7 @@ python run_pipeline.py \
 
 ```bash
 # Run the unit tests
-python -m unittest discover tests
+py -m unittest discover tests
 ```
 
 ### Interactive dashboard (Next.js)
@@ -87,15 +88,15 @@ npm run dev      # starts on http://localhost:3000
 **Features:**
 
 - **CSV upload** — drag-and-drop any CSV, or use the default `messy_leads.csv`
+- **Manual review** — UI loop to approve duplicate merges and restore dropped records before enrichment and scoring
 - **10 ICP scoring sliders** — adjust weights in real-time, scores recalculate live
+- **Summary Report** — interactive modal to preview and download a Markdown summary of the pipeline run
 - **Score rings** — visual SVG indicators per lead, color-coded by tier
 - **Filterable/sortable results** — filter by tier (Hot/Warm/Cool/Low), search by name/email/company, sort by score/name/company
 - **Lead detail panel** — full enrichment data, product-usage signals, ICP score breakdown with progress bars, data quality issues, pipeline scoring rules
 - **Export** — toggle between Salesforce CSV and JSON, preview output, one-click download
 
-The dashboard calls the Python pipeline through a Next.js API route
-(`child_process.exec`). The pipeline runs server-side; ICP scoring
-happens client-side so slider adjustments are instant.
+The dashboard calls the Python pipeline through Next.js API routes (`child_process.spawn`). The pipeline runs server-side; ICP scoring happens client-side so slider adjustments are instant.
 
 ## Pipeline stages
 
@@ -177,13 +178,13 @@ Adjusting a slider immediately rescores all leads.
 - [x] Python pipeline — zero deps, stdlib only
 - [x] Field normalization (names, emails, titles, phones, countries, dates)
 - [x] Mocked enrichment API with 10+ fields including product-usage signals
-- [x] Config-driven scoring with audit trail per lead
+- [x] Config-driven scoring with audit trail per lead aligned to the ICP factors
 - [x] Salesforce-ready CSV + JSON outputs
-- [x] Summary report (Markdown)
 - [x] Deduplication by email with most-complete merge
 - [x] Retry + exponential backoff on enrichment failures
 - [x] 29 unit tests
-- [x] Interactive Next.js dashboard with ICP scoring sliders
-- [x] CSV drag-and-drop upload
-- [x] Real-time score adjustment via weight sliders
+- [x] Interactive Next.js dashboard with drag-and-drop upload
+- [x] Manual review UI to approve merges and dropped records
+- [x] Real-time score adjustment via 10 ICP weight sliders
+- [x] Auto-generated summary report (Markdown popup & download)
 - [x] Export with CSV/JSON toggle

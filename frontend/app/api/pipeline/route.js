@@ -60,7 +60,7 @@ export async function POST(request) {
   }
 
   const todayArg = today ? `--today ${today}` : "";
-  const cmd = `python run_pipeline.py --input "${csvPath}" --output-dir "${path.join(ROOT, "output")}" --rules "${path.join(ROOT, "config", "scoring_rules.json")}" --seed ${seed} ${todayArg}`;
+  const cmd = `py run_pipeline.py --input "${csvPath}" --output-dir "${path.join(ROOT, "output")}" --rules "${path.join(ROOT, "config", "scoring_rules.json")}" --seed ${seed} ${todayArg}`;
 
   try {
     const { stdout, stderr } = await execAsync(cmd, {

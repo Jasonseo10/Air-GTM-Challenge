@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where python:*)",
+      "Bash(where python3:*)",
+      "Bash(where py:*)",
+      "Read(//c/Users/jason/**)",
+      "Read(//c/Users/jason/anaconda3/**)",
+      "Read(//c/Users/jason/miniconda3/**)",
+      "Read(//c/ProgramData/anaconda3/**)",
+      "Read(//c/Users/jason/AppData/Local/Programs/**)",
+      "Bash(winget:*)",
+      "Bash(C:/Users/jason/AppData/Local/Programs/Python/Python312/python.exe:*)",
+      "Bash(\"C:/Users/jason/AppData/Local/Programs/Python/Python312/python.exe\" run_pipeline.py --input \"D:/SWE Projects/Air GTM Challenge/data/uploaded_leads.csv\" --output-dir \"D:/SWE Projects/Air GTM Challenge/output\" --rules \"D:/SWE Projects/Air GTM Challenge/config/scoring_rules.json\" --seed 42)"
+    ]
+  }
+}

@@ -103,8 +103,10 @@ def score_lead(lead: dict, rules_config: dict) -> dict:
         tier = "Hot"
     elif total >= tiers["warm"]:
         tier = "Warm"
+    elif total >= tiers.get("cool", 35):
+        tier = "Cool"
     else:
-        tier = "Cold"
+        tier = "Low"
 
     out = dict(lead)
     out["score"] = total

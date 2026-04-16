@@ -30,7 +30,7 @@ export async function POST(request) {
       }
     }
 
-    const cmd = `python review_helper.py "${csvPath}" --today 2026-04-15`;
+    const cmd = `py review_helper.py "${csvPath}" --today 2026-04-15`;
     const { stdout } = await execAsync(cmd, { cwd: ROOT, timeout: 60_000, maxBuffer: 50 * 1024 * 1024 });
     const result = JSON.parse(stdout.trim());
     return NextResponse.json(result);

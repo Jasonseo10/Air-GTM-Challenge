@@ -13,9 +13,9 @@
 
 ## Scoring
 - Average score: **31.7**
-- Hot: **3**
-- Warm: **13**
-- Cold: **73**
+- Hot: **0**
+- Warm: **8**
+- Cold: **0**
 
 ## Data Quality Issues (count of leads flagged)
 - `missing_or_invalid_phone`: 48
@@ -39,14 +39,14 @@
 - Germany: 11
 - India: 10
 - (missing): 9
-- France: 9
 - United Kingdom: 9
+- France: 9
 
 ## Industry Breakdown
 - Personal / Unknown: 29
 - Enterprise Software: 17
-- SaaS: 13
 - Financial Services: 13
+- SaaS: 13
 - Creative Operations: 11
 - (missing): 6
 
@@ -54,13 +54,13 @@
 
 | Rank | Email | Name | Company | Title | Score | Tier |
 |------|-------|------|---------|-------|-------|------|
-| 1 | carol.taylor@company.com | Carol Taylor | Startup.io | CEO | 80 | Hot |
-| 2 | frank.anderson@company.com | Frank Anderson | Air Inc | CTO | 75 | Hot |
-| 3 | david.taylor@air.inc | David Taylor | Air Inc | VP Marketing | 75 | Hot |
-| 4 | jack.chen@company.com | Jack Chen | Company | VP Marketing | 70 | Warm |
-| 5 | henry.brown@company.com | Henry Brown | Initech | CEO | 70 | Warm |
-| 6 | jack.lee@company.com | Jack Lee | Air Inc | CEO | 70 | Warm |
-| 7 | alice.lee@air.inc | Alice Lee | GlobalTech | VP Marketing | 70 | Warm |
-| 8 | valid@example.com | Carol | Example Corp | VP Marketing | 65 | Warm |
-| 9 | jack.jones@business.co | Jack Jones | Initech | VP Marketing | 65 | Warm |
-| 10 | jack.martinez@company.com | Jack Martinez | Initech | CTO | 63 | Warm |
+| 1 | bob.lee@business.co | Bob Lee | GlobalTech | Head of Sales | 63 | Warm |
+| 2 | david.taylor@air.inc | David Taylor | Air Inc | VP Marketing | 62 | Warm |
+| 3 | alice.lee@air.inc | Alice Lee | GlobalTech | VP Marketing | 62 | Warm |
+| 4 | carol.taylor@company.com | Carol Taylor | Startup.io | CEO | 59 | Warm |
+| 5 | ivy.anderson@startup.io | Ivy Anderson | Initech | Data Analyst | 56 | Warm |
+| 6 | alice.chen@air.inc | Alice Chen | Acme Co | Senior Engineer | 56 | Warm |
+| 7 | ivy.jones@company.com | Ivy Jones | Startup.io | Product Lead | 56 | Warm |
+| 8 | david.lee@gmail.com | David Lee | Air Inc | CEO | 56 | Warm |
+| 9 | henry.smith@business.co | Henry Smith | Example Corp | Senior Engineer | 52 | Cool |
+| 10 | grace.martinez@gmail.com | Grace Martinez | Example Corp | Head of Sales | 50 | Cool |
