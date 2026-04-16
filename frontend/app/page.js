@@ -397,6 +397,190 @@ function DetailPanel({ lead, sc, W, onBack }) {
   );
 }
 
+/* ════════════════════ REVIEW PANEL ════════════════════ */
+
+function ReviewPanel({ reviewData, onConfirm, onBack }) {
+  // Track decisions: merges and deletions.
+  const [mergeDecisions, setMergeDecisions] = useState(() => {
+    const d = {};
+    (reviewData.duplicate_groups || []).forEach((g) => { d[g.email] = "approve"; });
+    return d;
+  });
+  const [dropDecisions, setDropDecisions] = useState(() => {
+    const d = {};
+    (reviewData.dropped_rows || []).forEach((r, i) => { d[i] = "confirm"; });
+    return d;
+  });
+
+  const dupGroups = reviewData.duplicate_groups || [];
+  const droppedRows = reviewData.dropped_rows || [];
+
+  function handleConfirm() {
+    const approved = [];
+    const rejected = [];
+    Object.entries(mergeDecisions).forEach(([email, decision]) => {
+      if (decision === "approve") approved.push(email);
+      else rejected.push(email);
+    });
+
+    const restored = [];
+    Object.entries(dropDecisions).forEach(([idx, decision]) => {
+      if (decision === "restore") restored.push(droppedRows[Number(idx)]);
+    });
+
+    onConfirm({ approved_merges: approved, rejected_merges: rejected, restored_drops: restored });
+  }
+
+  const approvedCount = Object.values(mergeDecisions).filter((v) => v === "approve").length;
+  const rejectedCount = Object.values(mergeDecisions).filter((v) => v === "reject").length;
+  const restoredCount = Object.values(dropDecisions).filter((v) => v === "restore").length;
+  const confirmedDrops = Object.values(dropDecisions).filter((v) => v === "confirm").length;
+
+  return (
+    <div style={{ animation: "slideUp .4s ease both" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
+        <div style={{ fontSize: 12, color: C.textLt, fontFamily: F.mono, letterSpacing: ".04em" }}>REVIEW MERGES &amp; DELETIONS</div>
+        <div style={{ display: "flex", gap: 8 }}>
+          <Btn v="ghost" onClick={onBack}>Back to Upload</Btn>
+          <Btn v="primary" onClick={handleConfirm}>
+            Confirm &amp; Run Pipeline
+          </Btn>
+        </div>
+      </div>
+
+      {/* Summary bar */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12, marginBottom: 24 }}>
+        <StatCard i={0} label="Total Rows" value={reviewData.total_rows} />
+        <StatCard i={1} label="Valid Leads" value={reviewData.valid_leads} />
+        <StatCard i={2} label="Duplicate Groups" value={dupGroups.length} sub={`${approvedCount} merge, ${rejectedCount} keep separate`} />
+        <StatCard i={3} label="Dropped Rows" value={droppedRows.length} sub={`${restoredCount} restore, ${confirmedDrops} confirm drop`} />
+      </div>
+
+      {/* Duplicate groups */}
+      {dupGroups.length > 0 && (
+        <div style={{ marginBottom: 28 }}>
+          <Label>Duplicate Groups ({dupGroups.length})</Label>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {dupGroups.map((group) => {
+              const decision = mergeDecisions[group.email];
+              return (
+                <div key={group.email} style={{
+                  background: C.surface, border: `1px solid ${decision === "approve" ? C.accent : C.border}`,
+                  borderRadius: 14, padding: 20, transition: "border-color .2s",
+                }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+                    <div>
+                      <span style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{group.email}</span>
+                      <span style={{ fontSize: 12, color: C.textLt, marginLeft: 10 }}>{group.rows.length} rows</span>
+                    </div>
+                    <div style={{ display: "flex", gap: 6 }}>
+                      <Btn v={decision === "approve" ? "soft" : "ghost"}
+                        onClick={() => setMergeDecisions((p) => ({ ...p, [group.email]: "approve" }))}
+                        style={{ fontSize: 11 }}>
+                        Merge
+                      </Btn>
+                      <Btn v={decision === "reject" ? "soft" : "ghost"}
+                        onClick={() => setMergeDecisions((p) => ({ ...p, [group.email]: "reject" }))}
+                        style={{ fontSize: 11, color: decision === "reject" ? C.warm : undefined }}>
+                        Keep Separate
+                      </Btn>
+                    </div>
+                  </div>
+
+                  {/* Show the rows side by side */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                    {group.rows.map((row, ri) => (
+                      <div key={ri} style={{
+                        display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8,
+                        padding: "10px 14px", background: C.surfaceAlt, borderRadius: 8, fontSize: 12,
+                      }}>
+                        <div><span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>NAME</span><br />{row.name || "--"}</div>
+                        <div><span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>COMPANY</span><br />{row.company || "--"}</div>
+                        <div><span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>TITLE</span><br />{row.title || "--"}</div>
+                        <div><span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>SOURCE</span><br />{row.source || "--"}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {decision === "approve" && (
+                    <div style={{ marginTop: 10, padding: "10px 14px", background: C.accentLight, borderRadius: 8, fontSize: 12 }}>
+                      <span style={{ fontFamily: F.mono, fontSize: 10, color: C.accent, fontWeight: 700 }}>MERGED RESULT</span>
+                      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8, marginTop: 6 }}>
+                        <div>{group.proposed_merge.name || "--"}</div>
+                        <div>{group.proposed_merge.company || "--"}</div>
+                        <div>{group.proposed_merge.title || "--"}</div>
+                        <div>{group.proposed_merge.source || "--"}</div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Dropped rows */}
+      {droppedRows.length > 0 && (
+        <div style={{ marginBottom: 28 }}>
+          <Label>Dropped Rows &mdash; Invalid/Missing Email ({droppedRows.length})</Label>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {droppedRows.map((drop, i) => {
+              const decision = dropDecisions[i];
+              return (
+                <div key={i} style={{
+                  background: C.surface, border: `1px solid ${decision === "restore" ? C.warm : C.border}`,
+                  borderRadius: 10, padding: "14px 18px", display: "flex", justifyContent: "space-between",
+                  alignItems: "center", transition: "border-color .2s",
+                }}>
+                  <div style={{ display: "flex", gap: 20, fontSize: 12, flexWrap: "wrap" }}>
+                    <div>
+                      <span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>ROW</span>
+                      <div>{drop.row_num}</div>
+                    </div>
+                    <div>
+                      <span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>NAME</span>
+                      <div>{drop.raw.Name || "--"}</div>
+                    </div>
+                    <div>
+                      <span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>EMAIL (RAW)</span>
+                      <div style={{ fontFamily: F.mono, color: C.low }}>{drop.raw.Email || "(empty)"}</div>
+                    </div>
+                    <div>
+                      <span style={{ color: C.textLt, fontFamily: F.mono, fontSize: 10 }}>REASON</span>
+                      <div>{drop.reason.replace(/_/g, " ")}</div>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", gap: 6 }}>
+                    <Btn v={decision === "confirm" ? "soft" : "ghost"}
+                      onClick={() => setDropDecisions((p) => ({ ...p, [i]: "confirm" }))}
+                      style={{ fontSize: 11 }}>
+                      Drop
+                    </Btn>
+                    <Btn v={decision === "restore" ? "soft" : "ghost"}
+                      onClick={() => setDropDecisions((p) => ({ ...p, [i]: "restore" }))}
+                      style={{ fontSize: 11, color: decision === "restore" ? C.warm : undefined }}>
+                      Restore
+                    </Btn>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Bottom confirm */}
+      <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, paddingTop: 12, borderTop: `1px solid ${C.border}` }}>
+        <Btn v="ghost" onClick={onBack}>Back</Btn>
+        <Btn v="primary" onClick={handleConfirm} style={{ padding: "12px 28px", fontSize: 14 }}>
+          Confirm &amp; Run Pipeline
+        </Btn>
+      </div>
+    </div>
+  );
+}
+
 /* ════════════════════ EXPORT PANEL ════════════════════ */
 
 function ExportPanel({ leads, scored, sfCsv, sfJson, onBack }) {
@@ -507,6 +691,8 @@ export default function App() {
   const [sort, setSort] = useState("score");
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
+  const [manualReview, setManualReview] = useState(false);
+  const [reviewData, setReviewData] = useState(null);
   const fileRef = useRef(null);
 
   // Score all leads with current weights.
@@ -559,32 +745,102 @@ export default function App() {
     }, 300);
 
     try {
-      let res;
-      if (csvFile) {
-        const form = new FormData();
-        form.append("file", csvFile);
-        form.append("seed", "42");
-        res = await fetch("/api/pipeline", { method: "POST", body: form });
+      if (manualReview) {
+        // Step 1: Get review data (duplicates + drops) without running full pipeline.
+        let res;
+        if (csvFile) {
+          const form = new FormData();
+          form.append("file", csvFile);
+          res = await fetch("/api/pipeline/review", { method: "POST", body: form });
+        } else {
+          res = await fetch("/api/pipeline/review", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({}),
+          });
+        }
+
+        clearInterval(progInterval);
+        setProg(100);
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || "Review step failed");
+        }
+
+        const data = await res.json();
+        setReviewData(data);
+        setStage("review");
       } else {
-        res = await fetch("/api/pipeline", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ seed: 42 }),
-        });
+        // Auto mode: run full pipeline directly.
+        let res;
+        if (csvFile) {
+          const form = new FormData();
+          form.append("file", csvFile);
+          form.append("seed", "42");
+          res = await fetch("/api/pipeline", { method: "POST", body: form });
+        } else {
+          res = await fetch("/api/pipeline", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ seed: 42 }),
+          });
+        }
+
+        clearInterval(progInterval);
+        setProg(100);
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || "Pipeline failed");
+        }
+
+        const data = await res.json();
+        setLeads(data.leads || []);
+        setSfCsv(data.salesforce_csv || "");
+        setSfJson(data.salesforce_json || null);
+        setStage("results");
       }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusy(false);
+      clearInterval(progInterval);
+    }
+  }
+
+  async function handleReviewConfirm(decisions) {
+    setBusy(true);
+    setProg(0);
+    setError(null);
+
+    const progInterval = setInterval(() => {
+      setProg((p) => Math.min(p + Math.random() * 10, 92));
+    }, 300);
+
+    try {
+      const res = await fetch("/api/pipeline/finalize", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...decisions,
+          seed: 42,
+        }),
+      });
 
       clearInterval(progInterval);
       setProg(100);
 
       if (!res.ok) {
         const err = await res.json();
-        throw new Error(err.error || "Pipeline failed");
+        throw new Error(err.error || "Finalize failed");
       }
 
       const data = await res.json();
       setLeads(data.leads || []);
       setSfCsv(data.salesforce_csv || "");
       setSfJson(data.salesforce_json || null);
+      setReviewData(null);
       setStage("results");
     } catch (err) {
       setError(err.message);
@@ -598,11 +854,16 @@ export default function App() {
     setLeads([]); setSel(null); setCsvFile(null); setStage("upload");
     setProg(0); setShowW(false); setError(null); setSearch("");
     setFilter("all"); setSfCsv(""); setSfJson(null);
+    setReviewData(null);
   }
 
   // Stage mapping for progress indicator
-  const steps = ["Upload CSV", "Pipeline Results", "Lead Detail", "Export"];
-  const stageMap = { upload: 0, processing: 0, results: 1, detail: 2, export: 3 };
+  const steps = manualReview
+    ? ["Upload CSV", "Review", "Pipeline Results", "Lead Detail", "Export"]
+    : ["Upload CSV", "Pipeline Results", "Lead Detail", "Export"];
+  const stageMap = manualReview
+    ? { upload: 0, processing: 0, review: 1, results: 2, detail: 3, export: 4 }
+    : { upload: 0, processing: 0, results: 1, detail: 2, export: 3 };
   const ci = stageMap[stage] ?? 0;
 
   return (
@@ -712,6 +973,35 @@ export default function App() {
                 style={{ width: "100%", padding: "14px", fontSize: 14, borderRadius: 10 }}>
                 Run Pipeline{csvFile ? ` on ${csvFile.name}` : " on Default Data"}
               </Btn>
+
+              {/* Manual review toggle */}
+              <div style={{
+                marginTop: 14, padding: "12px 16px", background: C.surfaceAlt,
+                borderRadius: 10, border: `1px solid ${C.borderLight}`,
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+              }}>
+                <div>
+                  <div style={{ fontSize: 13, fontWeight: 500, color: C.text }}>Manual Review</div>
+                  <div style={{ fontSize: 11, color: C.textLt, marginTop: 2 }}>
+                    Review merges &amp; deletions before scoring
+                  </div>
+                </div>
+                <button
+                  onClick={() => setManualReview((v) => !v)}
+                  style={{
+                    width: 44, height: 24, borderRadius: 12, border: "none", cursor: "pointer",
+                    background: manualReview ? C.accent : C.border,
+                    position: "relative", transition: "background .2s",
+                  }}
+                >
+                  <div style={{
+                    width: 18, height: 18, borderRadius: "50%", background: "#fff",
+                    position: "absolute", top: 3,
+                    left: manualReview ? 23 : 3,
+                    transition: "left .2s", boxShadow: "0 1px 3px rgba(0,0,0,.15)",
+                  }} />
+                </button>
+              </div>
             </div>
 
             {/* ICP Weights sidebar */}
@@ -747,6 +1037,15 @@ export default function App() {
               <div style={{ width: `${prog}%`, height: "100%", background: C.accent, borderRadius: 3, transition: "width .3s ease" }} />
             </div>
           </div>
+        )}
+
+        {/* ════════════ REVIEW STAGE ════════════ */}
+        {stage === "review" && reviewData && !busy && (
+          <ReviewPanel
+            reviewData={reviewData}
+            onConfirm={handleReviewConfirm}
+            onBack={() => { setReviewData(null); setStage("upload"); }}
+          />
         )}
 
         {/* ════════════ RESULTS STAGE ════════════ */}

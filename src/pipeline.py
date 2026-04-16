@@ -118,6 +118,33 @@ def ingest(csv_path: Path, today: date) -> tuple[list[dict], int, int]:
     return normalized, total, dropped
 
 
+def ingest_with_drops(csv_path: Path, today: date) -> tuple[list[dict], list[dict], int]:
+    """
+    Like ingest(), but also returns the dropped rows with their raw data
+    so a reviewer can inspect them.
+
+    Returns (normalized_leads, dropped_rows, total_rows_read).
+    Each dropped row is a dict with 'row_num', 'raw', and 'reason'.
+    """
+    normalized: list[dict] = []
+    dropped_rows: list[dict] = []
+    total = 0
+    with open(csv_path, "r", encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f)
+        for i, row in enumerate(reader, start=2):
+            total += 1
+            lead = normalize_row(row, row_num=i, today=today)
+            if lead is None:
+                dropped_rows.append({
+                    "row_num": i,
+                    "raw": dict(row),
+                    "reason": "invalid_or_missing_email",
+                })
+                continue
+            normalized.append(lead)
+    return normalized, dropped_rows, total
+
+
 # ---------------------------------------------------------------------------
 # Output writers
 # ---------------------------------------------------------------------------
