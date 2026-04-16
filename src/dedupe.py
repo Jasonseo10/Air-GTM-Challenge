@@ -27,6 +27,54 @@ def _pick_best(values: list[str | None]) -> str | None:
     return max(candidates, key=len)
 
 
+def find_duplicate_groups(leads: Iterable[dict]) -> tuple[list[dict], list[dict]]:
+    """
+    Identify duplicate groups without merging.
+
+    Returns (unique_leads, duplicate_groups) where each group is a dict:
+      {"email": str, "rows": [lead, ...], "proposed_merge": lead}
+    """
+    groups: dict[str, list[dict]] = defaultdict(list)
+    for lead in leads:
+        email = lead.get("email")
+        if not email:
+            continue
+        groups[email].append(lead)
+
+    unique: list[dict] = []
+    dup_groups: list[dict] = []
+
+    for email, group in groups.items():
+        if len(group) == 1:
+            unique.append(group[0])
+            continue
+
+        # Build the proposed merge (same logic as dedupe_by_email).
+        keys = set().union(*(row.keys() for row in group))
+        combined: dict = {}
+        for key in keys:
+            if key == "data_quality_issues":
+                issues: list[str] = []
+                for row in group:
+                    issues.extend(row.get(key) or [])
+                combined[key] = sorted(set(issues))
+            elif key == "source_row_numbers":
+                combined[key] = sorted(
+                    n for row in group for n in (row.get(key) or [])
+                )
+            else:
+                combined[key] = _pick_best([row.get(key) for row in group])
+        combined["merged_from_n_rows"] = len(group)
+
+        dup_groups.append({
+            "email": email,
+            "rows": group,
+            "proposed_merge": combined,
+        })
+
+    return unique, dup_groups
+
+
 def dedupe_by_email(leads: Iterable[dict]) -> tuple[list[dict], int]:
     """
     Merge leads that share a normalized email.

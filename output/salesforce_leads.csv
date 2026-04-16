@@ -28,8 +28,8 @@ David,Jones,david.jones@yahoo.com,Unknown,VP Marketing,+1 (123) 456-7890,Event,C
 Carol,Martinez,carol.martinez@business.co,Company,Marketing Manager,+1 (123) 456-7890,LinkedIn,Canada,2025-01-11,Financial Services,201-500,40,Warm,Manager,$50M-$100M,ok,
 Alice,Wilson,alice.wilson@gmail.com,Company,CTO,,Product Signup,Germany,2024-09-29,Personal / Unknown,Unknown,40,Warm,C-Level,Unknown,ok,missing_or_invalid_phone
 David,Lee,david.lee@gmail.com,Air Inc,CEO,,Product Signup,India,2025-06-11,Personal / Unknown,Unknown,40,Warm,C-Level,Unknown,ok,missing_or_invalid_phone
-Jack,Brown,jack.brown@company.com,GlobalTech,Data Analyst,+1 (123) 456-7890,Event,France,2025-03-16,Enterprise Software,1000-5000,38,Warm,IC,$100M-$500M,ok,missing_or_invalid_phone; missing_or_unknown_country
-Grace,Martinez,grace.martinez@gmail.com,Example Corp,Head of Sales,+1 (123) 456-7890,Product Signup,United States,2024-11-11,Personal / Unknown,Unknown,35,Warm,Director,Unknown,ok,missing_or_invalid_phone
+Bob,Jones,bob.jones@example.com,Air Inc,Product Lead,+1 (123) 456-7890,Referral,,2026-04-03,SaaS,501-1000,40,Warm,Senior IC,$50M-$100M,ok,missing_or_unknown_country
+Jack,Brown,jack.brown@company.com,GlobalTech,Designer,+1 (123) 456-7890,Event,,2024-12-20,Enterprise Software,1000-5000,38,Warm,IC,$100M-$500M,ok,missing_or_unknown_country
 Bob,Wilson,bob.wilson@business.co,Air Inc,Head of Sales,+1 (800) 555-1212,LinkedIn,Germany,2025-05-15,Financial Services,201-500,35,Warm,Director,$50M-$100M,ok,
 Bob,Martinez,bob.martinez@startup.io,Acme Co,Head of Sales,+1 (800) 555-1212,LinkedIn,United Kingdom,2025-02-25,SaaS,11-50,35,Warm,Director,$1M-$10M,ok,
 Carol,Brown,carol.brown@startup.io,Startup.io,Head of Sales,,Referral,United States,2025-07-30,SaaS,11-50,35,Warm,Director,$1M-$10M,ok,missing_company; missing_or_invalid_phone; company_backfilled_from_enrichment
@@ -38,8 +38,9 @@ Alice,Chen,alice.chen@air.inc,Acme Co,Senior Engineer,,Product Signup,United Sta
 Emily,Lee,emily.lee@startup.io,Startup.io,CTO,,LinkedIn,Germany,2025-01-30,SaaS,11-50,35,Warm,C-Level,$1M-$10M,ok,missing_company; missing_or_invalid_phone; company_backfilled_from_enrichment
 Grace,Smith,grace.smith@air.inc,Startup.io,Marketing Manager,,Referral,,2025-05-02,Creative Operations,51-200,35,Warm,Manager,$10M-$50M,ok,missing_or_invalid_phone; missing_or_unknown_country
 Henry,Smith,henry.smith@business.co,Example Corp,Senior Engineer,,Product Signup,India,2025-06-20,Financial Services,201-500,35,Warm,Senior IC,$50M-$100M,ok,missing_or_invalid_phone
+Grace,Martinez,grace.martinez@gmail.com,Example Corp,Head of Sales,+1 (123) 456-7890,Product Signup,United States,2024-11-11,Personal / Unknown,Unknown,35,Warm,Director,Unknown,ok,missing_or_invalid_phone
 Henry,Brown,henry.brown@air.inc,Initech,Head of Sales,,Event,,2025-03-25,Creative Operations,51-200,33,Warm,Director,$10M-$50M,ok,missing_or_invalid_phone; missing_or_unknown_country
-Bob,Jones,bob.jones@example.com,Air Inc,Senior Engineer,+1 (123) 456-7890,Website Visitor,United States,2026-04-03,SaaS,501-1000,30,Warm,Senior IC,$50M-$100M,ok,missing_company; missing_or_invalid_created_at; missing_or_invalid_phone; missing_or_unknown_country
+Jack,Brown,jack.brown@company.com,Initech,Data Analyst,,Event,France,2025-03-16,Enterprise Software,1000-5000,33,Warm,IC,$100M-$500M,ok,missing_or_invalid_phone
 Ivy,Anderson,ivy.anderson@startup.io,Initech,Data Analyst,,Product Signup,Germany,2024-10-19,SaaS,11-50,30,Warm,IC,$1M-$10M,ok,missing_or_invalid_phone
 Emily,Smith,emily.smith@air.inc,Air Inc,Data Analyst,+1 (123) 456-7890,Referral,United States,2025-05-10,Creative Operations,51-200,30,Warm,IC,$10M-$50M,ok,
 Grace,Martinez,grace.martinez@company.com,Initech,Product Lead,+1 (123) 456-7890,Website Visitor,,2025-07-09,Enterprise Software,1000-5000,30,Warm,Senior IC,$100M-$500M,ok,missing_or_unknown_country
@@ -54,27 +55,30 @@ Frank,Brown,frank.brown@startup.io,Acme Co,Senior Engineer,+1 (123) 456-7890,Eve
 Carol,Chen,carol.chen@gmail.com,Air Inc,CTO,,Website Visitor,United Kingdom,2025-03-09,Personal / Unknown,Unknown,25,Cold,C-Level,Unknown,ok,missing_or_invalid_phone
 Emily,Brown,emily.brown@startup.io,Startup.io,Data Analyst,,Referral,Canada,2024-10-18,SaaS,11-50,25,Cold,IC,$1M-$10M,ok,missing_or_invalid_phone
 Henry,Chen,henry.chen@gmail.com,Acme Co,CTO,+1 (123) 456-7890,Website Visitor,Germany,2024-08-20,Personal / Unknown,Unknown,25,Cold,C-Level,Unknown,ok,
-Grace,Johnson,grace.johnson@gmail.com,GlobalTech,Head of Sales,+1 (123) 456-7890,Referral,United States,2025-06-03,Personal / Unknown,Unknown,25,Cold,Director,Unknown,ok,missing_company; missing_or_unknown_country
 Emily,Chen,emily.chen@yahoo.com,Startup.io,VP Marketing,,Website Visitor,France,2025-05-18,Personal / Unknown,Unknown,25,Cold,VP,Unknown,ok,missing_or_invalid_phone
 Alice,Johnson,alice.johnson@yahoo.com,Acme Co,VP Marketing,,Website Visitor,India,2024-10-14,,,25,Cold,VP,,failed,missing_or_invalid_phone; enrichment_failed
 Bob,Johnson,bob.johnson@business.co,Initech,,,Referral,India,2025-03-31,Financial Services,201-500,25,Cold,Unknown,$50M-$100M,ok,missing_title; missing_or_invalid_phone
 Carol,Anderson,carol.anderson@company.com,Air Inc,Product Lead,,Website Visitor,Germany,2025-02-05,Enterprise Software,1000-5000,25,Cold,Senior IC,$100M-$500M,ok,missing_or_invalid_phone
+,Carol,bob.jones@example.com,Example Corp,Senior Engineer,,Website Visitor,United States,,SaaS,501-1000,25,Cold,Senior IC,$50M-$100M,ok,missing_company; missing_or_invalid_phone; missing_or_invalid_created_at; company_backfilled_from_enrichment
+Grace,Johnson,grace.johnson@gmail.com,GlobalTech,Head of Sales,+1 (123) 456-7890,Referral,United States,2025-06-03,Personal / Unknown,Unknown,25,Cold,Director,Unknown,ok,missing_company; missing_or_unknown_country
 Emily,Jones,emily.jones@business.co,Air Inc,Senior Engineer,,Event,Germany,2025-03-27,Financial Services,201-500,23,Cold,Senior IC,$50M-$100M,ok,missing_or_invalid_phone
 Emily,Jones,emily.jones@air.inc,Startup.io,Designer,+1 (123) 456-7890,Event,India,2025-07-01,Creative Operations,51-200,23,Cold,IC,$10M-$50M,ok,
 Frank,Wilson,frank.wilson@air.inc,Company,Designer,+1 (800) 555-1212,Website Visitor,United States,2024-10-14,Creative Operations,51-200,20,Cold,IC,$10M-$50M,ok,
 Jack,Wilson,jack.wilson@gmail.com,Air Inc,Head of Sales,+1 (123) 456-7890,Event,Germany,2025-02-02,Personal / Unknown,Unknown,18,Cold,Director,Unknown,ok,
 Jack,Smith,jack.smith@air.inc,Acme Co,Senior Engineer,,Website Visitor,United States,2025-06-15,Creative Operations,51-200,15,Cold,Senior IC,$10M-$50M,ok,missing_or_invalid_phone
-Alice,Chen,alice.chen@startup.io,GlobalTech,Software Engineer,+1 (123) 456-7890,Website Visitor,United States,2025-02-15,SaaS,11-50,15,Cold,IC,$1M-$10M,ok,missing_company; missing_or_invalid_phone; missing_or_unknown_country
 Henry,Lee,henry.lee@yahoo.com,Umbrella Corp,Head of Sales,+1 (800) 555-1212,Website Visitor,United Kingdom,2025-03-04,Personal / Unknown,Unknown,15,Cold,Director,Unknown,ok,
 Carol,Brown,carol.brown@business.co,Business Co,Software Engineer,,Website Visitor,Canada,2025-05-18,Financial Services,201-500,15,Cold,IC,$50M-$100M,ok,missing_company; missing_or_invalid_phone; company_backfilled_from_enrichment
 Henry,Anderson,henry.anderson@gmail.com,Umbrella Corp,Software Engineer,,Product Signup,United Kingdom,2024-10-01,Personal / Unknown,Unknown,15,Cold,IC,Unknown,ok,missing_or_invalid_phone
 Carol,Martinez,carol.martinez@yahoo.com,Umbrella Corp,Product Lead,,Product Signup,United Kingdom,2024-10-15,Personal / Unknown,Unknown,15,Cold,Senior IC,Unknown,ok,missing_or_invalid_phone
+Alice,Chen,alice.chen@startup.io,GlobalTech,Designer,+1 (123) 456-7890,LinkedIn,,2025-02-15,SaaS,11-50,15,Cold,IC,$1M-$10M,ok,missing_or_unknown_country
+Alice,Chen,alice.chen@startup.io,Acme Co,Product Lead,,Website Visitor,United States,2025-04-02,SaaS,11-50,15,Cold,Senior IC,$1M-$10M,ok,missing_or_invalid_phone
 Ivy,Taylor,ivy.taylor@yahoo.com,Example Corp,Marketing Manager,,Event,,2025-03-21,Personal / Unknown,Unknown,13,Cold,Manager,Unknown,ok,missing_or_invalid_phone; missing_or_unknown_country
 Alice,Lee,alice.lee@startup.io,Example Corp,Senior Engineer,,Website Visitor,France,2025-05-12,SaaS,11-50,10,Cold,Senior IC,$1M-$10M,ok,missing_or_invalid_phone
 Emily,Chen,emily.chen@gmail.com,GlobalTech,Product Lead,+1 (123) 456-7890,Referral,United States,2024-10-28,,,10,Cold,Senior IC,,failed,enrichment_failed
 Jack,Wilson,jack.wilson@air.inc,Air Inc,Designer,+1 (800) 555-1212,Website Visitor,,2025-01-28,Creative Operations,51-200,10,Cold,IC,$10M-$50M,ok,missing_company; missing_or_unknown_country; company_backfilled_from_enrichment
 Ivy,Anderson,ivy.anderson@yahoo.com,Initech,Senior Engineer,+1 (123) 456-7890,Referral,United States,2025-03-12,Personal / Unknown,Unknown,10,Cold,Senior IC,Unknown,ok,
 Grace,Taylor,grace.taylor@yahoo.com,Example Corp,Head of Sales,+1 (123) 456-7890,Website Visitor,India,2025-04-28,Personal / Unknown,Unknown,10,Cold,Director,Unknown,ok,
+Alice,Chen,alice.chen@startup.io,Startup.io,Software Engineer,,Website Visitor,United States,2025-05-24,SaaS,11-50,10,Cold,IC,$1M-$10M,ok,missing_company; missing_or_invalid_phone; company_backfilled_from_enrichment
 Ivy,Chen,ivy.chen@gmail.com,Company,Marketing Manager,,LinkedIn,France,2025-05-07,Personal / Unknown,Unknown,5,Cold,Manager,Unknown,ok,missing_or_invalid_phone
 Bob,Wilson,bob.wilson@company.com,Unknown,Data Analyst,+1 (800) 555-1212,LinkedIn,India,2025-06-14,,,5,Cold,IC,,failed,missing_company; enrichment_failed
 Alice,Johnson,alice.johnson@gmail.com,Unknown,Software Engineer,,Referral,Canada,2025-06-25,Personal / Unknown,Unknown,5,Cold,IC,Unknown,ok,missing_company; missing_or_invalid_phone

@@ -1699,23 +1699,78 @@
     ]
   },
   {
-    "source_row_numbers": [
-      25,
-      81
-    ],
-    "created_at": "2025-03-16",
-    "company": "GlobalTech",
-    "email": "jack.brown@company.com",
+    "name": "Bob Jones",
+    "email": "bob.jones@example.com",
+    "title": "Product Lead",
+    "company": "Air Inc",
+    "phone": "+1 (123) 456-7890",
+    "source": "Referral",
+    "country": null,
+    "created_at": "2026-04-03",
     "data_quality_issues": [
-      "missing_or_invalid_phone",
       "missing_or_unknown_country"
     ],
-    "title": "Data Analyst",
-    "source": "Event",
-    "phone": "+1 (123) 456-7890",
-    "country": "France",
+    "source_row_numbers": [
+      10
+    ],
+    "seniority_level": "Senior IC",
+    "pricing_page_views": 7,
+    "has_signup_intent": false,
+    "credit_usage_pct": 0,
+    "asset_uploads": 0,
+    "teammate_invites": 0,
+    "active_channels": 1,
+    "creative_job_postings": 1,
+    "has_marketing_title": false,
+    "enrichment_status": "ok",
+    "company_size_band": "501-1000",
+    "company_size_min": 501,
+    "industry": "SaaS",
+    "estimated_revenue": "$50M-$100M",
+    "score": 40,
+    "tier": "Warm",
+    "score_breakdown": [
+      {
+        "rule_id": "company_size_mid_market",
+        "matched": true,
+        "points": 15,
+        "description": "Mid-market (201-999 employees)"
+      },
+      {
+        "rule_id": "industry_saas",
+        "matched": true,
+        "points": 10,
+        "description": "SaaS and related \u2014 high product-market fit"
+      },
+      {
+        "rule_id": "source_referral",
+        "matched": true,
+        "points": 10,
+        "description": "Referrals convert well"
+      },
+      {
+        "rule_id": "has_phone",
+        "matched": true,
+        "points": 5,
+        "description": "Reachable by phone \u2014 SDR-ready"
+      }
+    ]
+  },
+  {
     "name": "Jack Brown",
-    "merged_from_n_rows": 2,
+    "email": "jack.brown@company.com",
+    "title": "Designer",
+    "company": "GlobalTech",
+    "phone": "+1 (123) 456-7890",
+    "source": "Event",
+    "country": null,
+    "created_at": "2024-12-20",
+    "data_quality_issues": [
+      "missing_or_unknown_country"
+    ],
+    "source_row_numbers": [
+      81
+    ],
     "seniority_level": "IC",
     "pricing_page_views": 19,
     "has_signup_intent": false,
@@ -1723,8 +1778,8 @@
     "asset_uploads": 0,
     "teammate_invites": 0,
     "active_channels": 2,
-    "creative_job_postings": 1,
-    "has_marketing_title": false,
+    "creative_job_postings": 3,
+    "has_marketing_title": true,
     "enrichment_status": "ok",
     "company_size_band": "1000-5000",
     "company_size_min": 1000,
@@ -1750,72 +1805,6 @@
         "matched": true,
         "points": 5,
         "description": "Reachable by phone \u2014 SDR-ready"
-      }
-    ]
-  },
-  {
-    "source_row_numbers": [
-      16,
-      29
-    ],
-    "created_at": "2024-11-11",
-    "company": "Example Corp",
-    "email": "grace.martinez@gmail.com",
-    "data_quality_issues": [
-      "missing_or_invalid_phone"
-    ],
-    "title": "Head of Sales",
-    "source": "Product Signup",
-    "phone": "+1 (123) 456-7890",
-    "country": "United States",
-    "name": "Grace Martinez",
-    "merged_from_n_rows": 2,
-    "seniority_level": "Director",
-    "pricing_page_views": 31,
-    "has_signup_intent": true,
-    "credit_usage_pct": 92,
-    "asset_uploads": 279,
-    "teammate_invites": 1,
-    "active_channels": 2,
-    "creative_job_postings": 0,
-    "has_marketing_title": false,
-    "enrichment_status": "ok",
-    "company_size_band": "Unknown",
-    "company_size_min": 0,
-    "industry": "Personal / Unknown",
-    "estimated_revenue": "Unknown",
-    "score": 35,
-    "tier": "Warm",
-    "score_breakdown": [
-      {
-        "rule_id": "title_director",
-        "matched": true,
-        "points": 15,
-        "description": "Directors and Heads of X"
-      },
-      {
-        "rule_id": "source_product_signup",
-        "matched": true,
-        "points": 20,
-        "description": "Product signups are the hottest signal \u2014 they've used the product"
-      },
-      {
-        "rule_id": "country_tier_1",
-        "matched": true,
-        "points": 5,
-        "description": "Tier-1 GTM markets"
-      },
-      {
-        "rule_id": "has_phone",
-        "matched": true,
-        "points": 5,
-        "description": "Reachable by phone \u2014 SDR-ready"
-      },
-      {
-        "rule_id": "penalty_personal_email",
-        "matched": true,
-        "points": -10,
-        "description": "Personal email domain \u2014 less likely to be a real buyer intent"
       }
     ]
   },
@@ -2247,6 +2236,72 @@
     ]
   },
   {
+    "title": "Head of Sales",
+    "source_row_numbers": [
+      16,
+      29
+    ],
+    "source": "Product Signup",
+    "created_at": "2024-11-11",
+    "email": "grace.martinez@gmail.com",
+    "company": "Example Corp",
+    "name": "Grace Martinez",
+    "phone": "+1 (123) 456-7890",
+    "country": "United States",
+    "data_quality_issues": [
+      "missing_or_invalid_phone"
+    ],
+    "merged_from_n_rows": 2,
+    "seniority_level": "Director",
+    "pricing_page_views": 31,
+    "has_signup_intent": true,
+    "credit_usage_pct": 92,
+    "asset_uploads": 279,
+    "teammate_invites": 1,
+    "active_channels": 2,
+    "creative_job_postings": 0,
+    "has_marketing_title": false,
+    "enrichment_status": "ok",
+    "company_size_band": "Unknown",
+    "company_size_min": 0,
+    "industry": "Personal / Unknown",
+    "estimated_revenue": "Unknown",
+    "score": 35,
+    "tier": "Warm",
+    "score_breakdown": [
+      {
+        "rule_id": "title_director",
+        "matched": true,
+        "points": 15,
+        "description": "Directors and Heads of X"
+      },
+      {
+        "rule_id": "source_product_signup",
+        "matched": true,
+        "points": 20,
+        "description": "Product signups are the hottest signal \u2014 they've used the product"
+      },
+      {
+        "rule_id": "country_tier_1",
+        "matched": true,
+        "points": 5,
+        "description": "Tier-1 GTM markets"
+      },
+      {
+        "rule_id": "has_phone",
+        "matched": true,
+        "points": 5,
+        "description": "Reachable by phone \u2014 SDR-ready"
+      },
+      {
+        "rule_id": "penalty_personal_email",
+        "matched": true,
+        "points": -10,
+        "description": "Personal email domain \u2014 less likely to be a real buyer intent"
+      }
+    ]
+  },
+  {
     "name": "Henry Brown",
     "email": "henry.brown@air.inc",
     "title": "Head of Sales",
@@ -2300,71 +2355,48 @@
     ]
   },
   {
-    "source_row_numbers": [
-      10,
-      52
-    ],
-    "created_at": "2026-04-03",
-    "company": "Air Inc",
-    "email": "bob.jones@example.com",
+    "name": "Jack Brown",
+    "email": "jack.brown@company.com",
+    "title": "Data Analyst",
+    "company": "Initech",
+    "phone": null,
+    "source": "Event",
+    "country": "France",
+    "created_at": "2025-03-16",
     "data_quality_issues": [
-      "missing_company",
-      "missing_or_invalid_created_at",
-      "missing_or_invalid_phone",
-      "missing_or_unknown_country"
+      "missing_or_invalid_phone"
     ],
-    "title": "Senior Engineer",
-    "source": "Website Visitor",
-    "phone": "+1 (123) 456-7890",
-    "country": "United States",
-    "name": "Bob Jones",
-    "merged_from_n_rows": 2,
-    "seniority_level": "Senior IC",
-    "pricing_page_views": 28,
+    "source_row_numbers": [
+      25
+    ],
+    "seniority_level": "IC",
+    "pricing_page_views": 19,
     "has_signup_intent": false,
     "credit_usage_pct": 0,
     "asset_uploads": 0,
     "teammate_invites": 0,
-    "active_channels": 1,
+    "active_channels": 2,
     "creative_job_postings": 1,
     "has_marketing_title": false,
     "enrichment_status": "ok",
-    "company_size_band": "501-1000",
-    "company_size_min": 501,
-    "industry": "SaaS",
-    "estimated_revenue": "$50M-$100M",
-    "score": 30,
+    "company_size_band": "1000-5000",
+    "company_size_min": 1000,
+    "industry": "Enterprise Software",
+    "estimated_revenue": "$100M-$500M",
+    "score": 33,
     "tier": "Warm",
     "score_breakdown": [
       {
-        "rule_id": "company_size_mid_market",
+        "rule_id": "company_size_enterprise",
         "matched": true,
-        "points": 15,
-        "description": "Mid-market (201-999 employees)"
+        "points": 25,
+        "description": "Enterprise accounts (1000+ employees)"
       },
       {
-        "rule_id": "industry_saas",
+        "rule_id": "source_event",
         "matched": true,
-        "points": 10,
-        "description": "SaaS and related \u2014 high product-market fit"
-      },
-      {
-        "rule_id": "country_tier_1",
-        "matched": true,
-        "points": 5,
-        "description": "Tier-1 GTM markets"
-      },
-      {
-        "rule_id": "has_phone",
-        "matched": true,
-        "points": 5,
-        "description": "Reachable by phone \u2014 SDR-ready"
-      },
-      {
-        "rule_id": "penalty_data_quality",
-        "matched": true,
-        "points": -5,
-        "description": "Missing critical fields \u2014 harder to act on"
+        "points": 8,
+        "description": "Event attendees have shown intent"
       }
     ]
   },
@@ -3113,73 +3145,6 @@
     ]
   },
   {
-    "source_row_numbers": [
-      32,
-      91
-    ],
-    "created_at": "2025-06-03",
-    "company": "GlobalTech",
-    "email": "grace.johnson@gmail.com",
-    "data_quality_issues": [
-      "missing_company",
-      "missing_or_unknown_country"
-    ],
-    "title": "Head of Sales",
-    "source": "Referral",
-    "phone": "+1 (123) 456-7890",
-    "country": "United States",
-    "name": "Grace Johnson",
-    "merged_from_n_rows": 2,
-    "seniority_level": "Director",
-    "pricing_page_views": 2,
-    "has_signup_intent": false,
-    "credit_usage_pct": 0,
-    "asset_uploads": 0,
-    "teammate_invites": 0,
-    "active_channels": 1,
-    "creative_job_postings": 2,
-    "has_marketing_title": false,
-    "enrichment_status": "ok",
-    "company_size_band": "Unknown",
-    "company_size_min": 0,
-    "industry": "Personal / Unknown",
-    "estimated_revenue": "Unknown",
-    "score": 25,
-    "tier": "Cold",
-    "score_breakdown": [
-      {
-        "rule_id": "title_director",
-        "matched": true,
-        "points": 15,
-        "description": "Directors and Heads of X"
-      },
-      {
-        "rule_id": "source_referral",
-        "matched": true,
-        "points": 10,
-        "description": "Referrals convert well"
-      },
-      {
-        "rule_id": "country_tier_1",
-        "matched": true,
-        "points": 5,
-        "description": "Tier-1 GTM markets"
-      },
-      {
-        "rule_id": "has_phone",
-        "matched": true,
-        "points": 5,
-        "description": "Reachable by phone \u2014 SDR-ready"
-      },
-      {
-        "rule_id": "penalty_personal_email",
-        "matched": true,
-        "points": -10,
-        "description": "Personal email domain \u2014 less likely to be a real buyer intent"
-      }
-    ]
-  },
-  {
     "name": "Emily Chen",
     "email": "emily.chen@yahoo.com",
     "title": "VP Marketing",
@@ -3369,6 +3334,134 @@
         "matched": true,
         "points": 25,
         "description": "Enterprise accounts (1000+ employees)"
+      }
+    ]
+  },
+  {
+    "name": "Carol",
+    "email": "bob.jones@example.com",
+    "title": "Senior Engineer",
+    "company": "Example Corp",
+    "phone": null,
+    "source": "Website Visitor",
+    "country": "United States",
+    "created_at": null,
+    "data_quality_issues": [
+      "missing_company",
+      "missing_or_invalid_phone",
+      "missing_or_invalid_created_at",
+      "company_backfilled_from_enrichment"
+    ],
+    "source_row_numbers": [
+      52
+    ],
+    "seniority_level": "Senior IC",
+    "pricing_page_views": 28,
+    "has_signup_intent": false,
+    "credit_usage_pct": 0,
+    "asset_uploads": 0,
+    "teammate_invites": 0,
+    "active_channels": 1,
+    "creative_job_postings": 1,
+    "has_marketing_title": false,
+    "enrichment_status": "ok",
+    "company_size_band": "501-1000",
+    "company_size_min": 501,
+    "industry": "SaaS",
+    "estimated_revenue": "$50M-$100M",
+    "score": 25,
+    "tier": "Cold",
+    "score_breakdown": [
+      {
+        "rule_id": "company_size_mid_market",
+        "matched": true,
+        "points": 15,
+        "description": "Mid-market (201-999 employees)"
+      },
+      {
+        "rule_id": "industry_saas",
+        "matched": true,
+        "points": 10,
+        "description": "SaaS and related \u2014 high product-market fit"
+      },
+      {
+        "rule_id": "country_tier_1",
+        "matched": true,
+        "points": 5,
+        "description": "Tier-1 GTM markets"
+      },
+      {
+        "rule_id": "penalty_data_quality",
+        "matched": true,
+        "points": -5,
+        "description": "Missing critical fields \u2014 harder to act on"
+      }
+    ]
+  },
+  {
+    "title": "Head of Sales",
+    "source_row_numbers": [
+      32,
+      91
+    ],
+    "source": "Referral",
+    "created_at": "2025-06-03",
+    "email": "grace.johnson@gmail.com",
+    "company": "GlobalTech",
+    "name": "Grace Johnson",
+    "phone": "+1 (123) 456-7890",
+    "country": "United States",
+    "data_quality_issues": [
+      "missing_company",
+      "missing_or_unknown_country"
+    ],
+    "merged_from_n_rows": 2,
+    "seniority_level": "Director",
+    "pricing_page_views": 2,
+    "has_signup_intent": false,
+    "credit_usage_pct": 0,
+    "asset_uploads": 0,
+    "teammate_invites": 0,
+    "active_channels": 1,
+    "creative_job_postings": 2,
+    "has_marketing_title": false,
+    "enrichment_status": "ok",
+    "company_size_band": "Unknown",
+    "company_size_min": 0,
+    "industry": "Personal / Unknown",
+    "estimated_revenue": "Unknown",
+    "score": 25,
+    "tier": "Cold",
+    "score_breakdown": [
+      {
+        "rule_id": "title_director",
+        "matched": true,
+        "points": 15,
+        "description": "Directors and Heads of X"
+      },
+      {
+        "rule_id": "source_referral",
+        "matched": true,
+        "points": 10,
+        "description": "Referrals convert well"
+      },
+      {
+        "rule_id": "country_tier_1",
+        "matched": true,
+        "points": 5,
+        "description": "Tier-1 GTM markets"
+      },
+      {
+        "rule_id": "has_phone",
+        "matched": true,
+        "points": 5,
+        "description": "Reachable by phone \u2014 SDR-ready"
+      },
+      {
+        "rule_id": "penalty_personal_email",
+        "matched": true,
+        "points": -10,
+        "description": "Personal email domain \u2014 less likely to be a real buyer intent"
       }
     ]
   },
@@ -3621,69 +3714,6 @@
     ]
   },
   {
-    "source_row_numbers": [
-      14,
-      36,
-      83
-    ],
-    "created_at": "2025-02-15",
-    "company": "GlobalTech",
-    "email": "alice.chen@startup.io",
-    "data_quality_issues": [
-      "missing_company",
-      "missing_or_invalid_phone",
-      "missing_or_unknown_country"
-    ],
-    "title": "Software Engineer",
-    "source": "Website Visitor",
-    "phone": "+1 (123) 456-7890",
-    "country": "United States",
-    "name": "Alice Chen",
-    "merged_from_n_rows": 3,
-    "seniority_level": "IC",
-    "pricing_page_views": 26,
-    "has_signup_intent": true,
-    "credit_usage_pct": 73,
-    "asset_uploads": 214,
-    "teammate_invites": 5,
-    "active_channels": 3,
-    "creative_job_postings": 0,
-    "has_marketing_title": false,
-    "enrichment_status": "ok",
-    "company_size_band": "11-50",
-    "company_size_min": 11,
-    "industry": "SaaS",
-    "estimated_revenue": "$1M-$10M",
-    "score": 15,
-    "tier": "Cold",
-    "score_breakdown": [
-      {
-        "rule_id": "industry_saas",
-        "matched": true,
-        "points": 10,
-        "description": "SaaS and related \u2014 high product-market fit"
-      },
-      {
-        "rule_id": "country_tier_1",
-        "matched": true,
-        "points": 5,
-        "description": "Tier-1 GTM markets"
-      },
-      {
-        "rule_id": "has_phone",
-        "matched": true,
-        "points": 5,
-        "description": "Reachable by phone \u2014 SDR-ready"
-      },
-      {
-        "rule_id": "penalty_data_quality",
-        "matched": true,
-        "points": -5,
-        "description": "Missing critical fields \u2014 harder to act on"
-      }
-    ]
-  },
-  {
     "name": "Henry Lee",
     "email": "henry.lee@yahoo.com",
     "title": "Head of Sales",
@@ -3894,6 +3924,98 @@
         "matched": true,
         "points": -10,
         "description": "Personal email domain \u2014 less likely to be a real buyer intent"
+      }
+    ]
+  },
+  {
+    "name": "Alice Chen",
+    "email": "alice.chen@startup.io",
+    "title": "Designer",
+    "company": "GlobalTech",
+    "phone": "+1 (123) 456-7890",
+    "source": "LinkedIn",
+    "country": null,
+    "created_at": "2025-02-15",
+    "data_quality_issues": [
+      "missing_or_unknown_country"
+    ],
+    "source_row_numbers": [
+      14
+    ],
+    "seniority_level": "IC",
+    "pricing_page_views": 8,
+    "has_signup_intent": false,
+    "credit_usage_pct": 0,
+    "asset_uploads": 0,
+    "teammate_invites": 0,
+    "active_channels": 3,
+    "creative_job_postings": 2,
+    "has_marketing_title": true,
+    "enrichment_status": "ok",
+    "company_size_band": "11-50",
+    "company_size_min": 11,
+    "industry": "SaaS",
+    "estimated_revenue": "$1M-$10M",
+    "score": 15,
+    "tier": "Cold",
+    "score_breakdown": [
+      {
+        "rule_id": "industry_saas",
+        "matched": true,
+        "points": 10,
+        "description": "SaaS and related \u2014 high product-market fit"
+      },
+      {
+        "rule_id": "has_phone",
+        "matched": true,
+        "points": 5,
+        "description": "Reachable by phone \u2014 SDR-ready"
+      }
+    ]
+  },
+  {
+    "name": "Alice Chen",
+    "email": "alice.chen@startup.io",
+    "title": "Product Lead",
+    "company": "Acme Co",
+    "phone": null,
+    "source": "Website Visitor",
+    "country": "United States",
+    "created_at": "2025-04-02",
+    "data_quality_issues": [
+      "missing_or_invalid_phone"
+    ],
+    "source_row_numbers": [
+      36
+    ],
+    "seniority_level": "Senior IC",
+    "pricing_page_views": 26,
+    "has_signup_intent": true,
+    "credit_usage_pct": 73,
+    "asset_uploads": 214,
+    "teammate_invites": 5,
+    "active_channels": 3,
+    "creative_job_postings": 0,
+    "has_marketing_title": false,
+    "enrichment_status": "ok",
+    "company_size_band": "11-50",
+    "company_size_min": 11,
+    "industry": "SaaS",
+    "estimated_revenue": "$1M-$10M",
+    "score": 15,
+    "tier": "Cold",
+    "score_breakdown": [
+      {
+        "rule_id": "industry_saas",
+        "matched": true,
+        "points": 10,
+        "description": "SaaS and related \u2014 high product-market fit"
+      },
+      {
+        "rule_id": "country_tier_1",
+        "matched": true,
+        "points": 5,
+        "description": "Tier-1 GTM markets"
       }
     ]
   },
@@ -4206,6 +4328,60 @@
         "matched": true,
         "points": -10,
         "description": "Personal email domain \u2014 less likely to be a real buyer intent"
+      }
+    ]
+  },
+  {
+    "name": "Alice Chen",
+    "email": "alice.chen@startup.io",
+    "title": "Software Engineer",
+    "company": "Startup.io",
+    "phone": null,
+    "source": "Website Visitor",
+    "country": "United States",
+    "created_at": "2025-05-24",
+    "data_quality_issues": [
+      "missing_company",
+      "missing_or_invalid_phone",
+      "company_backfilled_from_enrichment"
+    ],
+    "source_row_numbers": [
+      83
+    ],
+    "seniority_level": "IC",
+    "pricing_page_views": 26,
+    "has_signup_intent": true,
+    "credit_usage_pct": 73,
+    "asset_uploads": 214,
+    "teammate_invites": 5,
+    "active_channels": 3,
+    "creative_job_postings": 0,
+    "has_marketing_title": false,
+    "enrichment_status": "ok",
+    "company_size_band": "11-50",
+    "company_size_min": 11,
+    "industry": "SaaS",
+    "estimated_revenue": "$1M-$10M",
+    "score": 10,
+    "tier": "Cold",
+    "score_breakdown": [
+      {
+        "rule_id": "industry_saas",
+        "matched": true,
+        "points": 10,
+        "description": "SaaS and related \u2014 high product-market fit"
+      },
+      {
+        "rule_id": "country_tier_1",
+        "matched": true,
+        "points": 5,
+        "description": "Tier-1 GTM markets"
+      },
+      {
+        "rule_id": "penalty_data_quality",
+        "matched": true,
+        "points": -5,
+        "description": "Missing critical fields \u2014 harder to act on"
       }
     ]
   },

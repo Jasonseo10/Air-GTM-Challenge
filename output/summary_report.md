@@ -3,49 +3,49 @@
 ## Volume
 - Rows read from source: **100**
 - Dropped (invalid/missing email): **5**
-- Duplicate rows collapsed: **6**
-- Unique leads after dedupe: **89**
-- Final leads in output: **89**
+- Duplicate rows collapsed: **2**
+- Unique leads after dedupe: **93**
+- Final leads in output: **93**
 
 ## Enrichment
-- Successfully enriched: **83 / 89 (93.3%)**
+- Successfully enriched: **87 / 93 (93.5%)**
 - Failed (after retry): **6**
 
 ## Scoring
-- Average score: **31.7**
+- Average score: **31.4**
 - Hot: **13**
-- Warm: **37**
-- Cold: **39**
+- Warm: **38**
+- Cold: **42**
 
 ## Data Quality Issues (count of leads flagged)
-- `missing_or_invalid_phone`: 48
+- `missing_or_invalid_phone`: 49
 - `missing_company`: 18
 - `missing_or_unknown_country`: 13
-- `company_backfilled_from_enrichment`: 7
+- `company_backfilled_from_enrichment`: 9
 - `enrichment_failed`: 6
 - `missing_title`: 3
 - `missing_or_invalid_created_at`: 2
 
 ## Source Breakdown
-- Website Visitor: 25
-- Referral: 23
+- Website Visitor: 26
+- Referral: 24
 - Product Signup: 16
-- Event: 13
-- LinkedIn: 12
+- Event: 14
+- LinkedIn: 13
 
 ## Country Breakdown
-- United States: 22
+- United States: 23
 - Canada: 19
+- (missing): 12
 - Germany: 11
 - India: 10
-- (missing): 9
 - France: 9
 - United Kingdom: 9
 
 ## Industry Breakdown
 - Personal / Unknown: 29
-- Enterprise Software: 17
-- SaaS: 13
+- Enterprise Software: 18
+- SaaS: 16
 - Financial Services: 13
 - Creative Operations: 11
 - (missing): 6
