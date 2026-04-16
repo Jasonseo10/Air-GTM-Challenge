@@ -1105,15 +1105,22 @@ export default function App() {
       <header className="sticky top-0 z-20 border-b border-border/40 bg-background/50 backdrop-blur-2xl">
         <div className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4 md:px-10">
           <div className="flex items-center gap-3">
-            <div className="relative">
-              <div className="absolute inset-0 rounded-xl bg-primary/30 blur-md" />
-              <div className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-primary/40 bg-primary/20 backdrop-blur">
-                <span className="font-display text-base font-medium text-primary">A</span>
+            <svg
+              viewBox="0 0 1391.33 572.14"
+              aria-label="Air"
+              className="h-6 w-auto text-foreground"
+            >
+              <path
+                stroke="currentColor" fill="none" strokeWidth="67" strokeLinecap="round"
+                d="M1357.83,457.51s-49.35,81.13-149.45,81.13c-26.54,0-55.27-22.45-55.27-56.42,0-57.09,51.05-179.74,54.59-186.9.1-.19-.02-.42-.24-.45-58.86-7.71-267.52,31.33-267.52-90.35,0-47.15,29.21-65.66,51.56-65.66,13.97,0,56.57,7.19,56.57,68.18,0,119.14-90.03,331.61-217.73,331.61-149.67,0-30.26-226.79-22.15-242.82.21-.42-.08-.92-.55-.93-10.86-.41-108.58-3.89-231.16-1.78-228.36,3.92-543,33.47-543,183.09,0,44.69,35.21,62.45,58.8,62.45,100.58,0,167.49-112.93,237.36-231.89,77.76-132.39,183.97-273.25,234-273.25,123.64,0,5.31,371.93-55.07,503.14"
+              />
+              <circle cx="812.36" cy="154.14" r="48.28" fill="currentColor" />
+            </svg>
+            <div className="hidden h-5 w-px bg-border/70 sm:block" />
+            <div className="hidden sm:block">
+              <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/55">
+                GTM · Lead Pipeline
               </div>
-            </div>
-            <div>
-              <div className="font-display text-sm font-normal tracking-tight text-foreground">Air GTM Pipeline</div>
-              <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/45">Lead Scoring Engine</div>
             </div>
           </div>
           <div className="hidden items-center gap-0.5 md:flex">
