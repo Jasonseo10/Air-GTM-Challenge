@@ -1,9 +1,23 @@
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 .venv/
 venv/
+
+# Node / Next.js
+node_modules/
+frontend/.next/
+frontend/out/
+
+# Environment
 .env
+.env.local
+
+# IDE
 .DS_Store
 .vscode/
 .idea/
+
+# Uploaded CSVs (user uploads via the dashboard)
+data/uploaded_leads.csv

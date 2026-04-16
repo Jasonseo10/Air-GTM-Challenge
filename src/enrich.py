@@ -143,6 +143,124 @@ def _synthesize_enrichment(domain: str) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# Product-usage signal synthesis (mocked).
+#
+# These fields simulate behavioral / product-usage data that a real
+# integration would pull from the application database, Segment, or a
+# product analytics warehouse.  For this demo they're deterministically
+# derived from the lead's email + existing enrichment fields so the same
+# input always produces the same output and the numbers feel realistic
+# (correlated with source, company size, and title).
+# ---------------------------------------------------------------------------
+
+_TARGET_INDUSTRIES = {
+    "SaaS", "Marketing Technology", "Creative Operations",
+    "Developer Tools", "E-commerce",
+}
+
+
+def _synthesize_product_signals(lead: dict) -> dict:
+    """Generate realistic product-usage signals from existing lead data."""
+    h = _stable_hash(lead.get("email", ""))
+    source = (lead.get("source") or "").lower()
+    size_min = lead.get("company_size_min") or 0
+    title = (lead.get("title") or "").lower()
+    industry = lead.get("industry") or ""
+
+    # --- pricing_page_views (0-50) ---
+    # Product Signups and Website Visitors have higher page views.
+    base_views = (h % 12)
+    if "product signup" in source:
+        base_views += 15 + (h >> 3) % 20
+    elif "website visitor" in source:
+        base_views += 8 + (h >> 5) % 15
+    elif "event" in source:
+        base_views += 3 + (h >> 7) % 8
+    pricing_page_views = min(base_views, 50)
+
+    # --- has_signup_intent ---
+    # True for Product Signups; probabilistic for others based on hash.
+    if "product signup" in source:
+        has_signup_intent = True
+    elif "website visitor" in source:
+        has_signup_intent = ((h >> 4) % 5) < 2   # ~40%
+    else:
+        has_signup_intent = ((h >> 6) % 10) < 1   # ~10%
+
+    # --- credit_usage_pct (0-100) ---
+    # Only non-zero if they've signed up; correlates with engagement.
+    if has_signup_intent:
+        credit_usage_pct = 20 + (h >> 2) % 75     # 20-94
+        if "product signup" in source:
+            credit_usage_pct = min(credit_usage_pct + 15, 100)
+    else:
+        credit_usage_pct = 0
+
+    # --- asset_uploads (0-500) ---
+    # Correlated with credit usage and company size.
+    if credit_usage_pct > 0:
+        asset_uploads = int(credit_usage_pct * 1.8) + (h >> 8) % 120
+        if size_min >= 200:
+            asset_uploads += 80 + (h >> 10) % 100
+        asset_uploads = min(asset_uploads, 500)
+    else:
+        asset_uploads = 0
+
+    # --- teammate_invites (0-20) ---
+    # Larger companies invite more teammates.
+    if has_signup_intent:
+        teammate_invites = 1 + (h >> 5) % 6
+        if size_min >= 1000:
+            teammate_invites += 5 + (h >> 9) % 6
+        elif size_min >= 200:
+            teammate_invites += 2 + (h >> 7) % 4
+        teammate_invites = min(teammate_invites, 20)
+    else:
+        teammate_invites = 0
+
+    # --- active_channels (1-8) ---
+    # Larger / more mature companies use more channels.
+    active_channels = 1 + (h >> 3) % 3
+    if size_min >= 1000:
+        active_channels += 3 + (h >> 6) % 2
+    elif size_min >= 200:
+        active_channels += 1 + (h >> 8) % 2
+    if industry in _TARGET_INDUSTRIES:
+        active_channels += 1
+    active_channels = min(active_channels, 8)
+
+    # --- creative_job_postings (0-15) ---
+    # Correlates with company size and marketing/creative titles.
+    creative_job_postings = (h >> 4) % 4
+    if size_min >= 1000:
+        creative_job_postings += 4 + (h >> 7) % 5
+    elif size_min >= 200:
+        creative_job_postings += 2 + (h >> 9) % 3
+    if any(kw in title for kw in ("marketing", "creative", "brand", "content", "design")):
+        creative_job_postings += 2
+    creative_job_postings = min(creative_job_postings, 15)
+
+    # --- has_marketing_title ---
+    has_marketing_title = any(
+        kw in title for kw in (
+            "marketing", "creative", "brand", "content",
+            "design", "growth", "demand", "campaign",
+        )
+    )
+
+    return {
+        "pricing_page_views": pricing_page_views,
+        "has_signup_intent": has_signup_intent,
+        "credit_usage_pct": credit_usage_pct,
+        "asset_uploads": asset_uploads,
+        "teammate_invites": teammate_invites,
+        "active_channels": active_channels,
+        "creative_job_postings": creative_job_postings,
+        "has_marketing_title": has_marketing_title,
+    }
+
+
+# ---------------------------------------------------------------------------
 # Seniority derivation — not from the "API", from the normalized title.
 # Kept alongside enrichment because it's conceptually the same step: inferring
 # structured attributes callers can score against.
@@ -235,6 +353,12 @@ def enrich_lead(lead: dict, cfg: Optional[EnrichmentConfig] = None,
 
     out = dict(lead)
     out["seniority_level"] = derive_seniority(lead.get("title"))
+
+    # Synthesize product-usage signals (always, even on enrichment failure —
+    # these come from our own product DB, not the external API).
+    product_signals = _synthesize_product_signals(out)
+    out.update(product_signals)
+
     if enrichment is None:
         out["enrichment_status"] = "failed"
         # Bucket tag for the histogram + separate detail column for audit.
