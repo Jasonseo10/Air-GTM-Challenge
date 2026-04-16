@@ -654,21 +654,21 @@
     ]
   },
   {
-    "company": "Example Corp",
     "country": "United States",
+    "email": "grace.martinez@gmail.com",
+    "created_at": "2024-11-11",
+    "company": "Example Corp",
+    "phone": "+1 (123) 456-7890",
+    "title": "Head of Sales",
+    "name": "Grace Martinez",
+    "data_quality_issues": [
+      "missing_or_invalid_phone"
+    ],
+    "source": "Product Signup",
     "source_row_numbers": [
       16,
       29
     ],
-    "data_quality_issues": [
-      "missing_or_invalid_phone"
-    ],
-    "phone": "+1 (123) 456-7890",
-    "name": "Grace Martinez",
-    "title": "Head of Sales",
-    "source": "Product Signup",
-    "email": "grace.martinez@gmail.com",
-    "created_at": "2024-11-11",
     "merged_from_n_rows": 2,
     "seniority_level": "Director",
     "pricing_page_views": 31,
@@ -1619,24 +1619,24 @@
     ]
   },
   {
-    "company": "GlobalTech",
     "country": "United States",
-    "source_row_numbers": [
-      14,
-      36,
-      83
-    ],
+    "email": "alice.chen@startup.io",
+    "created_at": "2025-02-15",
+    "company": "GlobalTech",
+    "phone": "+1 (123) 456-7890",
+    "title": "Software Engineer",
+    "name": "Alice Chen",
     "data_quality_issues": [
       "missing_company",
       "missing_or_invalid_phone",
       "missing_or_unknown_country"
     ],
-    "phone": "+1 (123) 456-7890",
-    "name": "Alice Chen",
-    "title": "Software Engineer",
     "source": "Website Visitor",
-    "email": "alice.chen@startup.io",
-    "created_at": "2025-02-15",
+    "source_row_numbers": [
+      14,
+      36,
+      83
+    ],
     "merged_from_n_rows": 3,
     "seniority_level": "IC",
     "pricing_page_views": 26,
@@ -2143,24 +2143,24 @@
     ]
   },
   {
-    "company": "Air Inc",
     "country": "United States",
-    "source_row_numbers": [
-      10,
-      52
-    ],
+    "email": "bob.jones@example.com",
+    "created_at": "2026-04-04",
+    "company": "Air Inc",
+    "phone": "+1 (123) 456-7890",
+    "title": "Senior Engineer",
+    "name": "Bob Jones",
     "data_quality_issues": [
       "missing_company",
       "missing_or_invalid_created_at",
       "missing_or_invalid_phone",
       "missing_or_unknown_country"
     ],
-    "phone": "+1 (123) 456-7890",
-    "name": "Bob Jones",
-    "title": "Senior Engineer",
     "source": "Website Visitor",
-    "email": "bob.jones@example.com",
-    "created_at": "2026-04-04",
+    "source_row_numbers": [
+      10,
+      52
+    ],
     "merged_from_n_rows": 2,
     "seniority_level": "Senior IC",
     "pricing_page_views": 28,
@@ -2909,22 +2909,22 @@
     ]
   },
   {
-    "company": "GlobalTech",
     "country": "France",
-    "source_row_numbers": [
-      25,
-      81
-    ],
+    "email": "jack.brown@company.com",
+    "created_at": "2025-03-16",
+    "company": "GlobalTech",
+    "phone": "+1 (123) 456-7890",
+    "title": "Data Analyst",
+    "name": "Jack Brown",
     "data_quality_issues": [
       "missing_or_invalid_phone",
       "missing_or_unknown_country"
     ],
-    "phone": "+1 (123) 456-7890",
-    "name": "Jack Brown",
-    "title": "Data Analyst",
     "source": "Event",
-    "email": "jack.brown@company.com",
-    "created_at": "2025-03-16",
+    "source_row_numbers": [
+      25,
+      81
+    ],
     "merged_from_n_rows": 2,
     "seniority_level": "IC",
     "pricing_page_views": 19,
@@ -5270,22 +5270,22 @@
     ]
   },
   {
-    "company": "GlobalTech",
     "country": "United States",
-    "source_row_numbers": [
-      32,
-      91
-    ],
+    "email": "grace.johnson@gmail.com",
+    "created_at": "2025-06-03",
+    "company": "GlobalTech",
+    "phone": "+1 (123) 456-7890",
+    "title": "Head of Sales",
+    "name": "Grace Johnson",
     "data_quality_issues": [
       "missing_company",
       "missing_or_unknown_country"
     ],
-    "phone": "+1 (123) 456-7890",
-    "name": "Grace Johnson",
-    "title": "Head of Sales",
     "source": "Referral",
-    "email": "grace.johnson@gmail.com",
-    "created_at": "2025-06-03",
+    "source_row_numbers": [
+      32,
+      91
+    ],
     "merged_from_n_rows": 2,
     "seniority_level": "Director",
     "pricing_page_views": 2,
