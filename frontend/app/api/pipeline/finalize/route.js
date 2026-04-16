@@ -20,7 +20,12 @@ const ROOT = path.resolve(process.cwd(), "..");
  * }
  */
 export async function POST(request) {
-  const body = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch (err) {
+    return NextResponse.json({ error: `Invalid JSON body: ${err.message}` }, { status: 400 });
+  }
   const csvPath = body.csv_path || path.join(ROOT, "data", "messy_leads.csv");
   const seed = body.seed || 42;
 
@@ -31,6 +36,7 @@ export async function POST(request) {
   });
 
   return new Promise((resolve) => {
+    try {
     const proc = spawn("python", [
       "finalize_helper.py",
       csvPath,
@@ -75,5 +81,11 @@ export async function POST(request) {
         ));
       }
     });
+    } catch (err) {
+      resolve(NextResponse.json(
+        { error: err?.message || "Finalize route crashed" },
+        { status: 500 }
+      ));
+    }
   });
 }

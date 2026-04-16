@@ -29,6 +29,7 @@ export async function GET() {
  * Body (FormData): file (CSV), seed?, today?
  */
 export async function POST(request) {
+  try {
   let csvPath = path.join(ROOT, "data", "messy_leads.csv");
   let seed = 42;
   let today = null;
@@ -42,7 +43,6 @@ export async function POST(request) {
     today = formData.get("today") || null;
 
     if (file && file.size > 0) {
-      // Save uploaded CSV to data/ directory.
       const uploadDir = path.join(ROOT, "data");
       await mkdir(uploadDir, { recursive: true });
       const bytes = Buffer.from(await file.arrayBuffer());
@@ -59,14 +59,14 @@ export async function POST(request) {
     }
   }
 
-  // Build the pipeline command.
   const todayArg = today ? `--today ${today}` : "";
   const cmd = `python run_pipeline.py --input "${csvPath}" --output-dir "${path.join(ROOT, "output")}" --rules "${path.join(ROOT, "config", "scoring_rules.json")}" --seed ${seed} ${todayArg}`;
 
   try {
     const { stdout, stderr } = await execAsync(cmd, {
       cwd: ROOT,
-      timeout: 60_000,
+      timeout: 120_000,
+      maxBuffer: 50 * 1024 * 1024,
     });
 
     // Read the enriched output.
@@ -97,6 +97,12 @@ export async function POST(request) {
   } catch (err) {
     return NextResponse.json(
       { error: err.message, stderr: err.stderr || "" },
+      { status: 500 }
+    );
+  }
+  } catch (err) {
+    return NextResponse.json(
+      { error: err?.message || "Pipeline route crashed" },
       { status: 500 }
     );
   }
