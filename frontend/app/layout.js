@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetMono.variable} dark`}
+      className={`${inter.variable} ${jetMono.variable}`}
     >
       <body suppressHydrationWarning className="antialiased">
         {children}
