@@ -1,45 +1,101 @@
 {
-  "description": "Lead scoring rules. Edit this file to tune scoring without touching code. Each rule has an id (for audit trails), a human description, a condition, and a point value. The pipeline emits per-lead score breakdowns so GTM can see why a lead got the score it did.",
+  "description": "ICP lead scoring rules aligned with the dashboard's 10-criteria weighted system. Each rule maps to one of the ICP signals. The pipeline scores 0-100 to match the dashboard's percentage-weight model. Tier thresholds match the dashboard: HOT ≥75, WARM 55-74, COOL 35-54, LOW <35.",
   "rules": [
     {
-      "id": "title_c_level",
-      "description": "C-level titles (CEO, CTO, etc.) are high-value buyers",
-      "field": "seniority_level",
-      "op": "equals",
-      "value": "C-Level",
-      "points": 30
+      "id": "pricing_page_high",
+      "description": "High pricing/demo page engagement (20+ views)",
+      "field": "pricing_page_views",
+      "op": "gte",
+      "value": 20,
+      "points": 10
     },
     {
-      "id": "title_vp",
-      "description": "VP-level has budget authority",
-      "field": "seniority_level",
-      "op": "equals",
-      "value": "VP",
-      "points": 20
+      "id": "pricing_page_medium",
+      "description": "Moderate pricing/demo page engagement (10-19 views)",
+      "field": "pricing_page_views",
+      "op": "between",
+      "value": [10, 19],
+      "points": 7
     },
     {
-      "id": "title_director",
-      "description": "Directors and Heads of X",
-      "field": "seniority_level",
+      "id": "pricing_page_low",
+      "description": "Some pricing/demo page engagement (3-9 views)",
+      "field": "pricing_page_views",
+      "op": "between",
+      "value": [3, 9],
+      "points": 4
+    },
+    {
+      "id": "signup_intent_product",
+      "description": "Product signup with intent signal — strongest buying signal",
+      "field": "source",
       "op": "equals",
-      "value": "Director",
+      "value": "Product Signup",
       "points": 15
     },
     {
-      "id": "title_marketing",
-      "description": "Marketing-related titles — Air's creative ops ICP",
-      "field": "title",
-      "op": "contains_any",
-      "value": ["Marketing", "Mktg"],
-      "points": 15
+      "id": "signup_intent_event_referral",
+      "description": "Event or referral source shows moderate intent",
+      "field": "source",
+      "op": "in",
+      "value": ["Event", "Referral"],
+      "points": 6
+    },
+    {
+      "id": "credit_usage_high",
+      "description": "Heavy free-credit usage (80%+) — strong product adoption",
+      "field": "credit_usage_pct",
+      "op": "gte",
+      "value": 80,
+      "points": 10
+    },
+    {
+      "id": "credit_usage_medium",
+      "description": "Moderate free-credit usage (50-79%)",
+      "field": "credit_usage_pct",
+      "op": "between",
+      "value": [50, 79],
+      "points": 7
+    },
+    {
+      "id": "asset_uploads_high",
+      "description": "High asset upload volume (200+) — deep feature engagement",
+      "field": "asset_uploads",
+      "op": "gte",
+      "value": 200,
+      "points": 10
+    },
+    {
+      "id": "asset_uploads_medium",
+      "description": "Moderate asset uploads (50-199)",
+      "field": "asset_uploads",
+      "op": "between",
+      "value": [50, 199],
+      "points": 7
+    },
+    {
+      "id": "team_collab_high",
+      "description": "Strong team collaboration (10+ invites) — viral/expansion signal",
+      "field": "teammate_invites",
+      "op": "gte",
+      "value": 10,
+      "points": 10
+    },
+    {
+      "id": "team_collab_medium",
+      "description": "Some team collaboration (5-9 invites)",
+      "field": "teammate_invites",
+      "op": "between",
+      "value": [5, 9],
+      "points": 7
     },
     {
       "id": "company_size_enterprise",
-      "description": "Enterprise accounts (1000+ employees)",
+      "description": "Enterprise accounts (1000+ employees) — ideal ICP fit",
       "field": "company_size_min",
       "op": "gte",
       "value": 1000,
-      "points": 25
+      "points": 10
     },
     {
       "id": "company_size_mid_market",
@@ -47,76 +103,68 @@
       "field": "company_size_min",
       "op": "between",
       "value": [201, 999],
-      "points": 15
+      "points": 7
     },
     {
-      "id": "industry_saas",
-      "description": "SaaS and related — high product-market fit",
+      "id": "industry_match",
+      "description": "Target industry — high product-market fit",
       "field": "industry",
       "op": "in",
-      "value": ["SaaS", "Marketing Technology", "Developer Tools", "Creative Operations"],
+      "value": ["SaaS", "Marketing Technology", "Creative Operations", "Developer Tools", "E-commerce"],
       "points": 10
     },
     {
-      "id": "source_product_signup",
-      "description": "Product signups are the hottest signal — they've used the product",
-      "field": "source",
+      "id": "marketing_creative_senior",
+      "description": "Senior marketing/creative title — ideal buyer persona",
+      "field": "has_marketing_title",
       "op": "equals",
-      "value": "Product Signup",
-      "points": 20
+      "value": true,
+      "points": 6
     },
     {
-      "id": "source_referral",
-      "description": "Referrals convert well",
-      "field": "source",
-      "op": "equals",
-      "value": "Referral",
-      "points": 10
-    },
-    {
-      "id": "source_event",
-      "description": "Event attendees have shown intent",
-      "field": "source",
-      "op": "equals",
-      "value": "Event",
-      "points": 8
-    },
-    {
-      "id": "country_tier_1",
-      "description": "Tier-1 GTM markets",
-      "field": "country",
+      "id": "seniority_senior",
+      "description": "C-level, VP, or Director — budget authority",
+      "field": "seniority_level",
       "op": "in",
-      "value": ["United States", "Canada", "United Kingdom"],
-      "points": 5
+      "value": ["C-Level", "VP", "Director"],
+      "points": 4
     },
     {
-      "id": "has_phone",
-      "description": "Reachable by phone — SDR-ready",
-      "field": "phone",
-      "op": "is_present",
-      "value": null,
-      "points": 5
-    },
-    {
-      "id": "penalty_personal_email",
-      "description": "Personal email domain — less likely to be a real buyer intent",
-      "field": "email_domain",
-      "op": "in",
-      "value": ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com"],
-      "points": -10
-    },
-    {
-      "id": "penalty_data_quality",
-      "description": "Missing critical fields — harder to act on",
-      "field": "data_quality_issue_count",
+      "id": "channel_expansion_high",
+      "description": "Active on 6+ channels — growth signal",
+      "field": "active_channels",
       "op": "gte",
-      "value": 3,
-      "points": -5
+      "value": 6,
+      "points": 10
+    },
+    {
+      "id": "channel_expansion_medium",
+      "description": "Active on 4-5 channels",
+      "field": "active_channels",
+      "op": "between",
+      "value": [4, 5],
+      "points": 7
+    },
+    {
+      "id": "creative_hiring_high",
+      "description": "8+ creative job postings — strong growth intent",
+      "field": "creative_job_postings",
+      "op": "gte",
+      "value": 8,
+      "points": 5
+    },
+    {
+      "id": "creative_hiring_medium",
+      "description": "3-7 creative job postings",
+      "field": "creative_job_postings",
+      "op": "between",
+      "value": [3, 7],
+      "points": 3
     }
   ],
   "tiers": {
     "hot": 75,
     "warm": 55,
-    "cold": 35
+    "cool": 35
   }
 }

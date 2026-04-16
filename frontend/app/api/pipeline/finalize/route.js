@@ -37,7 +37,7 @@ export async function POST(request) {
 
   return new Promise((resolve) => {
     try {
-    const proc = spawn("python", [
+    const proc = spawn("py", [
       "finalize_helper.py",
       csvPath,
       "--today", "2026-04-15",
