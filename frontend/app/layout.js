@@ -1,16 +1,23 @@
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Fraunces } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const mono = JetBrains_Mono({
+const jetMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  axes: ["opsz", "SOFT"],
+  style: ["normal", "italic"],
 });
 
 export const metadata = {
@@ -20,7 +27,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${mono.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${jetMono.variable} ${fraunces.variable} dark`}
+    >
       <body suppressHydrationWarning className="antialiased">
         {children}
       </body>
