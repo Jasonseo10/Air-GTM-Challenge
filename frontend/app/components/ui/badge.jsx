@@ -2,32 +2,30 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const VARIANTS = {
-  outline: "border border-border bg-card text-foreground/70",
-  muted: "border-transparent bg-muted text-foreground/70",
-  primary: "border border-primary/20 bg-primary-soft text-primary",
-  hot: "border border-hot/25 bg-hot/10 text-hot",
-  warm: "border border-warm/30 bg-warm/10 text-warm",
-  cool: "border border-cool/25 bg-cool/10 text-cool",
-  low: "border border-low/30 bg-low/10 text-low",
+  outline:
+    "border-border/60 bg-background/55 text-foreground/70 backdrop-blur",
+  solid:
+    "border-transparent bg-foreground/[0.06] text-foreground/80",
+  primary:
+    "border-primary/30 bg-primary/15 text-primary",
+  ember:
+    "border-ember/30 bg-ember/15 text-ember",
+  amber:
+    "border-amber/30 bg-amber/15 text-amber",
+  mint:
+    "border-mint/30 bg-mint/15 text-mint",
+  dust:
+    "border-dust/30 bg-dust/10 text-dust",
 };
 
 export function Badge({ className, variant = "outline", ...props }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-2xs font-medium",
+        "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em]",
         VARIANTS[variant],
         className,
       )}
-      {...props}
-    />
-  );
-}
-
-export function Dot({ className, ...props }) {
-  return (
-    <span
-      className={cn("inline-block h-1.5 w-1.5 rounded-full", className)}
       {...props}
     />
   );
