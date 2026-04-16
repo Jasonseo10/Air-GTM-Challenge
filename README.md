@@ -135,11 +135,11 @@ adjustable via a slider (0-50%). Weights should sum to 100%.
 | Channel Expansion | Growth signal | `active_channels` (mocked) |
 | Creative Hiring Signals | Growth intent | `creative_job_postings` (mocked) |
 
-**Tier thresholds:** Hot >= 85, Warm >= 70, Cool >= 55, Low < 55
+**Tier thresholds:** Hot >= 75, Warm >= 55, Cool >= 35, Low < 35
 
 Each criterion scores 0-100% of its weight based on signal strength
 (e.g., 200+ asset uploads = full weight, 50+ = 70%, 10+ = 40%).
-Adjusting a slider immediately rescores all leads.
+Adjusting a slider immediately rescores all leads in the UI. The underlying Python pipeline uses fixed point values defined in `config/scoring_rules.json` that perfectly mirror these percentage weights and tier thresholds.
 
 ## Assumptions
 
