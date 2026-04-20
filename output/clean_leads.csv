@@ -19,16 +19,15 @@ david.smith@business.co,David Smith,VP Marketing,VP,Air Inc,Financial Services,2
 carol.taylor@business.co,Carol Taylor,VP Marketing,VP,GlobalTech,Financial Services,201-500,$50M-$100M,+1 (123) 456-7890,Canada,Website Visitor,2025-07-11,53,Cool,ok,,,
 henry.chen@company.com,Henry Chen,Head of Sales,Director,Startup.io,Enterprise Software,1000-5000,$100M-$500M,,France,Referral,2024-12-08,53,Cool,ok,,missing_or_invalid_phone,
 jack.lee@company.com,Jack Lee,CEO,C-Level,Air Inc,Enterprise Software,1000-5000,$100M-$500M,,Canada,Referral,2025-06-29,53,Cool,ok,,missing_or_invalid_phone,
+grace.martinez@gmail.com,Grace Martinez,Head of Sales,Director,Example Corp,,,,+1 (123) 456-7890,United States,Product Signup,2024-11-11,52,Cool,no_match,,missing_or_invalid_phone; enrichment_no_match,2
 jack.jones@business.co,Jack Jones,VP Marketing,VP,Initech,Financial Services,201-500,$50M-$100M,+1 (123) 456-7890,India,Referral,2025-01-06,52,Cool,ok,,,
 henry.anderson@gmail.com,Henry Anderson,Software Engineer,IC,Umbrella Corp,,,,,United Kingdom,Product Signup,2024-10-01,52,Cool,no_match,,missing_or_invalid_phone; enrichment_no_match,
-bob.jones@example.com,Bob Jones,Product Lead,Senior IC,Air Inc,SaaS,501-1000,$50M-$100M,+1 (123) 456-7890,,Referral,2026-04-03,52,Cool,ok,,missing_or_unknown_country,
-grace.martinez@gmail.com,Grace Martinez,Head of Sales,Director,Example Corp,,,,+1 (123) 456-7890,United States,Product Signup,2024-11-11,52,Cool,no_match,,missing_or_invalid_phone; enrichment_no_match,2
 emily.johnson@gmail.com,Emily Johnson,Marketing Manager,Manager,,,,,,Canada,Product Signup,2024-09-22,50,Cool,no_match,,missing_company; missing_or_invalid_phone; enrichment_no_match,
 bob.martinez@company.com,Bob Martinez,VP Marketing,VP,GlobalTech,Enterprise Software,1000-5000,$100M-$500M,+1 (123) 456-7890,Canada,Referral,2025-06-29,50,Cool,ok,,,
 emily.chen@yahoo.com,Emily Chen,VP Marketing,VP,Startup.io,,,,,France,Website Visitor,2025-05-18,49,Cool,failed,firmograph: firmograph 503 for yahoo.com (attempt 3),missing_or_invalid_phone; enrichment_failed,
 carol.brown@business.co,Carol Brown,Software Engineer,IC,Business Co,Financial Services,201-500,$50M-$100M,,Canada,Website Visitor,2025-05-18,49,Cool,ok,,missing_company; missing_or_invalid_phone; company_backfilled_from_enrichment,
+bob.jones@example.com,Bob Jones,Senior Engineer,Senior IC,Air Inc,SaaS,501-1000,$50M-$100M,+1 (123) 456-7890,United States,Website Visitor,2026-04-08,48,Cool,ok,,missing_company; missing_or_invalid_created_at; missing_or_invalid_phone; missing_or_unknown_country,2
 bob.brown@startup.io,Bob Brown,CEO,C-Level,Air Inc,SaaS,11-50,$1M-$10M,+1 (123) 456-7890,Germany,Website Visitor,2025-04-17,48,Cool,ok,,,
-bob.jones@example.com,Carol,Senior Engineer,Senior IC,Example Corp,SaaS,501-1000,$50M-$100M,,United States,Website Visitor,,48,Cool,ok,,missing_company; missing_or_invalid_phone; missing_or_invalid_created_at; company_backfilled_from_enrichment,
 grace.taylor@company.com,Grace Taylor,VP Marketing,VP,Air Inc,Enterprise Software,1000-5000,$100M-$500M,,France,LinkedIn,2024-08-24,47,Cool,ok,,missing_or_invalid_phone,
 carol.martinez@yahoo.com,Carol Martinez,Product Lead,Senior IC,Umbrella Corp,,,,,United Kingdom,Product Signup,2024-10-15,47,Cool,failed,firmograph: firmograph 503 for yahoo.com (attempt 3),missing_or_invalid_phone; enrichment_failed,
 ivy.jones@air.inc,Ivy Jones,Product Lead,Senior IC,Example Corp,Creative Operations,51-200,$10M-$50M,+1 (123) 456-7890,Canada,Referral,2025-05-13,46,Cool,ok,,,
@@ -40,8 +39,8 @@ jack.jones@startup.io,Jack Jones,CEO,C-Level,Startup.io,SaaS,11-50,$1M-$10M,+1 (
 carol.taylor@startup.io,Carol Taylor,Marketing Manager,Manager,Startup.io,SaaS,11-50,$1M-$10M,,,Referral,2025-04-17,41,Cool,ok,,missing_company; missing_or_invalid_phone; missing_or_unknown_country; company_backfilled_from_enrichment,
 carol.wilson@company.com,Carol Wilson,Data Analyst,IC,Initech,Enterprise Software,1000-5000,$100M-$500M,+1 (123) 456-7890,India,Website Visitor,2025-07-08,41,Cool,ok,,,
 alice.jones@business.co,Alice Jones,CEO,C-Level,Air Inc,Financial Services,201-500,$50M-$100M,+1 (800) 555-1212,United States,Website Visitor,2025-04-01,40,Cool,ok,,,
-bob.johnson@business.co,Bob Johnson,,Unknown,Initech,Financial Services,201-500,$50M-$100M,,India,Referral,2025-03-31,40,Cool,ok,,missing_title; missing_or_invalid_phone,
 alice.chen@startup.io,Alice Chen,Software Engineer,IC,GlobalTech,SaaS,11-50,$1M-$10M,+1 (123) 456-7890,United States,Website Visitor,2025-02-15,40,Cool,ok,,missing_company; missing_or_invalid_phone; missing_or_unknown_country,3
+bob.johnson@business.co,Bob Johnson,,Unknown,Initech,Financial Services,201-500,$50M-$100M,,India,Referral,2025-03-31,40,Cool,ok,,missing_title; missing_or_invalid_phone,
 grace.smith@company.com,Grace Smith,Data Analyst,IC,Example Corp,Enterprise Software,1000-5000,$100M-$500M,+1 (123) 456-7890,Canada,Referral,2024-12-07,39,Cool,ok,,,
 carol.chen@company.com,Carol Chen,Software Engineer,IC,GlobalTech,Enterprise Software,1000-5000,$100M-$500M,+1 (123) 456-7890,Canada,LinkedIn,2025-07-22,38,Cool,ok,,,
 grace.smith@air.inc,Grace Smith,Marketing Manager,Manager,Startup.io,Creative Operations,51-200,$10M-$50M,,,Referral,2025-05-02,38,Cool,ok,,missing_or_invalid_phone; missing_or_unknown_country,
@@ -52,8 +51,8 @@ bob.wilson@business.co,Bob Wilson,Head of Sales,Director,Air Inc,Financial Servi
 alice.lee@startup.io,Alice Lee,Senior Engineer,Senior IC,Example Corp,SaaS,11-50,$1M-$10M,,France,Website Visitor,2025-05-12,34,Low,ok,,missing_or_invalid_phone,
 emily.brown@startup.io,Emily Brown,Data Analyst,IC,Startup.io,SaaS,11-50,$1M-$10M,,Canada,Referral,2024-10-18,34,Low,ok,,missing_or_invalid_phone,
 emily.jones@business.co,Emily Jones,Senior Engineer,Senior IC,Air Inc,Financial Services,201-500,$50M-$100M,,Germany,Event,2025-03-27,34,Low,ok,,missing_or_invalid_phone,
-frank.wilson@air.inc,Frank Wilson,Designer,IC,Company,Creative Operations,51-200,$10M-$50M,+1 (800) 555-1212,United States,Website Visitor,2024-10-14,34,Low,ok,,,
 jack.brown@company.com,Jack Brown,Data Analyst,IC,GlobalTech,Enterprise Software,1000-5000,$100M-$500M,+1 (123) 456-7890,France,Event,2025-03-16,34,Low,ok,,missing_or_invalid_phone; missing_or_unknown_country,2
+frank.wilson@air.inc,Frank Wilson,Designer,IC,Company,Creative Operations,51-200,$10M-$50M,+1 (800) 555-1212,United States,Website Visitor,2024-10-14,34,Low,ok,,,
 frank.anderson@company.com,Frank Anderson,CTO,C-Level,Air Inc,Enterprise Software,1000-5000,$100M-$500M,+1 (123) 456-7890,United States,Referral,2024-12-25,33,Low,ok,,,
 henry.brown@air.inc,Henry Brown,Head of Sales,Director,Initech,Creative Operations,51-200,$10M-$50M,,,Event,2025-03-25,33,Low,ok,,missing_or_invalid_phone; missing_or_unknown_country,
 frank.brown@startup.io,Frank Brown,Senior Engineer,Senior IC,Acme Co,SaaS,11-50,$1M-$10M,+1 (123) 456-7890,United States,Event,2025-04-04,33,Low,ok,,,

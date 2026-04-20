@@ -3,20 +3,20 @@
 ## Volume
 - Rows read from source: **100**
 - Dropped (invalid/missing email): **5**
-- Duplicate rows collapsed: **5**
-- Unique leads after dedupe: **90**
-- Final leads in output: **90**
+- Duplicate rows collapsed: **6**
+- Unique leads after dedupe: **89**
+- Final leads in output: **89**
 
 ## Enrichment
-- Successfully enriched: **58 / 90 (64.4%)**
+- Successfully enriched: **57 / 89 (64.0%)**
 - No match (personal / unknown domain): **16**
 - Failed after retry: **16**
 
 ## Scoring
-- Average score: **38.6**
+- Average score: **38.5**
 - Hot: **2**
 - Warm: **13**
-- Cool: **35**
+- Cool: **34**
 - Low: **40**
 
 ## Data Quality Issues (count of leads flagged)
@@ -25,13 +25,13 @@
 - `enrichment_no_match`: 16
 - `enrichment_failed`: 16
 - `missing_or_unknown_country`: 13
-- `company_backfilled_from_enrichment`: 9
+- `company_backfilled_from_enrichment`: 8
 - `missing_title`: 3
 - `missing_or_invalid_created_at`: 2
 
 ## Source Breakdown
 - Website Visitor: 25
-- Referral: 24
+- Referral: 23
 - Product Signup: 16
 - Event: 13
 - LinkedIn: 12
@@ -41,15 +41,15 @@
 - Canada: 19
 - Germany: 11
 - India: 10
-- (missing): 10
 - United Kingdom: 9
+- (missing): 9
 - France: 9
 
 ## Industry Breakdown
 - (missing): 32
 - Enterprise Software: 19
 - Financial Services: 14
-- SaaS: 14
+- SaaS: 13
 - Creative Operations: 11
 
 ## Top 10 Leads by Score

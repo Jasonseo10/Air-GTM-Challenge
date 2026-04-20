@@ -2514,6 +2514,113 @@
     }
   },
   {
+    "phone": "+1 (123) 456-7890",
+    "data_quality_issues": [
+      "missing_or_invalid_phone",
+      "enrichment_no_match"
+    ],
+    "source_row_numbers": [
+      16,
+      29
+    ],
+    "created_at": "2024-11-11",
+    "name": "Grace Martinez",
+    "country": "United States",
+    "company": "Example Corp",
+    "title": "Head of Sales",
+    "email": "grace.martinez@gmail.com",
+    "source": "Product Signup",
+    "merged_from_n_rows": 2,
+    "company_size_band": null,
+    "company_size_min": 0,
+    "industry": null,
+    "estimated_revenue": null,
+    "hq_country": null,
+    "detected_tools": [],
+    "has_creative_stack": false,
+    "has_martech_stack": false,
+    "tech_modernity_score": 0,
+    "seniority_level": "Director",
+    "is_business_email": false,
+    "pricing_page_views": 31,
+    "has_signup_intent": true,
+    "credit_usage_pct": 77,
+    "asset_uploads": 196,
+    "teammate_invites": 6,
+    "active_channels": 2,
+    "creative_job_postings": 0,
+    "has_marketing_title": false,
+    "activation_score": 74,
+    "enrichment_providers_ok": [],
+    "enrichment_status": "no_match",
+    "score": 52,
+    "tier": "Cool",
+    "score_breakdown": [
+      {
+        "rule_id": "intent_pricing_page_high",
+        "matched": true,
+        "category": "intent",
+        "points": 10,
+        "description": "20+ pricing/demo page views. Repeated pricing visits are the single strongest pre-contact intent signal \u2014 a prospect checking price multiple times has an internal decision in motion.",
+        "conditional": false
+      },
+      {
+        "rule_id": "intent_signup_product",
+        "matched": true,
+        "category": "intent",
+        "points": 15,
+        "description": "Source is Product Signup. A prospect who gave us their email in exchange for a workspace has self-qualified further than any form-fill can measure.",
+        "conditional": false
+      },
+      {
+        "rule_id": "intent_signup_validated",
+        "matched": true,
+        "category": "intent",
+        "points": 8,
+        "description": "Product signup AND >=50% credit usage. A signup alone is cheap; credit usage proves the prospect actually tried the product. This rule stacks on top of intent_signup_product because a *validated* signup is categorically stronger than a dormant one.",
+        "conditional": true
+      },
+      {
+        "rule_id": "intent_credit_usage_medium",
+        "matched": true,
+        "category": "intent",
+        "points": 6,
+        "description": "50-79% credit usage. Actively trialing \u2014 good nurture candidate.",
+        "conditional": false
+      },
+      {
+        "rule_id": "intent_asset_uploads_medium",
+        "matched": true,
+        "category": "intent",
+        "points": 5,
+        "description": "50-199 asset uploads \u2014 real but not yet committed usage.",
+        "conditional": false
+      },
+      {
+        "rule_id": "intent_team_seeding",
+        "matched": true,
+        "category": "intent",
+        "points": 5,
+        "description": "5-9 teammate invites \u2014 early team adoption.",
+        "conditional": false
+      },
+      {
+        "rule_id": "persona_senior_generic",
+        "matched": true,
+        "category": "persona",
+        "points": 3,
+        "description": "C-Level / VP / Director without a marketing title. Budget authority but not our target user \u2014 worth some weight, not a lot.",
+        "conditional": false
+      }
+    ],
+    "score_by_category": {
+      "intent": 49,
+      "fit": 0,
+      "persona": 3,
+      "expansion": 0
+    }
+  },
+  {
     "name": "Jack Jones",
     "email": "jack.jones@business.co",
     "title": "VP Marketing",
@@ -2741,231 +2848,6 @@
       "fit": 0,
       "persona": 0,
       "expansion": 3
-    }
-  },
-  {
-    "name": "Bob Jones",
-    "email": "bob.jones@example.com",
-    "title": "Product Lead",
-    "company": "Air Inc",
-    "phone": "+1 (123) 456-7890",
-    "source": "Referral",
-    "country": null,
-    "created_at": "2026-04-03",
-    "data_quality_issues": [
-      "missing_or_unknown_country"
-    ],
-    "source_row_numbers": [
-      10
-    ],
-    "company_name": "Example Corp",
-    "company_size_band": "501-1000",
-    "company_size_min": 501,
-    "industry": "SaaS",
-    "estimated_revenue": "$50M-$100M",
-    "hq_country": "United States",
-    "detected_tools": [
-      "Figma"
-    ],
-    "has_creative_stack": true,
-    "has_martech_stack": false,
-    "tech_modernity_score": 37,
-    "seniority_level": "Senior IC",
-    "is_business_email": true,
-    "pricing_page_views": 7,
-    "has_signup_intent": false,
-    "credit_usage_pct": 24,
-    "asset_uploads": 261,
-    "teammate_invites": 5,
-    "active_channels": 3,
-    "creative_job_postings": 4,
-    "has_marketing_title": false,
-    "activation_score": 62,
-    "enrichment_providers_ok": [
-      "firmograph",
-      "stacklens"
-    ],
-    "enrichment_status": "ok",
-    "score": 52,
-    "tier": "Cool",
-    "score_breakdown": [
-      {
-        "rule_id": "intent_pricing_page_low",
-        "matched": true,
-        "category": "intent",
-        "points": 4,
-        "description": "3-9 pricing page views \u2014 research phase, not yet decision.",
-        "conditional": false
-      },
-      {
-        "rule_id": "intent_referral_warm",
-        "matched": true,
-        "category": "intent",
-        "points": 10,
-        "description": "Referral source from a business email (not gmail/yahoo). Warm intros outperform product-signups on close rate when the referrer is a current customer at a real company \u2014 a referral from a personal email is unverifiable and doesn't get the same lift.",
-        "conditional": true
-      },
-      {
-        "rule_id": "intent_asset_uploads_high",
-        "matched": true,
-        "category": "intent",
-        "points": 8,
-        "description": "200+ asset uploads. Heavy upload volume means the prospect has migrated real work into our workspace \u2014 they've made a switching-cost investment we can lean on.",
-        "conditional": false
-      },
-      {
-        "rule_id": "intent_team_seeding",
-        "matched": true,
-        "category": "intent",
-        "points": 5,
-        "description": "5-9 teammate invites \u2014 early team adoption.",
-        "conditional": false
-      },
-      {
-        "rule_id": "fit_mid_market",
-        "matched": true,
-        "category": "fit",
-        "points": 9,
-        "description": "Mid-market (201-999). Air's strongest economic fit \u2014 teams large enough to feel the pain of disorganized assets, small enough to buy without a 6-month procurement cycle.",
-        "conditional": false
-      },
-      {
-        "rule_id": "fit_industry_match",
-        "matched": true,
-        "category": "fit",
-        "points": 8,
-        "description": "Target industry. SaaS, MarTech, Creative Ops, Dev Tools, E-commerce, Media \u2014 industries with high creative-asset output where Air's value prop lands without translation.",
-        "conditional": false
-      },
-      {
-        "rule_id": "fit_creative_stack_detected",
-        "matched": true,
-        "category": "fit",
-        "points": 5,
-        "description": "Company runs Figma / Adobe / Canva / Frame.io. A detected creative stack is harder evidence of fit than an industry label \u2014 teams using these tools have creative volume to manage and recognize Air's category instantly.",
-        "conditional": false
-      },
-      {
-        "rule_id": "expansion_creative_hiring_medium",
-        "matched": true,
-        "category": "expansion",
-        "points": 3,
-        "description": "3-7 open creative roles.",
-        "conditional": false
-      }
-    ],
-    "score_by_category": {
-      "intent": 27,
-      "fit": 22,
-      "persona": 0,
-      "expansion": 3
-    }
-  },
-  {
-    "country": "United States",
-    "created_at": "2024-11-11",
-    "data_quality_issues": [
-      "missing_or_invalid_phone",
-      "enrichment_no_match"
-    ],
-    "phone": "+1 (123) 456-7890",
-    "email": "grace.martinez@gmail.com",
-    "source": "Product Signup",
-    "source_row_numbers": [
-      16,
-      29
-    ],
-    "title": "Head of Sales",
-    "company": "Example Corp",
-    "name": "Grace Martinez",
-    "merged_from_n_rows": 2,
-    "company_size_band": null,
-    "company_size_min": 0,
-    "industry": null,
-    "estimated_revenue": null,
-    "hq_country": null,
-    "detected_tools": [],
-    "has_creative_stack": false,
-    "has_martech_stack": false,
-    "tech_modernity_score": 0,
-    "seniority_level": "Director",
-    "is_business_email": false,
-    "pricing_page_views": 31,
-    "has_signup_intent": true,
-    "credit_usage_pct": 77,
-    "asset_uploads": 196,
-    "teammate_invites": 6,
-    "active_channels": 2,
-    "creative_job_postings": 0,
-    "has_marketing_title": false,
-    "activation_score": 74,
-    "enrichment_providers_ok": [],
-    "enrichment_status": "no_match",
-    "score": 52,
-    "tier": "Cool",
-    "score_breakdown": [
-      {
-        "rule_id": "intent_pricing_page_high",
-        "matched": true,
-        "category": "intent",
-        "points": 10,
-        "description": "20+ pricing/demo page views. Repeated pricing visits are the single strongest pre-contact intent signal \u2014 a prospect checking price multiple times has an internal decision in motion.",
-        "conditional": false
-      },
-      {
-        "rule_id": "intent_signup_product",
-        "matched": true,
-        "category": "intent",
-        "points": 15,
-        "description": "Source is Product Signup. A prospect who gave us their email in exchange for a workspace has self-qualified further than any form-fill can measure.",
-        "conditional": false
-      },
-      {
-        "rule_id": "intent_signup_validated",
-        "matched": true,
-        "category": "intent",
-        "points": 8,
-        "description": "Product signup AND >=50% credit usage. A signup alone is cheap; credit usage proves the prospect actually tried the product. This rule stacks on top of intent_signup_product because a *validated* signup is categorically stronger than a dormant one.",
-        "conditional": true
-      },
-      {
-        "rule_id": "intent_credit_usage_medium",
-        "matched": true,
-        "category": "intent",
-        "points": 6,
-        "description": "50-79% credit usage. Actively trialing \u2014 good nurture candidate.",
-        "conditional": false
-      },
-      {
-        "rule_id": "intent_asset_uploads_medium",
-        "matched": true,
-        "category": "intent",
-        "points": 5,
-        "description": "50-199 asset uploads \u2014 real but not yet committed usage.",
-        "conditional": false
-      },
-      {
-        "rule_id": "intent_team_seeding",
-        "matched": true,
-        "category": "intent",
-        "points": 5,
-        "description": "5-9 teammate invites \u2014 early team adoption.",
-        "conditional": false
-      },
-      {
-        "rule_id": "persona_senior_generic",
-        "matched": true,
-        "category": "persona",
-        "points": 3,
-        "description": "C-Level / VP / Director without a marketing title. Budget authority but not our target user \u2014 worth some weight, not a lot.",
-        "conditional": false
-      }
-    ],
-    "score_by_category": {
-      "intent": 49,
-      "fit": 0,
-      "persona": 3,
-      "expansion": 0
     }
   },
   {
@@ -3429,6 +3311,121 @@
     }
   },
   {
+    "phone": "+1 (123) 456-7890",
+    "data_quality_issues": [
+      "missing_company",
+      "missing_or_invalid_created_at",
+      "missing_or_invalid_phone",
+      "missing_or_unknown_country"
+    ],
+    "source_row_numbers": [
+      10,
+      52
+    ],
+    "created_at": "2026-04-08",
+    "name": "Bob Jones",
+    "country": "United States",
+    "company": "Air Inc",
+    "title": "Senior Engineer",
+    "email": "bob.jones@example.com",
+    "source": "Website Visitor",
+    "merged_from_n_rows": 2,
+    "company_name": "Example Corp",
+    "company_size_band": "501-1000",
+    "company_size_min": 501,
+    "industry": "SaaS",
+    "estimated_revenue": "$50M-$100M",
+    "hq_country": "United States",
+    "detected_tools": [
+      "Figma"
+    ],
+    "has_creative_stack": true,
+    "has_martech_stack": false,
+    "tech_modernity_score": 37,
+    "seniority_level": "Senior IC",
+    "is_business_email": true,
+    "pricing_page_views": 28,
+    "has_signup_intent": false,
+    "credit_usage_pct": 24,
+    "asset_uploads": 261,
+    "teammate_invites": 5,
+    "active_channels": 3,
+    "creative_job_postings": 4,
+    "has_marketing_title": false,
+    "activation_score": 62,
+    "enrichment_providers_ok": [
+      "firmograph",
+      "stacklens"
+    ],
+    "enrichment_status": "ok",
+    "score": 48,
+    "tier": "Cool",
+    "score_breakdown": [
+      {
+        "rule_id": "intent_pricing_page_high",
+        "matched": true,
+        "category": "intent",
+        "points": 10,
+        "description": "20+ pricing/demo page views. Repeated pricing visits are the single strongest pre-contact intent signal \u2014 a prospect checking price multiple times has an internal decision in motion.",
+        "conditional": false
+      },
+      {
+        "rule_id": "intent_asset_uploads_high",
+        "matched": true,
+        "category": "intent",
+        "points": 8,
+        "description": "200+ asset uploads. Heavy upload volume means the prospect has migrated real work into our workspace \u2014 they've made a switching-cost investment we can lean on.",
+        "conditional": false
+      },
+      {
+        "rule_id": "intent_team_seeding",
+        "matched": true,
+        "category": "intent",
+        "points": 5,
+        "description": "5-9 teammate invites \u2014 early team adoption.",
+        "conditional": false
+      },
+      {
+        "rule_id": "fit_mid_market",
+        "matched": true,
+        "category": "fit",
+        "points": 9,
+        "description": "Mid-market (201-999). Air's strongest economic fit \u2014 teams large enough to feel the pain of disorganized assets, small enough to buy without a 6-month procurement cycle.",
+        "conditional": false
+      },
+      {
+        "rule_id": "fit_industry_match",
+        "matched": true,
+        "category": "fit",
+        "points": 8,
+        "description": "Target industry. SaaS, MarTech, Creative Ops, Dev Tools, E-commerce, Media \u2014 industries with high creative-asset output where Air's value prop lands without translation.",
+        "conditional": false
+      },
+      {
+        "rule_id": "fit_creative_stack_detected",
+        "matched": true,
+        "category": "fit",
+        "points": 5,
+        "description": "Company runs Figma / Adobe / Canva / Frame.io. A detected creative stack is harder evidence of fit than an industry label \u2014 teams using these tools have creative volume to manage and recognize Air's category instantly.",
+        "conditional": false
+      },
+      {
+        "rule_id": "expansion_creative_hiring_medium",
+        "matched": true,
+        "category": "expansion",
+        "points": 3,
+        "description": "3-7 open creative roles.",
+        "conditional": false
+      }
+    ],
+    "score_by_category": {
+      "intent": 23,
+      "fit": 22,
+      "persona": 0,
+      "expansion": 3
+    }
+  },
+  {
     "name": "Bob Brown",
     "email": "bob.brown@startup.io",
     "title": "CEO",
@@ -3544,119 +3541,6 @@
       "intent": 21,
       "fit": 13,
       "persona": 11,
-      "expansion": 3
-    }
-  },
-  {
-    "name": "Carol",
-    "email": "bob.jones@example.com",
-    "title": "Senior Engineer",
-    "company": "Example Corp",
-    "phone": null,
-    "source": "Website Visitor",
-    "country": "United States",
-    "created_at": null,
-    "data_quality_issues": [
-      "missing_company",
-      "missing_or_invalid_phone",
-      "missing_or_invalid_created_at",
-      "company_backfilled_from_enrichment"
-    ],
-    "source_row_numbers": [
-      52
-    ],
-    "company_name": "Example Corp",
-    "company_size_band": "501-1000",
-    "company_size_min": 501,
-    "industry": "SaaS",
-    "estimated_revenue": "$50M-$100M",
-    "hq_country": "United States",
-    "detected_tools": [
-      "Figma"
-    ],
-    "has_creative_stack": true,
-    "has_martech_stack": false,
-    "tech_modernity_score": 37,
-    "seniority_level": "Senior IC",
-    "is_business_email": true,
-    "pricing_page_views": 28,
-    "has_signup_intent": false,
-    "credit_usage_pct": 24,
-    "asset_uploads": 261,
-    "teammate_invites": 5,
-    "active_channels": 3,
-    "creative_job_postings": 4,
-    "has_marketing_title": false,
-    "activation_score": 62,
-    "enrichment_providers_ok": [
-      "firmograph",
-      "stacklens"
-    ],
-    "enrichment_status": "ok",
-    "score": 48,
-    "tier": "Cool",
-    "score_breakdown": [
-      {
-        "rule_id": "intent_pricing_page_high",
-        "matched": true,
-        "category": "intent",
-        "points": 10,
-        "description": "20+ pricing/demo page views. Repeated pricing visits are the single strongest pre-contact intent signal \u2014 a prospect checking price multiple times has an internal decision in motion.",
-        "conditional": false
-      },
-      {
-        "rule_id": "intent_asset_uploads_high",
-        "matched": true,
-        "category": "intent",
-        "points": 8,
-        "description": "200+ asset uploads. Heavy upload volume means the prospect has migrated real work into our workspace \u2014 they've made a switching-cost investment we can lean on.",
-        "conditional": false
-      },
-      {
-        "rule_id": "intent_team_seeding",
-        "matched": true,
-        "category": "intent",
-        "points": 5,
-        "description": "5-9 teammate invites \u2014 early team adoption.",
-        "conditional": false
-      },
-      {
-        "rule_id": "fit_mid_market",
-        "matched": true,
-        "category": "fit",
-        "points": 9,
-        "description": "Mid-market (201-999). Air's strongest economic fit \u2014 teams large enough to feel the pain of disorganized assets, small enough to buy without a 6-month procurement cycle.",
-        "conditional": false
-      },
-      {
-        "rule_id": "fit_industry_match",
-        "matched": true,
-        "category": "fit",
-        "points": 8,
-        "description": "Target industry. SaaS, MarTech, Creative Ops, Dev Tools, E-commerce, Media \u2014 industries with high creative-asset output where Air's value prop lands without translation.",
-        "conditional": false
-      },
-      {
-        "rule_id": "fit_creative_stack_detected",
-        "matched": true,
-        "category": "fit",
-        "points": 5,
-        "description": "Company runs Figma / Adobe / Canva / Frame.io. A detected creative stack is harder evidence of fit than an industry label \u2014 teams using these tools have creative volume to manage and recognize Air's category instantly.",
-        "conditional": false
-      },
-      {
-        "rule_id": "expansion_creative_hiring_medium",
-        "matched": true,
-        "category": "expansion",
-        "points": 3,
-        "description": "3-7 open creative roles.",
-        "conditional": false
-      }
-    ],
-    "score_by_category": {
-      "intent": 23,
-      "fit": 22,
-      "persona": 0,
       "expansion": 3
     }
   },
@@ -4884,6 +4768,116 @@
     }
   },
   {
+    "phone": "+1 (123) 456-7890",
+    "data_quality_issues": [
+      "missing_company",
+      "missing_or_invalid_phone",
+      "missing_or_unknown_country"
+    ],
+    "source_row_numbers": [
+      14,
+      36,
+      83
+    ],
+    "created_at": "2025-02-15",
+    "name": "Alice Chen",
+    "country": "United States",
+    "company": "GlobalTech",
+    "title": "Software Engineer",
+    "email": "alice.chen@startup.io",
+    "source": "Website Visitor",
+    "merged_from_n_rows": 3,
+    "company_name": "Startup.io",
+    "company_size_band": "11-50",
+    "company_size_min": 11,
+    "industry": "SaaS",
+    "estimated_revenue": "$1M-$10M",
+    "hq_country": "United States",
+    "detected_tools": [
+      "Slack",
+      "Linear",
+      "Canva",
+      "HubSpot"
+    ],
+    "has_creative_stack": true,
+    "has_martech_stack": true,
+    "tech_modernity_score": 93,
+    "seniority_level": "IC",
+    "is_business_email": true,
+    "pricing_page_views": 26,
+    "has_signup_intent": true,
+    "credit_usage_pct": 63,
+    "asset_uploads": 264,
+    "teammate_invites": 3,
+    "active_channels": 4,
+    "creative_job_postings": 0,
+    "has_marketing_title": false,
+    "activation_score": 75,
+    "enrichment_providers_ok": [
+      "firmograph",
+      "stacklens"
+    ],
+    "enrichment_status": "ok",
+    "score": 40,
+    "tier": "Cool",
+    "score_breakdown": [
+      {
+        "rule_id": "intent_pricing_page_high",
+        "matched": true,
+        "category": "intent",
+        "points": 10,
+        "description": "20+ pricing/demo page views. Repeated pricing visits are the single strongest pre-contact intent signal \u2014 a prospect checking price multiple times has an internal decision in motion.",
+        "conditional": false
+      },
+      {
+        "rule_id": "intent_credit_usage_medium",
+        "matched": true,
+        "category": "intent",
+        "points": 6,
+        "description": "50-79% credit usage. Actively trialing \u2014 good nurture candidate.",
+        "conditional": false
+      },
+      {
+        "rule_id": "intent_asset_uploads_high",
+        "matched": true,
+        "category": "intent",
+        "points": 8,
+        "description": "200+ asset uploads. Heavy upload volume means the prospect has migrated real work into our workspace \u2014 they've made a switching-cost investment we can lean on.",
+        "conditional": false
+      },
+      {
+        "rule_id": "fit_industry_match",
+        "matched": true,
+        "category": "fit",
+        "points": 8,
+        "description": "Target industry. SaaS, MarTech, Creative Ops, Dev Tools, E-commerce, Media \u2014 industries with high creative-asset output where Air's value prop lands without translation.",
+        "conditional": false
+      },
+      {
+        "rule_id": "fit_creative_stack_detected",
+        "matched": true,
+        "category": "fit",
+        "points": 5,
+        "description": "Company runs Figma / Adobe / Canva / Frame.io. A detected creative stack is harder evidence of fit than an industry label \u2014 teams using these tools have creative volume to manage and recognize Air's category instantly.",
+        "conditional": false
+      },
+      {
+        "rule_id": "expansion_modern_stack",
+        "matched": true,
+        "category": "expansion",
+        "points": 3,
+        "description": "High tech-modernity score (60+). Teams already running a modern creative+martech stack have the operational maturity to actually deploy another tool \u2014 lower implementation risk, faster time-to-value.",
+        "conditional": false
+      }
+    ],
+    "score_by_category": {
+      "intent": 24,
+      "fit": 13,
+      "persona": 0,
+      "expansion": 3
+    }
+  },
+  {
     "name": "Bob Johnson",
     "email": "bob.johnson@business.co",
     "title": null,
@@ -4983,116 +4977,6 @@
     "score_by_category": {
       "intent": 23,
       "fit": 14,
-      "persona": 0,
-      "expansion": 3
-    }
-  },
-  {
-    "country": "United States",
-    "created_at": "2025-02-15",
-    "data_quality_issues": [
-      "missing_company",
-      "missing_or_invalid_phone",
-      "missing_or_unknown_country"
-    ],
-    "phone": "+1 (123) 456-7890",
-    "email": "alice.chen@startup.io",
-    "source": "Website Visitor",
-    "source_row_numbers": [
-      14,
-      36,
-      83
-    ],
-    "title": "Software Engineer",
-    "company": "GlobalTech",
-    "name": "Alice Chen",
-    "merged_from_n_rows": 3,
-    "company_name": "Startup.io",
-    "company_size_band": "11-50",
-    "company_size_min": 11,
-    "industry": "SaaS",
-    "estimated_revenue": "$1M-$10M",
-    "hq_country": "United States",
-    "detected_tools": [
-      "Slack",
-      "Linear",
-      "Canva",
-      "HubSpot"
-    ],
-    "has_creative_stack": true,
-    "has_martech_stack": true,
-    "tech_modernity_score": 93,
-    "seniority_level": "IC",
-    "is_business_email": true,
-    "pricing_page_views": 26,
-    "has_signup_intent": true,
-    "credit_usage_pct": 63,
-    "asset_uploads": 264,
-    "teammate_invites": 3,
-    "active_channels": 4,
-    "creative_job_postings": 0,
-    "has_marketing_title": false,
-    "activation_score": 75,
-    "enrichment_providers_ok": [
-      "firmograph",
-      "stacklens"
-    ],
-    "enrichment_status": "ok",
-    "score": 40,
-    "tier": "Cool",
-    "score_breakdown": [
-      {
-        "rule_id": "intent_pricing_page_high",
-        "matched": true,
-        "category": "intent",
-        "points": 10,
-        "description": "20+ pricing/demo page views. Repeated pricing visits are the single strongest pre-contact intent signal \u2014 a prospect checking price multiple times has an internal decision in motion.",
-        "conditional": false
-      },
-      {
-        "rule_id": "intent_credit_usage_medium",
-        "matched": true,
-        "category": "intent",
-        "points": 6,
-        "description": "50-79% credit usage. Actively trialing \u2014 good nurture candidate.",
-        "conditional": false
-      },
-      {
-        "rule_id": "intent_asset_uploads_high",
-        "matched": true,
-        "category": "intent",
-        "points": 8,
-        "description": "200+ asset uploads. Heavy upload volume means the prospect has migrated real work into our workspace \u2014 they've made a switching-cost investment we can lean on.",
-        "conditional": false
-      },
-      {
-        "rule_id": "fit_industry_match",
-        "matched": true,
-        "category": "fit",
-        "points": 8,
-        "description": "Target industry. SaaS, MarTech, Creative Ops, Dev Tools, E-commerce, Media \u2014 industries with high creative-asset output where Air's value prop lands without translation.",
-        "conditional": false
-      },
-      {
-        "rule_id": "fit_creative_stack_detected",
-        "matched": true,
-        "category": "fit",
-        "points": 5,
-        "description": "Company runs Figma / Adobe / Canva / Frame.io. A detected creative stack is harder evidence of fit than an industry label \u2014 teams using these tools have creative volume to manage and recognize Air's category instantly.",
-        "conditional": false
-      },
-      {
-        "rule_id": "expansion_modern_stack",
-        "matched": true,
-        "category": "expansion",
-        "points": 3,
-        "description": "High tech-modernity score (60+). Teams already running a modern creative+martech stack have the operational maturity to actually deploy another tool \u2014 lower implementation risk, faster time-to-value.",
-        "conditional": false
-      }
-    ],
-    "score_by_category": {
-      "intent": 24,
-      "fit": 13,
       "persona": 0,
       "expansion": 3
     }
@@ -6157,6 +6041,111 @@
     }
   },
   {
+    "phone": "+1 (123) 456-7890",
+    "data_quality_issues": [
+      "missing_or_invalid_phone",
+      "missing_or_unknown_country"
+    ],
+    "source_row_numbers": [
+      25,
+      81
+    ],
+    "created_at": "2025-03-16",
+    "name": "Jack Brown",
+    "country": "France",
+    "company": "GlobalTech",
+    "title": "Data Analyst",
+    "email": "jack.brown@company.com",
+    "source": "Event",
+    "merged_from_n_rows": 2,
+    "company_name": "Company",
+    "company_size_band": "1000-5000",
+    "company_size_min": 1000,
+    "industry": "Enterprise Software",
+    "estimated_revenue": "$100M-$500M",
+    "hq_country": "United States",
+    "detected_tools": [],
+    "has_creative_stack": false,
+    "has_martech_stack": false,
+    "tech_modernity_score": 0,
+    "seniority_level": "IC",
+    "is_business_email": true,
+    "pricing_page_views": 19,
+    "has_signup_intent": false,
+    "credit_usage_pct": 7,
+    "asset_uploads": 193,
+    "teammate_invites": 5,
+    "active_channels": 5,
+    "creative_job_postings": 8,
+    "has_marketing_title": false,
+    "activation_score": 44,
+    "enrichment_providers_ok": [
+      "firmograph"
+    ],
+    "enrichment_provider_errors": {
+      "stacklens": "stacklens 503 for company.com (attempt 3)"
+    },
+    "enrichment_status": "ok",
+    "score": 34,
+    "tier": "Low",
+    "score_breakdown": [
+      {
+        "rule_id": "intent_pricing_page_medium",
+        "matched": true,
+        "category": "intent",
+        "points": 7,
+        "description": "10-19 pricing page views \u2014 decision-gathering phase.",
+        "conditional": false
+      },
+      {
+        "rule_id": "intent_event_source",
+        "matched": true,
+        "category": "intent",
+        "points": 5,
+        "description": "Event-sourced lead. Moderate intent \u2014 they showed up in person, but event lists are noisy.",
+        "conditional": false
+      },
+      {
+        "rule_id": "intent_asset_uploads_medium",
+        "matched": true,
+        "category": "intent",
+        "points": 5,
+        "description": "50-199 asset uploads \u2014 real but not yet committed usage.",
+        "conditional": false
+      },
+      {
+        "rule_id": "intent_team_seeding",
+        "matched": true,
+        "category": "intent",
+        "points": 5,
+        "description": "5-9 teammate invites \u2014 early team adoption.",
+        "conditional": false
+      },
+      {
+        "rule_id": "fit_enterprise",
+        "matched": true,
+        "category": "fit",
+        "points": 7,
+        "description": "Enterprise firmographic (1000+ employees). Large budget, long sales cycle, higher ACV. Never fire this on top of low activation \u2014 see expansion_activated_enterprise for when size + usage compound.",
+        "conditional": false
+      },
+      {
+        "rule_id": "expansion_creative_hiring_high",
+        "matched": true,
+        "category": "expansion",
+        "points": 5,
+        "description": "8+ open creative roles. Strong hiring = scaling the creative org = rising budget for creative infrastructure.",
+        "conditional": false
+      }
+    ],
+    "score_by_category": {
+      "intent": 22,
+      "fit": 7,
+      "persona": 0,
+      "expansion": 5
+    }
+  },
+  {
     "name": "Frank Wilson",
     "email": "frank.wilson@air.inc",
     "title": "Designer",
@@ -6254,111 +6243,6 @@
       "fit": 13,
       "persona": 3,
       "expansion": 3
-    }
-  },
-  {
-    "country": "France",
-    "created_at": "2025-03-16",
-    "data_quality_issues": [
-      "missing_or_invalid_phone",
-      "missing_or_unknown_country"
-    ],
-    "phone": "+1 (123) 456-7890",
-    "email": "jack.brown@company.com",
-    "source": "Event",
-    "source_row_numbers": [
-      25,
-      81
-    ],
-    "title": "Data Analyst",
-    "company": "GlobalTech",
-    "name": "Jack Brown",
-    "merged_from_n_rows": 2,
-    "company_name": "Company",
-    "company_size_band": "1000-5000",
-    "company_size_min": 1000,
-    "industry": "Enterprise Software",
-    "estimated_revenue": "$100M-$500M",
-    "hq_country": "United States",
-    "detected_tools": [],
-    "has_creative_stack": false,
-    "has_martech_stack": false,
-    "tech_modernity_score": 0,
-    "seniority_level": "IC",
-    "is_business_email": true,
-    "pricing_page_views": 19,
-    "has_signup_intent": false,
-    "credit_usage_pct": 7,
-    "asset_uploads": 193,
-    "teammate_invites": 5,
-    "active_channels": 5,
-    "creative_job_postings": 8,
-    "has_marketing_title": false,
-    "activation_score": 44,
-    "enrichment_providers_ok": [
-      "firmograph"
-    ],
-    "enrichment_provider_errors": {
-      "stacklens": "stacklens 503 for company.com (attempt 3)"
-    },
-    "enrichment_status": "ok",
-    "score": 34,
-    "tier": "Low",
-    "score_breakdown": [
-      {
-        "rule_id": "intent_pricing_page_medium",
-        "matched": true,
-        "category": "intent",
-        "points": 7,
-        "description": "10-19 pricing page views \u2014 decision-gathering phase.",
-        "conditional": false
-      },
-      {
-        "rule_id": "intent_event_source",
-        "matched": true,
-        "category": "intent",
-        "points": 5,
-        "description": "Event-sourced lead. Moderate intent \u2014 they showed up in person, but event lists are noisy.",
-        "conditional": false
-      },
-      {
-        "rule_id": "intent_asset_uploads_medium",
-        "matched": true,
-        "category": "intent",
-        "points": 5,
-        "description": "50-199 asset uploads \u2014 real but not yet committed usage.",
-        "conditional": false
-      },
-      {
-        "rule_id": "intent_team_seeding",
-        "matched": true,
-        "category": "intent",
-        "points": 5,
-        "description": "5-9 teammate invites \u2014 early team adoption.",
-        "conditional": false
-      },
-      {
-        "rule_id": "fit_enterprise",
-        "matched": true,
-        "category": "fit",
-        "points": 7,
-        "description": "Enterprise firmographic (1000+ employees). Large budget, long sales cycle, higher ACV. Never fire this on top of low activation \u2014 see expansion_activated_enterprise for when size + usage compound.",
-        "conditional": false
-      },
-      {
-        "rule_id": "expansion_creative_hiring_high",
-        "matched": true,
-        "category": "expansion",
-        "points": 5,
-        "description": "8+ open creative roles. Strong hiring = scaling the creative org = rising budget for creative infrastructure.",
-        "conditional": false
-      }
-    ],
-    "score_by_category": {
-      "intent": 22,
-      "fit": 7,
-      "persona": 0,
-      "expansion": 5
     }
   },
   {
@@ -9237,23 +9121,23 @@
     }
   },
   {
-    "country": "United States",
-    "created_at": "2025-06-03",
+    "phone": "+1 (123) 456-7890",
     "data_quality_issues": [
       "missing_company",
       "missing_or_unknown_country",
       "enrichment_no_match"
     ],
-    "phone": "+1 (123) 456-7890",
-    "email": "grace.johnson@gmail.com",
-    "source": "Referral",
     "source_row_numbers": [
       32,
       91
     ],
-    "title": "Head of Sales",
-    "company": "GlobalTech",
+    "created_at": "2025-06-03",
     "name": "Grace Johnson",
+    "country": "United States",
+    "company": "GlobalTech",
+    "title": "Head of Sales",
+    "email": "grace.johnson@gmail.com",
+    "source": "Referral",
     "merged_from_n_rows": 2,
     "company_size_band": null,
     "company_size_min": 0,

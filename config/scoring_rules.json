@@ -115,6 +115,9 @@
       "op": "between",
       "value": [50, 199],
       "points": 5
+
+
+      
     },
     {
       "id": "intent_team_adoption",

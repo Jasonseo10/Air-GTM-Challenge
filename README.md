@@ -254,8 +254,8 @@ tier in the file output never disagrees with its tier in the UI.
   obvious — state lives in one place, the stages are procedural. When the
   UI grows, it splits along state boundaries (upload / review / results
   are already natural seams).
-- **Four categories, not two.** Sarim's-style "account fit vs contact fit"
-  is a valid framing for enterprise SDR work. For Air it's incomplete —
+- **Four categories, not two.** A traditional "account fit vs contact fit"
+  framing is valid for enterprise SDR work. For Air it's incomplete —
   there's an `intent` axis (product usage) and an `expansion` axis
   (whitespace) that matter more than either of those two for a PLG-adjacent
   product. Collapsing either into "account fit" loses information a seller
