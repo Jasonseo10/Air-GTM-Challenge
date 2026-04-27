@@ -1,0 +1,391 @@
+{
+  "active_rules_path": "config\\outbound_scoring_rules.v3.json",
+  "baseline_win_rate": 0.4583333333333333,
+  "n_dispositions_terminal": 48,
+  "updates": [
+    {
+      "rule_id": "funding_recent",
+      "description": "Account closed a funding round in the last 90 days",
+      "old_weight": 18,
+      "new_weight": 18,
+      "matched_n": 6,
+      "won_n": 4,
+      "win_rate": 0.6666666666666666,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 1.4545454545454546,
+      "sufficient_evidence": false,
+      "note": "insufficient evidence (6 < 8) \u2014 weight unchanged"
+    },
+    {
+      "rule_id": "exec_hire_marketing",
+      "description": "Account hired a CMO / VP Marketing / Head of Brand in the last 60 days",
+      "old_weight": 10,
+      "new_weight": 9,
+      "matched_n": 13,
+      "won_n": 4,
+      "win_rate": 0.3076923076923077,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 0.6713286713286714,
+      "sufficient_evidence": true,
+      "note": "refit on 13 samples, win rate 30.8% vs baseline 45.8%"
+    },
+    {
+      "rule_id": "exec_hire_creative",
+      "description": "Account hired a Creative Director / Head of Creative in the last 60 days",
+      "old_weight": 10,
+      "new_weight": 10,
+      "matched_n": 0,
+      "won_n": 0,
+      "win_rate": 0.0,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 1.0,
+      "sufficient_evidence": false,
+      "note": "insufficient evidence (0 < 8) \u2014 weight unchanged"
+    },
+    {
+      "rule_id": "creative_hiring_spike",
+      "description": "Account posted 4+ creative roles (designer, brand, social, video) in last 30 days",
+      "old_weight": 9,
+      "new_weight": 9,
+      "matched_n": 1,
+      "won_n": 1,
+      "win_rate": 1.0,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 2.181818181818182,
+      "sufficient_evidence": false,
+      "note": "insufficient evidence (1 < 8) \u2014 weight unchanged"
+    },
+    {
+      "rule_id": "rebrand_or_campaign_launch",
+      "description": "Public rebrand or major campaign launch detected in last 90 days",
+      "old_weight": 12,
+      "new_weight": 15,
+      "matched_n": 9,
+      "won_n": 7,
+      "win_rate": 0.7777777777777778,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 1.696969696969697,
+      "sufficient_evidence": true,
+      "note": "refit on 9 samples, win rate 77.8% vs baseline 45.8%"
+    },
+    {
+      "rule_id": "agency_change",
+      "description": "Agency-of-record change in last 6 months \u2014 workflow disruption window",
+      "old_weight": 7,
+      "new_weight": 7,
+      "matched_n": 20,
+      "won_n": 9,
+      "win_rate": 0.45,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 0.9818181818181819,
+      "sufficient_evidence": true,
+      "note": "refit on 20 samples, win rate 45.0% vs baseline 45.8%"
+    },
+    {
+      "rule_id": "competitor_dam_in_stack",
+      "description": "Account uses Bynder / Brandfolder / Frontify / Aprimo \u2014 replacement opportunity",
+      "old_weight": 17,
+      "new_weight": 20,
+      "matched_n": 13,
+      "won_n": 10,
+      "win_rate": 0.7692307692307693,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 1.6783216783216786,
+      "sufficient_evidence": true,
+      "note": "refit on 13 samples, win rate 76.9% vs baseline 45.8%"
+    },
+    {
+      "rule_id": "ad_spend_increase",
+      "description": "Significant ad-spend ramp (>40%) in last 60 days \u2014 creative volume need",
+      "old_weight": 6,
+      "new_weight": 6,
+      "matched_n": 21,
+      "won_n": 9,
+      "win_rate": 0.42857142857142855,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 0.935064935064935,
+      "sufficient_evidence": true,
+      "note": "refit on 21 samples, win rate 42.9% vs baseline 45.8%"
+    },
+    {
+      "rule_id": "channel_expansion_new",
+      "description": "New channel launch (TikTok Shop, retail, Amazon, broadcast) in last 90 days",
+      "old_weight": 5,
+      "new_weight": 5,
+      "matched_n": 11,
+      "won_n": 6,
+      "win_rate": 0.5454545454545454,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 1.1900826446280992,
+      "sufficient_evidence": true,
+      "note": "refit on 11 samples, win rate 54.5% vs baseline 45.8%"
+    },
+    {
+      "rule_id": "industry_target",
+      "description": "Target vertical for Air's GTM motion",
+      "old_weight": 10,
+      "new_weight": 12,
+      "matched_n": 17,
+      "won_n": 12,
+      "win_rate": 0.7058823529411765,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 1.540106951871658,
+      "sufficient_evidence": true,
+      "note": "refit on 17 samples, win rate 70.6% vs baseline 45.8%"
+    },
+    {
+      "rule_id": "company_size_enterprise",
+      "description": "Enterprise account (1000+ employees) \u2014 top deal size band",
+      "old_weight": 6,
+      "new_weight": 5,
+      "matched_n": 12,
+      "won_n": 3,
+      "win_rate": 0.25,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 0.5454545454545455,
+      "sufficient_evidence": true,
+      "note": "refit on 12 samples, win rate 25.0% vs baseline 45.8%"
+    },
+    {
+      "rule_id": "company_size_mid_market",
+      "description": "Mid-market account (201-999 employees)",
+      "old_weight": 6,
+      "new_weight": 6,
+      "matched_n": 14,
+      "won_n": 5,
+      "win_rate": 0.35714285714285715,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 0.7792207792207793,
+      "sufficient_evidence": true,
+      "note": "refit on 14 samples, win rate 35.7% vs baseline 45.8%"
+    },
+    {
+      "rule_id": "company_size_smb_qualified",
+      "description": "Qualified SMB (51-200 employees) \u2014 fits velocity motion",
+      "old_weight": 3,
+      "new_weight": 3,
+      "matched_n": 9,
+      "won_n": 6,
+      "win_rate": 0.6666666666666666,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 1.4545454545454546,
+      "sufficient_evidence": true,
+      "note": "refit on 9 samples, win rate 66.7% vs baseline 45.8%"
+    },
+    {
+      "rule_id": "persona_marketing_senior",
+      "description": "Senior marketing/brand title (VP/Director/Head) \u2014 primary buyer persona",
+      "old_weight": 7,
+      "new_weight": 7,
+      "matched_n": 9,
+      "won_n": 5,
+      "win_rate": 0.5555555555555556,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 1.2121212121212122,
+      "sufficient_evidence": true,
+      "note": "refit on 9 samples, win rate 55.6% vs baseline 45.8%"
+    },
+    {
+      "rule_id": "persona_creative_senior",
+      "description": "Senior creative title (CD / Head of Creative / VP Design) \u2014 secondary buyer",
+      "old_weight": 6,
+      "new_weight": 6,
+      "matched_n": 0,
+      "won_n": 0,
+      "win_rate": 0.0,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 1.0,
+      "sufficient_evidence": false,
+      "note": "insufficient evidence (0 < 8) \u2014 weight unchanged"
+    },
+    {
+      "rule_id": "persona_c_level",
+      "description": "C-level (CMO, CEO at SMB) \u2014 exec sponsor",
+      "old_weight": 4,
+      "new_weight": 4,
+      "matched_n": 7,
+      "won_n": 3,
+      "win_rate": 0.42857142857142855,
+      "baseline_win_rate": 0.4583333333333333,
+      "lift": 0.935064935064935,
+      "sufficient_evidence": false,
+      "note": "insufficient evidence (7 < 8) \u2014 weight unchanged"
+    }
+  ],
+  "proposed_rules": {
+    "version": 4,
+    "description": "Outbound-only ICP scoring. Deliberately excludes product-usage signals (pricing_page_views, credit_usage_pct, asset_uploads, teammate_invites, has_signup_intent) \u2014 those don't exist on cold prospects. Scores firmographics + persona + external trigger signals only. Weights are refit by src/outbound/feedback.py from disposition outcomes (won/lost). Original config is preserved when promoted; see config/outbound_scoring_rules.pointer.json for the active version.",
+    "rules": [
+      {
+        "id": "funding_recent",
+        "category": "trigger_signal",
+        "description": "Account closed a funding round in the last 90 days",
+        "field": "signal_funding_recent",
+        "op": "equals",
+        "value": true,
+        "points": 18
+      },
+      {
+        "id": "exec_hire_marketing",
+        "category": "trigger_signal",
+        "description": "Account hired a CMO / VP Marketing / Head of Brand in the last 60 days",
+        "field": "signal_exec_hire_marketing",
+        "op": "equals",
+        "value": true,
+        "points": 9
+      },
+      {
+        "id": "exec_hire_creative",
+        "category": "trigger_signal",
+        "description": "Account hired a Creative Director / Head of Creative in the last 60 days",
+        "field": "signal_exec_hire_creative",
+        "op": "equals",
+        "value": true,
+        "points": 10
+      },
+      {
+        "id": "creative_hiring_spike",
+        "category": "trigger_signal",
+        "description": "Account posted 4+ creative roles (designer, brand, social, video) in last 30 days",
+        "field": "signal_creative_hiring_spike",
+        "op": "equals",
+        "value": true,
+        "points": 9
+      },
+      {
+        "id": "rebrand_or_campaign_launch",
+        "category": "trigger_signal",
+        "description": "Public rebrand or major campaign launch detected in last 90 days",
+        "field": "signal_rebrand",
+        "op": "equals",
+        "value": true,
+        "points": 15
+      },
+      {
+        "id": "agency_change",
+        "category": "trigger_signal",
+        "description": "Agency-of-record change in last 6 months \u2014 workflow disruption window",
+        "field": "signal_agency_change",
+        "op": "equals",
+        "value": true,
+        "points": 7
+      },
+      {
+        "id": "competitor_dam_in_stack",
+        "category": "trigger_signal",
+        "description": "Account uses Bynder / Brandfolder / Frontify / Aprimo \u2014 replacement opportunity",
+        "field": "signal_competitor_dam",
+        "op": "is_present",
+        "value": null,
+        "points": 20
+      },
+      {
+        "id": "ad_spend_increase",
+        "category": "trigger_signal",
+        "description": "Significant ad-spend ramp (>40%) in last 60 days \u2014 creative volume need",
+        "field": "signal_ad_spend_ramp",
+        "op": "equals",
+        "value": true,
+        "points": 6
+      },
+      {
+        "id": "channel_expansion_new",
+        "category": "trigger_signal",
+        "description": "New channel launch (TikTok Shop, retail, Amazon, broadcast) in last 90 days",
+        "field": "signal_channel_expansion",
+        "op": "equals",
+        "value": true,
+        "points": 5
+      },
+      {
+        "id": "industry_target",
+        "category": "firmographic",
+        "description": "Target vertical for Air's GTM motion",
+        "field": "industry",
+        "op": "in",
+        "value": [
+          "Creative Operations",
+          "Marketing Technology",
+          "E-commerce",
+          "SaaS",
+          "Media",
+          "Entertainment",
+          "Sports",
+          "CPG",
+          "Fashion",
+          "Beauty",
+          "Food & Beverage",
+          "Retail",
+          "Agency"
+        ],
+        "points": 12
+      },
+      {
+        "id": "company_size_enterprise",
+        "category": "firmographic",
+        "description": "Enterprise account (1000+ employees) \u2014 top deal size band",
+        "field": "company_size_min",
+        "op": "gte",
+        "value": 1000,
+        "points": 5
+      },
+      {
+        "id": "company_size_mid_market",
+        "category": "firmographic",
+        "description": "Mid-market account (201-999 employees)",
+        "field": "company_size_min",
+        "op": "between",
+        "value": [
+          201,
+          999
+        ],
+        "points": 6
+      },
+      {
+        "id": "company_size_smb_qualified",
+        "category": "firmographic",
+        "description": "Qualified SMB (51-200 employees) \u2014 fits velocity motion",
+        "field": "company_size_min",
+        "op": "between",
+        "value": [
+          51,
+          200
+        ],
+        "points": 3
+      },
+      {
+        "id": "persona_marketing_senior",
+        "category": "persona",
+        "description": "Senior marketing/brand title (VP/Director/Head) \u2014 primary buyer persona",
+        "field": "persona_marketing_senior",
+        "op": "equals",
+        "value": true,
+        "points": 7
+      },
+      {
+        "id": "persona_creative_senior",
+        "category": "persona",
+        "description": "Senior creative title (CD / Head of Creative / VP Design) \u2014 secondary buyer",
+        "field": "persona_creative_senior",
+        "op": "equals",
+        "value": true,
+        "points": 6
+      },
+      {
+        "id": "persona_c_level",
+        "category": "persona",
+        "description": "C-level (CMO, CEO at SMB) \u2014 exec sponsor",
+        "field": "seniority_level",
+        "op": "equals",
+        "value": "C-Level",
+        "points": 4
+      }
+    ],
+    "tiers": {
+      "hot": 45,
+      "warm": 30,
+      "cool": 15
+    },
+    "refit_at": "2026-04-27T20:33:13.817738+00:00"
+  }
+}

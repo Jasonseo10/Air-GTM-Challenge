@@ -1,0 +1,47 @@
+{
+  "active_version": "config/outbound_scoring_rules.v3.json",
+  "history": [
+    {
+      "version_path": "config/outbound_scoring_rules.json",
+      "promoted_at": "2026-04-26T00:00:00Z",
+      "promoted_by": "system",
+      "note": "Initial weights — hand-tuned baseline before first feedback refit."
+    },
+    {
+      "version_path": "config/outbound_scoring_rules.v2.json",
+      "promoted_at": "2026-04-27T16:30:02.817Z",
+      "promoted_by": "dashboard",
+      "note": "smoke test"
+    },
+    {
+      "version_path": "config/outbound_scoring_rules.v3.json",
+      "promoted_at": "2026-04-27T19:11:26.307Z",
+      "promoted_by": "dashboard",
+      "note": "promoted from dashboard refit"
+    },
+    {
+      "version_path": "config/outbound_scoring_rules.v3.json",
+      "promoted_at": "2026-04-27T19:12:02.122Z",
+      "promoted_by": "dashboard",
+      "note": "promoted from dashboard refit"
+    },
+    {
+      "version_path": "config/outbound_scoring_rules.v4.json",
+      "promoted_at": "2026-04-27T20:27:21.806Z",
+      "promoted_by": "dashboard",
+      "note": "promoted from dashboard refit"
+    },
+    {
+      "version_path": "config/outbound_scoring_rules.v4.json",
+      "promoted_at": "2026-04-27T20:28:22.888Z",
+      "promoted_by": "dashboard",
+      "note": "promoted from dashboard refit"
+    },
+    {
+      "version_path": "config/outbound_scoring_rules.v3.json",
+      "promoted_at": "2026-04-27T20:33:08.703Z",
+      "promoted_by": "dashboard",
+      "note": "rolled back from dashboard"
+    }
+  ]
+}

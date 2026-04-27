@@ -1,0 +1,949 @@
+[
+  {
+    "account_id": "business.co",
+    "company": "Air Inc",
+    "industry": "Financial Services",
+    "company_size_band": "201-500",
+    "outbound_vertical": "CPG",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "primary_lead": {
+      "email": "david.smith@business.co",
+      "name": "David Smith",
+      "title": "VP Marketing",
+      "seniority_level": "VP",
+      "fit_score": 64,
+      "role": "champion_marketing",
+      "why": "highest-fit contact at this account"
+    },
+    "supporting_leads": [
+      {
+        "email": "carol.taylor@business.co",
+        "name": "Carol Taylor",
+        "title": "VP Marketing",
+        "seniority_level": "VP",
+        "fit_score": 64,
+        "role": "champion_marketing",
+        "why": "primary marketing-side champion"
+      },
+      {
+        "email": "jack.jones@business.co",
+        "name": "Jack Jones",
+        "title": "VP Marketing",
+        "seniority_level": "VP",
+        "fit_score": 64,
+        "role": "champion_marketing",
+        "why": "primary marketing-side champion"
+      },
+      {
+        "email": "bob.lee@business.co",
+        "name": "Bob Lee",
+        "title": "Head of Sales",
+        "seniority_level": "Director",
+        "fit_score": 56,
+        "role": "exec_sponsor",
+        "why": "senior multi-thread anchor"
+      },
+      {
+        "email": "bob.wilson@business.co",
+        "name": "Bob Wilson",
+        "title": "Head of Sales",
+        "seniority_level": "Director",
+        "fit_score": 56,
+        "role": "exec_sponsor",
+        "why": "senior multi-thread anchor"
+      },
+      {
+        "email": "carol.martinez@business.co",
+        "name": "Carol Martinez",
+        "title": "Marketing Manager",
+        "seniority_level": "Manager",
+        "fit_score": 46,
+        "role": "champion_marketing",
+        "why": "primary marketing-side champion"
+      },
+      {
+        "email": "henry.smith@business.co",
+        "name": "Henry Smith",
+        "title": "Senior Engineer",
+        "seniority_level": "Senior IC",
+        "fit_score": 39,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "carol.brown@business.co",
+        "name": "Carol Brown",
+        "title": "Software Engineer",
+        "seniority_level": "IC",
+        "fit_score": 39,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "emily.lee@business.co",
+        "name": "Emily Lee",
+        "title": "CEO",
+        "seniority_level": "C-Level",
+        "fit_score": 39,
+        "role": "economic_buyer",
+        "why": "exec sponsor \u2014 needed for budget approval"
+      },
+      {
+        "email": "alice.jones@business.co",
+        "name": "Alice Jones",
+        "title": "CEO",
+        "seniority_level": "C-Level",
+        "fit_score": 39,
+        "role": "economic_buyer",
+        "why": "exec sponsor \u2014 needed for budget approval"
+      },
+      {
+        "email": "bob.johnson@business.co",
+        "name": "Bob Johnson",
+        "title": null,
+        "seniority_level": "Unknown",
+        "fit_score": 39,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "david.chen@business.co",
+        "name": "David Chen",
+        "title": "Senior Engineer",
+        "seniority_level": "Senior IC",
+        "fit_score": 39,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "emily.jones@business.co",
+        "name": "Emily Jones",
+        "title": "Senior Engineer",
+        "seniority_level": "Senior IC",
+        "fit_score": 39,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "jack.brown@business.co",
+        "name": "Jack Brown",
+        "title": null,
+        "seniority_level": "Unknown",
+        "fit_score": 39,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      }
+    ],
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "sequence": [
+      "1. Open with David Smith (VP Marketing) \u2014 strongest fit signal.",
+      "2. After first reply, multi-thread to Carol Taylor (VP Marketing) \u2014 primary marketing-side champion.",
+      "3. After first reply, multi-thread to Jack Jones (VP Marketing) \u2014 primary marketing-side champion.",
+      "4. 11 additional contacts at the account available for follow-up if first thread cools."
+    ]
+  },
+  {
+    "account_id": "example.com",
+    "company": "Example Corp",
+    "industry": "SaaS",
+    "company_size_band": "501-1000",
+    "outbound_vertical": "Marketing Technology",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "primary_lead": {
+      "email": "valid@example.com",
+      "name": "Carol",
+      "title": "VP Marketing",
+      "seniority_level": "VP",
+      "fit_score": 64,
+      "role": "champion_marketing",
+      "why": "highest-fit contact at this account"
+    },
+    "supporting_leads": [
+      {
+        "email": "bob.jones@example.com",
+        "name": "Bob Jones",
+        "title": "Senior Engineer",
+        "seniority_level": "Senior IC",
+        "fit_score": 60,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      }
+    ],
+    "signals": [
+      {
+        "account_id": "example.com",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 58,
+        "payload": {
+          "competitor": "Brandfolder"
+        }
+      }
+    ],
+    "play_id": "competitor_replace",
+    "sequence": [
+      "1. Open with Carol (VP Marketing) \u2014 strongest fit signal.",
+      "2. After first reply, multi-thread to Bob Jones (Senior Engineer) \u2014 in-the-trenches user / day-to-day pain."
+    ]
+  },
+  {
+    "account_id": "air.inc",
+    "company": "Air Inc",
+    "industry": "Creative Operations",
+    "company_size_band": "51-200",
+    "outbound_vertical": "Media",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "primary_lead": {
+      "email": "david.taylor@air.inc",
+      "name": "David Taylor",
+      "title": "VP Marketing",
+      "seniority_level": "VP",
+      "fit_score": 56,
+      "role": "champion_marketing",
+      "why": "highest-fit contact at this account"
+    },
+    "supporting_leads": [
+      {
+        "email": "alice.lee@air.inc",
+        "name": "Alice Lee",
+        "title": "VP Marketing",
+        "seniority_level": "VP",
+        "fit_score": 56,
+        "role": "champion_marketing",
+        "why": "primary marketing-side champion"
+      },
+      {
+        "email": "henry.brown@air.inc",
+        "name": "Henry Brown",
+        "title": "Head of Sales",
+        "seniority_level": "Director",
+        "fit_score": 49,
+        "role": "exec_sponsor",
+        "why": "senior multi-thread anchor"
+      },
+      {
+        "email": "alice.chen@air.inc",
+        "name": "Alice Chen",
+        "title": "Senior Engineer",
+        "seniority_level": "Senior IC",
+        "fit_score": 46,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "emily.smith@air.inc",
+        "name": "Emily Smith",
+        "title": "Data Analyst",
+        "seniority_level": "IC",
+        "fit_score": 46,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "jack.smith@air.inc",
+        "name": "Jack Smith",
+        "title": "Senior Engineer",
+        "seniority_level": "Senior IC",
+        "fit_score": 46,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "grace.smith@air.inc",
+        "name": "Grace Smith",
+        "title": "Marketing Manager",
+        "seniority_level": "Manager",
+        "fit_score": 42,
+        "role": "champion_marketing",
+        "why": "primary marketing-side champion"
+      },
+      {
+        "email": "ivy.jones@air.inc",
+        "name": "Ivy Jones",
+        "title": "Product Lead",
+        "seniority_level": "Senior IC",
+        "fit_score": 39,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "emily.jones@air.inc",
+        "name": "Emily Jones",
+        "title": "Designer",
+        "seniority_level": "IC",
+        "fit_score": 39,
+        "role": "champion_creative",
+        "why": "primary creative-side champion"
+      },
+      {
+        "email": "frank.wilson@air.inc",
+        "name": "Frank Wilson",
+        "title": "Designer",
+        "seniority_level": "IC",
+        "fit_score": 39,
+        "role": "champion_creative",
+        "why": "primary creative-side champion"
+      },
+      {
+        "email": "jack.wilson@air.inc",
+        "name": "Jack Wilson",
+        "title": "Designer",
+        "seniority_level": "IC",
+        "fit_score": 39,
+        "role": "champion_creative",
+        "why": "primary creative-side champion"
+      }
+    ],
+    "signals": [
+      {
+        "account_id": "air.inc",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 74,
+        "payload": {
+          "pct_increase": 99,
+          "channel": "TikTok"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 50,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "channel_expansion_new",
+        "days_ago": 11,
+        "payload": {
+          "new_channel": "Broadcast"
+        }
+      }
+    ],
+    "play_id": null,
+    "sequence": [
+      "1. Open with David Taylor (VP Marketing) \u2014 strongest fit signal.",
+      "2. After first reply, multi-thread to Alice Lee (VP Marketing) \u2014 primary marketing-side champion.",
+      "3. After first reply, multi-thread to Henry Brown (Head of Sales) \u2014 senior multi-thread anchor.",
+      "4. 8 additional contacts at the account available for follow-up if first thread cools."
+    ]
+  },
+  {
+    "account_id": "company.personal",
+    "company": "Company",
+    "industry": null,
+    "company_size_band": null,
+    "outbound_vertical": "Beauty",
+    "rep_id": "sarah_mitchell",
+    "rep_name": "Sarah Mitchell",
+    "primary_lead": {
+      "email": "alice.wilson@gmail.com",
+      "name": "Alice Wilson",
+      "title": "CTO",
+      "seniority_level": "C-Level",
+      "fit_score": 54,
+      "role": "economic_buyer",
+      "why": "highest-fit contact at this account"
+    },
+    "supporting_leads": [
+      {
+        "email": "ivy.chen@gmail.com",
+        "name": "Ivy Chen",
+        "title": "Marketing Manager",
+        "seniority_level": "Manager",
+        "fit_score": 42,
+        "role": "champion_marketing",
+        "why": "primary marketing-side champion"
+      }
+    ],
+    "signals": [
+      {
+        "account_id": "company.personal",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 86,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      }
+    ],
+    "play_id": "competitor_replace",
+    "sequence": [
+      "1. Open with Alice Wilson (CTO) \u2014 strongest fit signal.",
+      "2. After first reply, multi-thread to Ivy Chen (Marketing Manager) \u2014 primary marketing-side champion."
+    ]
+  },
+  {
+    "account_id": "company.com",
+    "company": "Air Inc",
+    "industry": "Enterprise Software",
+    "company_size_band": "1000-5000",
+    "outbound_vertical": "SaaS",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "primary_lead": {
+      "email": "frank.anderson@company.com",
+      "name": "Frank Anderson",
+      "title": "CTO",
+      "seniority_level": "C-Level",
+      "fit_score": 53,
+      "role": "economic_buyer",
+      "why": "highest-fit contact at this account"
+    },
+    "supporting_leads": [
+      {
+        "email": "jack.martinez@company.com",
+        "name": "Jack Martinez",
+        "title": "CTO",
+        "seniority_level": "C-Level",
+        "fit_score": 53,
+        "role": "economic_buyer",
+        "why": "exec sponsor \u2014 needed for budget approval"
+      },
+      {
+        "email": "henry.chen@company.com",
+        "name": "Henry Chen",
+        "title": "Head of Sales",
+        "seniority_level": "Director",
+        "fit_score": 52,
+        "role": "exec_sponsor",
+        "why": "senior multi-thread anchor"
+      },
+      {
+        "email": "jack.chen@company.com",
+        "name": "Jack Chen",
+        "title": "VP Marketing",
+        "seniority_level": "VP",
+        "fit_score": 51,
+        "role": "champion_marketing",
+        "why": "primary marketing-side champion"
+      },
+      {
+        "email": "bob.martinez@company.com",
+        "name": "Bob Martinez",
+        "title": "VP Marketing",
+        "seniority_level": "VP",
+        "fit_score": 51,
+        "role": "champion_marketing",
+        "why": "primary marketing-side champion"
+      },
+      {
+        "email": "grace.taylor@company.com",
+        "name": "Grace Taylor",
+        "title": "VP Marketing",
+        "seniority_level": "VP",
+        "fit_score": 51,
+        "role": "champion_marketing",
+        "why": "primary marketing-side champion"
+      },
+      {
+        "email": "ivy.jones@company.com",
+        "name": "Ivy Jones",
+        "title": "Product Lead",
+        "seniority_level": "Senior IC",
+        "fit_score": 42,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "grace.martinez@company.com",
+        "name": "Grace Martinez",
+        "title": "Product Lead",
+        "seniority_level": "Senior IC",
+        "fit_score": 42,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "carol.anderson@company.com",
+        "name": "Carol Anderson",
+        "title": "Product Lead",
+        "seniority_level": "Senior IC",
+        "fit_score": 42,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "alice.anderson@company.com",
+        "name": "Alice Anderson",
+        "title": "Product Lead",
+        "seniority_level": "Senior IC",
+        "fit_score": 42,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "carol.wilson@company.com",
+        "name": "Carol Wilson",
+        "title": "Data Analyst",
+        "seniority_level": "IC",
+        "fit_score": 42,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "grace.smith@company.com",
+        "name": "Grace Smith",
+        "title": "Data Analyst",
+        "seniority_level": "IC",
+        "fit_score": 42,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "carol.chen@company.com",
+        "name": "Carol Chen",
+        "title": "Software Engineer",
+        "seniority_level": "IC",
+        "fit_score": 42,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "jack.brown@company.com",
+        "name": "Jack Brown",
+        "title": "Data Analyst",
+        "seniority_level": "IC",
+        "fit_score": 42,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "bob.wilson@company.com",
+        "name": "Bob Wilson",
+        "title": "Data Analyst",
+        "seniority_level": "IC",
+        "fit_score": 42,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "alice.johnson@company.com",
+        "name": "Alice Johnson",
+        "title": null,
+        "seniority_level": "Unknown",
+        "fit_score": 38,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "carol.taylor@company.com",
+        "name": "Carol Taylor",
+        "title": "CEO",
+        "seniority_level": "C-Level",
+        "fit_score": 36,
+        "role": "economic_buyer",
+        "why": "exec sponsor \u2014 needed for budget approval"
+      },
+      {
+        "email": "henry.brown@company.com",
+        "name": "Henry Brown",
+        "title": "CEO",
+        "seniority_level": "C-Level",
+        "fit_score": 36,
+        "role": "economic_buyer",
+        "why": "exec sponsor \u2014 needed for budget approval"
+      },
+      {
+        "email": "jack.lee@company.com",
+        "name": "Jack Lee",
+        "title": "CEO",
+        "seniority_level": "C-Level",
+        "fit_score": 36,
+        "role": "economic_buyer",
+        "why": "exec sponsor \u2014 needed for budget approval"
+      }
+    ],
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "sequence": [
+      "1. Open with Frank Anderson (CTO) \u2014 strongest fit signal.",
+      "2. After first reply, multi-thread to Jack Martinez (CTO) \u2014 exec sponsor \u2014 needed for budget approval.",
+      "3. After first reply, multi-thread to Henry Chen (Head of Sales) \u2014 senior multi-thread anchor.",
+      "4. 16 additional contacts at the account available for follow-up if first thread cools."
+    ]
+  },
+  {
+    "account_id": "startup.io",
+    "company": "Startup.io",
+    "industry": "SaaS",
+    "company_size_band": "11-50",
+    "outbound_vertical": "Developer Tools",
+    "rep_id": "jordan_park",
+    "rep_name": "Jordan Park",
+    "primary_lead": {
+      "email": "carol.taylor@startup.io",
+      "name": "Carol Taylor",
+      "title": "Marketing Manager",
+      "seniority_level": "Manager",
+      "fit_score": 52,
+      "role": "champion_marketing",
+      "why": "highest-fit contact at this account"
+    },
+    "supporting_leads": [
+      {
+        "email": "emily.lee@startup.io",
+        "name": "Emily Lee",
+        "title": "CTO",
+        "seniority_level": "C-Level",
+        "fit_score": 50,
+        "role": "economic_buyer",
+        "why": "exec sponsor \u2014 needed for budget approval"
+      },
+      {
+        "email": "carol.brown@startup.io",
+        "name": "Carol Brown",
+        "title": "Head of Sales",
+        "seniority_level": "Director",
+        "fit_score": 46,
+        "role": "exec_sponsor",
+        "why": "senior multi-thread anchor"
+      },
+      {
+        "email": "bob.martinez@startup.io",
+        "name": "Bob Martinez",
+        "title": "Head of Sales",
+        "seniority_level": "Director",
+        "fit_score": 46,
+        "role": "exec_sponsor",
+        "why": "senior multi-thread anchor"
+      },
+      {
+        "email": "ivy.anderson@startup.io",
+        "name": "Ivy Anderson",
+        "title": "Data Analyst",
+        "seniority_level": "IC",
+        "fit_score": 36,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "alice.chen@startup.io",
+        "name": "Alice Chen",
+        "title": "Software Engineer",
+        "seniority_level": "IC",
+        "fit_score": 36,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "alice.lee@startup.io",
+        "name": "Alice Lee",
+        "title": "Senior Engineer",
+        "seniority_level": "Senior IC",
+        "fit_score": 36,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "emily.brown@startup.io",
+        "name": "Emily Brown",
+        "title": "Data Analyst",
+        "seniority_level": "IC",
+        "fit_score": 36,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "frank.brown@startup.io",
+        "name": "Frank Brown",
+        "title": "Senior Engineer",
+        "seniority_level": "Senior IC",
+        "fit_score": 36,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "bob.brown@startup.io",
+        "name": "Bob Brown",
+        "title": "CEO",
+        "seniority_level": "C-Level",
+        "fit_score": 35,
+        "role": "economic_buyer",
+        "why": "exec sponsor \u2014 needed for budget approval"
+      },
+      {
+        "email": "jack.jones@startup.io",
+        "name": "Jack Jones",
+        "title": "CEO",
+        "seniority_level": "C-Level",
+        "fit_score": 35,
+        "role": "economic_buyer",
+        "why": "exec sponsor \u2014 needed for budget approval"
+      }
+    ],
+    "signals": [
+      {
+        "account_id": "startup.io",
+        "signal_type": "agency_change",
+        "days_ago": 23,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 78,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "funding_recent",
+        "days_ago": 80,
+        "payload": {
+          "round": "Growth",
+          "amount_m_usd": 154,
+          "lead_investor": "Bessemer"
+        }
+      }
+    ],
+    "play_id": "agency_change",
+    "sequence": [
+      "1. Open with Carol Taylor (Marketing Manager) \u2014 strongest fit signal.",
+      "2. After first reply, multi-thread to Emily Lee (CTO) \u2014 exec sponsor \u2014 needed for budget approval.",
+      "3. After first reply, multi-thread to Carol Brown (Head of Sales) \u2014 senior multi-thread anchor.",
+      "4. 8 additional contacts at the account available for follow-up if first thread cools."
+    ]
+  },
+  {
+    "account_id": "david.jones@yahoo.com",
+    "company": null,
+    "industry": null,
+    "company_size_band": null,
+    "outbound_vertical": "Beauty",
+    "rep_id": "sarah_mitchell",
+    "rep_name": "Sarah Mitchell",
+    "primary_lead": {
+      "email": "david.jones@yahoo.com",
+      "name": "David Jones",
+      "title": "VP Marketing",
+      "seniority_level": "VP",
+      "fit_score": 52,
+      "role": "champion_marketing",
+      "why": "highest-fit contact at this account"
+    },
+    "supporting_leads": [],
+    "signals": [
+      {
+        "account_id": "david.jones@yahoo.com",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 87,
+        "payload": {
+          "campaign_or_rebrand": "rebrand",
+          "detected_via": "press release"
+        }
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "sequence": [
+      "1. Open with David Jones (VP Marketing) \u2014 strongest fit signal."
+    ]
+  },
+  {
+    "account_id": "umbrella-corp.personal",
+    "company": "Umbrella Corp",
+    "industry": null,
+    "company_size_band": null,
+    "outbound_vertical": "Broadcast",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "primary_lead": {
+      "email": "henry.lee@yahoo.com",
+      "name": "Henry Lee",
+      "title": "Head of Sales",
+      "seniority_level": "Director",
+      "fit_score": 49,
+      "role": "exec_sponsor",
+      "why": "highest-fit contact at this account"
+    },
+    "supporting_leads": [
+      {
+        "email": "henry.anderson@gmail.com",
+        "name": "Henry Anderson",
+        "title": "Software Engineer",
+        "seniority_level": "IC",
+        "fit_score": 46,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      },
+      {
+        "email": "carol.martinez@yahoo.com",
+        "name": "Carol Martinez",
+        "title": "Product Lead",
+        "seniority_level": "Senior IC",
+        "fit_score": 39,
+        "role": "operator_IC",
+        "why": "in-the-trenches user / day-to-day pain"
+      }
+    ],
+    "signals": [
+      {
+        "account_id": "umbrella-corp.personal",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 28,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "umbrella-corp.personal",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 38,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "umbrella-corp.personal",
+        "signal_type": "agency_change",
+        "days_ago": 9,
+        "payload": {
+          "from_agency": "Wieden+Kennedy",
+          "to_agency": "Gut"
+        }
+      }
+    ],
+    "play_id": "competitor_replace",
+    "sequence": [
+      "1. Open with Henry Lee (Head of Sales) \u2014 strongest fit signal.",
+      "2. After first reply, multi-thread to Henry Anderson (Software Engineer) \u2014 in-the-trenches user / day-to-day pain.",
+      "3. After first reply, multi-thread to Carol Martinez (Product Lead) \u2014 in-the-trenches user / day-to-day pain."
+    ]
+  },
+  {
+    "account_id": "alice.jones@gmail.com",
+    "company": null,
+    "industry": null,
+    "company_size_band": null,
+    "outbound_vertical": "Sports",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "primary_lead": {
+      "email": "alice.jones@gmail.com",
+      "name": "Alice Jones",
+      "title": "Senior Engineer",
+      "seniority_level": "Senior IC",
+      "fit_score": 41,
+      "role": "operator_IC",
+      "why": "highest-fit contact at this account"
+    },
+    "supporting_leads": [],
+    "signals": [
+      {
+        "account_id": "alice.jones@gmail.com",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 30,
+        "payload": {
+          "campaign_or_rebrand": "category launch",
+          "detected_via": "ad library"
+        }
+      },
+      {
+        "account_id": "alice.jones@gmail.com",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 55,
+        "payload": {
+          "competitor": "Brandfolder"
+        }
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "sequence": [
+      "1. Open with Alice Jones (Senior Engineer) \u2014 strongest fit signal."
+    ]
+  },
+  {
+    "account_id": "ivy.martinez@gmail.com",
+    "company": null,
+    "industry": null,
+    "company_size_band": null,
+    "outbound_vertical": "Developer Tools",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "primary_lead": {
+      "email": "ivy.martinez@gmail.com",
+      "name": "Ivy Martinez",
+      "title": "Designer",
+      "seniority_level": "IC",
+      "fit_score": 36,
+      "role": "champion_creative",
+      "why": "highest-fit contact at this account"
+    },
+    "supporting_leads": [],
+    "signals": [
+      {
+        "account_id": "ivy.martinez@gmail.com",
+        "signal_type": "agency_change",
+        "days_ago": 48,
+        "payload": {
+          "from_agency": "Anomaly",
+          "to_agency": "Battery"
+        }
+      },
+      {
+        "account_id": "ivy.martinez@gmail.com",
+        "signal_type": "creative_hiring_spike",
+        "days_ago": 50,
+        "payload": {
+          "role_count_30d": 7,
+          "roles": [
+            "Designer",
+            "Brand Lead",
+            "Social Manager"
+          ]
+        }
+      },
+      {
+        "account_id": "ivy.martinez@gmail.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Jamie Park"
+        }
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "sequence": [
+      "1. Open with Ivy Martinez (Designer) \u2014 strongest fit signal."
+    ]
+  }
+]

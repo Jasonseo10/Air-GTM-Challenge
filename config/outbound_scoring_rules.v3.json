@@ -1,0 +1,176 @@
+{
+  "version": 3,
+  "description": "Outbound-only ICP scoring. Deliberately excludes product-usage signals (pricing_page_views, credit_usage_pct, asset_uploads, teammate_invites, has_signup_intent) — those don't exist on cold prospects. Scores firmographics + persona + external trigger signals only. Weights are refit by src/outbound/feedback.py from disposition outcomes (won/lost). Original config is preserved when promoted; see config/outbound_scoring_rules.pointer.json for the active version.",
+  "rules": [
+    {
+      "id": "funding_recent",
+      "category": "trigger_signal",
+      "description": "Account closed a funding round in the last 90 days",
+      "field": "signal_funding_recent",
+      "op": "equals",
+      "value": true,
+      "points": 18
+    },
+    {
+      "id": "exec_hire_marketing",
+      "category": "trigger_signal",
+      "description": "Account hired a CMO / VP Marketing / Head of Brand in the last 60 days",
+      "field": "signal_exec_hire_marketing",
+      "op": "equals",
+      "value": true,
+      "points": 10
+    },
+    {
+      "id": "exec_hire_creative",
+      "category": "trigger_signal",
+      "description": "Account hired a Creative Director / Head of Creative in the last 60 days",
+      "field": "signal_exec_hire_creative",
+      "op": "equals",
+      "value": true,
+      "points": 10
+    },
+    {
+      "id": "creative_hiring_spike",
+      "category": "trigger_signal",
+      "description": "Account posted 4+ creative roles (designer, brand, social, video) in last 30 days",
+      "field": "signal_creative_hiring_spike",
+      "op": "equals",
+      "value": true,
+      "points": 9
+    },
+    {
+      "id": "rebrand_or_campaign_launch",
+      "category": "trigger_signal",
+      "description": "Public rebrand or major campaign launch detected in last 90 days",
+      "field": "signal_rebrand",
+      "op": "equals",
+      "value": true,
+      "points": 12
+    },
+    {
+      "id": "agency_change",
+      "category": "trigger_signal",
+      "description": "Agency-of-record change in last 6 months — workflow disruption window",
+      "field": "signal_agency_change",
+      "op": "equals",
+      "value": true,
+      "points": 7
+    },
+    {
+      "id": "competitor_dam_in_stack",
+      "category": "trigger_signal",
+      "description": "Account uses Bynder / Brandfolder / Frontify / Aprimo — replacement opportunity",
+      "field": "signal_competitor_dam",
+      "op": "is_present",
+      "value": null,
+      "points": 17
+    },
+    {
+      "id": "ad_spend_increase",
+      "category": "trigger_signal",
+      "description": "Significant ad-spend ramp (>40%) in last 60 days — creative volume need",
+      "field": "signal_ad_spend_ramp",
+      "op": "equals",
+      "value": true,
+      "points": 6
+    },
+    {
+      "id": "channel_expansion_new",
+      "category": "trigger_signal",
+      "description": "New channel launch (TikTok Shop, retail, Amazon, broadcast) in last 90 days",
+      "field": "signal_channel_expansion",
+      "op": "equals",
+      "value": true,
+      "points": 5
+    },
+    {
+      "id": "industry_target",
+      "category": "firmographic",
+      "description": "Target vertical for Air's GTM motion",
+      "field": "industry",
+      "op": "in",
+      "value": [
+        "Creative Operations",
+        "Marketing Technology",
+        "E-commerce",
+        "SaaS",
+        "Media",
+        "Entertainment",
+        "Sports",
+        "CPG",
+        "Fashion",
+        "Beauty",
+        "Food & Beverage",
+        "Retail",
+        "Agency"
+      ],
+      "points": 10
+    },
+    {
+      "id": "company_size_enterprise",
+      "category": "firmographic",
+      "description": "Enterprise account (1000+ employees) — top deal size band",
+      "field": "company_size_min",
+      "op": "gte",
+      "value": 1000,
+      "points": 6
+    },
+    {
+      "id": "company_size_mid_market",
+      "category": "firmographic",
+      "description": "Mid-market account (201-999 employees)",
+      "field": "company_size_min",
+      "op": "between",
+      "value": [
+        201,
+        999
+      ],
+      "points": 6
+    },
+    {
+      "id": "company_size_smb_qualified",
+      "category": "firmographic",
+      "description": "Qualified SMB (51-200 employees) — fits velocity motion",
+      "field": "company_size_min",
+      "op": "between",
+      "value": [
+        51,
+        200
+      ],
+      "points": 3
+    },
+    {
+      "id": "persona_marketing_senior",
+      "category": "persona",
+      "description": "Senior marketing/brand title (VP/Director/Head) — primary buyer persona",
+      "field": "persona_marketing_senior",
+      "op": "equals",
+      "value": true,
+      "points": 7
+    },
+    {
+      "id": "persona_creative_senior",
+      "category": "persona",
+      "description": "Senior creative title (CD / Head of Creative / VP Design) — secondary buyer",
+      "field": "persona_creative_senior",
+      "op": "equals",
+      "value": true,
+      "points": 6
+    },
+    {
+      "id": "persona_c_level",
+      "category": "persona",
+      "description": "C-level (CMO, CEO at SMB) — exec sponsor",
+      "field": "seniority_level",
+      "op": "equals",
+      "value": "C-Level",
+      "points": 4
+    }
+  ],
+  "tiers": {
+    "hot": 45,
+    "warm": 30,
+    "cool": 15
+  },
+  "refit_at": "2026-04-27T18:47:05.097387+00:00"
+}

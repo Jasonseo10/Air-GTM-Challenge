@@ -1,0 +1,105 @@
+{
+  "description": "Outbound play templates. Each play is selected by (primary_signal × persona × tier). Body templates use {{handlebars}} placeholders that src/outbound/plays.py fills from the lead + signal payload.",
+  "plays": [
+    {
+      "play_id": "funding_marketing_buyer",
+      "primary_signal": "funding_recent",
+      "personas": ["VP Marketing", "Director Marketing", "Head of Marketing", "Head of Brand", "CMO"],
+      "tiers": ["Hot", "Warm"],
+      "subject": "Congrats on the {{round}} — quick thought on creative scale",
+      "opener": "Saw {{company}} closed a {{round}} ${{amount_m}}M last month. Most marketing teams I work with hit a creative-throughput wall ~6 months after a round like this — variants pile up, brand consistency cracks. Worth 15 min to compare notes on how Sweetgreen / Peloton handled it?",
+      "channel_priority": ["email", "linkedin", "phone"],
+      "expected_response_window_days": 5
+    },
+    {
+      "play_id": "funding_creative_buyer",
+      "primary_signal": "funding_recent",
+      "personas": ["Creative Director", "Head of Creative", "VP Creative", "Design Ops"],
+      "tiers": ["Hot", "Warm"],
+      "subject": "Post-{{round}} creative ops — {{company}}",
+      "opener": "Congrats on the {{round}}. The story I keep hearing from CDs after a raise: the new headcount triples your asset library overnight, and tracking what's approved-to-ship gets dicey by month 3. Curious how you're set up — happy to share what {{reference_brand}} does.",
+      "channel_priority": ["linkedin", "email"],
+      "expected_response_window_days": 7
+    },
+    {
+      "play_id": "exec_hire_marketing",
+      "primary_signal": "exec_hire_marketing",
+      "personas": ["VP Marketing", "Director Marketing", "Head of Marketing", "Head of Brand", "CMO"],
+      "tiers": ["Hot", "Warm", "Cool"],
+      "subject": "Welcome / quick intro for the new chapter at {{company}}",
+      "opener": "Saw {{exec_name}} just joined as {{exec_title}}. New marketing leaders almost always inherit a creative library in disarray — usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how {{reference_brand}} runs theirs.",
+      "channel_priority": ["email", "linkedin"],
+      "expected_response_window_days": 7
+    },
+    {
+      "play_id": "exec_hire_creative",
+      "primary_signal": "exec_hire_creative",
+      "personas": ["Creative Director", "Head of Creative", "VP Creative", "Design Ops"],
+      "tiers": ["Hot", "Warm"],
+      "subject": "Congrats on the {{exec_title}} role at {{company}}",
+      "opener": "Welcome to the seat. Most CDs I talk to in their first 60 days at a new shop are auditing the asset library and finding 3+ tools doing fragments of the job. Air is what most {{vertical}} teams consolidate to — happy to share their migration playbook if useful.",
+      "channel_priority": ["linkedin", "email"],
+      "expected_response_window_days": 10
+    },
+    {
+      "play_id": "competitor_replace",
+      "primary_signal": "competitor_dam_in_stack",
+      "personas": ["VP Marketing", "Director Marketing", "Marketing Ops", "Creative Director", "Head of Creative", "Design Ops"],
+      "tiers": ["Hot", "Warm", "Cool"],
+      "subject": "{{competitor}} renewal coming up at {{company}}?",
+      "opener": "Most teams renewing {{competitor}} this year are quietly mapping alternatives — usually because of search/findability, AI tagging, or pricing. We've migrated {{rep_competitor_wins}} {{competitor}} customers in the last 18 months. Want a no-pitch comparison doc?",
+      "channel_priority": ["email", "linkedin"],
+      "expected_response_window_days": 5
+    },
+    {
+      "play_id": "creative_hiring_spike",
+      "primary_signal": "creative_hiring_spike",
+      "personas": ["VP Marketing", "Director Marketing", "Head of Brand", "Creative Director", "Head of Creative"],
+      "tiers": ["Hot", "Warm"],
+      "subject": "{{company}} is staffing up creative — saw {{role_count}} roles open",
+      "opener": "Noticed {{role_count}} creative roles at {{company}} — designer, social, video. Onboarding new creatives without a single source of truth is where the wheels come off. We help teams structure the library before the new hires start, not after. 15 min to walk through it?",
+      "channel_priority": ["email", "linkedin"],
+      "expected_response_window_days": 7
+    },
+    {
+      "play_id": "agency_change",
+      "primary_signal": "agency_change",
+      "personas": ["VP Marketing", "Director Marketing", "Head of Brand", "CMO", "Creative Director", "Head of Creative"],
+      "tiers": ["Hot", "Warm"],
+      "subject": "Agency transition at {{company}} — asset handoff thoughts",
+      "opener": "Saw the {{from_agency}} → {{to_agency}} switch. Asset handoffs in agency transitions are where 6-12 months of work gets lost or mis-versioned. We're the system most brands use to own their library through the transition so the new agency starts with structure, not chaos. Worth a chat?",
+      "channel_priority": ["email", "linkedin"],
+      "expected_response_window_days": 7
+    },
+    {
+      "play_id": "rebrand_or_campaign",
+      "primary_signal": "rebrand_or_campaign_launch",
+      "personas": ["VP Marketing", "Director Marketing", "Head of Brand", "Creative Director", "Head of Creative", "CMO"],
+      "tiers": ["Warm", "Cool"],
+      "subject": "{{company}}'s {{campaign_or_rebrand}} — single source of truth",
+      "opener": "Loved the {{campaign_or_rebrand}}. The hardest part of any launch like that isn't shipping it, it's keeping every team — paid, social, retail, sales enablement — using the right approved assets through the long tail. That's the exact problem Air solves. Open to a 15-min walkthrough?",
+      "channel_priority": ["linkedin", "email"],
+      "expected_response_window_days": 10
+    },
+    {
+      "play_id": "fit_only_warm",
+      "primary_signal": "firmographic_fit",
+      "personas": ["VP Marketing", "Director Marketing", "Head of Brand", "Marketing Ops", "Head of Marketing"],
+      "tiers": ["Warm", "Cool"],
+      "subject": "{{vertical}} brands & creative ops",
+      "opener": "Reaching out because we work with a lot of {{vertical}} teams at {{company_size_band}} — {{reference_brand}}, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for {{company}}?",
+      "channel_priority": ["email"],
+      "expected_response_window_days": 14
+    },
+    {
+      "play_id": "fit_only_smb",
+      "primary_signal": "firmographic_fit",
+      "personas": ["Founder", "Owner", "Head of Marketing", "Creative Lead", "Manager"],
+      "tiers": ["Warm", "Cool"],
+      "subject": "Quick one for {{company}}",
+      "opener": "Founder-to-founder mode: most {{vertical}} teams under 100 people are juggling Drive + Slack + Frame for creative. Air replaces the whole stack for $X/mo. 10-min Loom if you want it?",
+      "channel_priority": ["email", "linkedin"],
+      "expected_response_window_days": 7
+    }
+  ]
+}

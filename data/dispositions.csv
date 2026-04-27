@@ -1,0 +1,68 @@
+lead_email,account_id,rep_id,outcome,days_to_outcome,reason,acv_usd,won_date
+bob.lee@business.co,business.co,maya_chen,no_response,15,no engagement,0,
+david.taylor@air.inc,air.inc,daniel_okafor,no_response,29,no engagement,0,
+alice.lee@air.inc,air.inc,daniel_okafor,closed_won,15,"competitor replacement, signed annual",26935,2025-11-04
+carol.taylor@company.com,company.com,jordan_park,closed_won,56,new exec consolidated tooling,101952,2026-04-18
+ivy.anderson@startup.io,startup.io,priya_shah,closed_won,31,"post-funding budget, fast cycle",12931,2025-12-18
+alice.chen@air.inc,air.inc,daniel_okafor,closed_won,27,"competitor replacement, signed annual",29490,2025-11-11
+ivy.jones@company.com,company.com,jordan_park,replied,30,deferred 60d,0,
+henry.smith@business.co,business.co,maya_chen,no_response,14,no engagement,0,
+jack.chen@company.com,company.com,sarah_mitchell,closed_won,56,new exec consolidated tooling,118210,2026-01-29
+emily.chen@yahoo.com,startup.io.personal,priya_shah,no_response,26,out of ICP / no engagement,0,
+grace.smith@yahoo.com,example-corp.personal,jordan_park,no_response,42,out of ICP / no engagement,0,
+henry.anderson@gmail.com,umbrella-corp.personal,daniel_okafor,replied,79,deferred 60d,0,
+carol.anderson@company.com,company.com,jordan_park,no_response,48,no engagement,0,
+ivy.jones@air.inc,air.inc,daniel_okafor,closed_won,50,"competitor replacement, signed annual",27044,2026-04-06
+alice.wilson@gmail.com,company.personal,sarah_mitchell,replied,48,intro to team,0,
+carol.martinez@yahoo.com,umbrella-corp.personal,daniel_okafor,closed_won,10,"competitor replacement, signed annual",13417,2026-04-15
+valid@example.com,example.com,maya_chen,closed_won,39,"competitor replacement, signed annual",88027,2026-04-06
+emily.jones@air.inc,air.inc,daniel_okafor,closed_won,14,"competitor replacement, signed annual",22554,2026-01-19
+carol.brown@business.co,business.co,maya_chen,no_response,37,no engagement,0,
+alice.chen@startup.io,startup.io,priya_shah,closed_won,47,"post-funding budget, fast cycle",13490,2026-03-04
+henry.brown@company.com,company.com,jordan_park,opp_created,89,"qualified, in eval",0,
+grace.martinez@company.com,company.com,jordan_park,no_response,52,no engagement,0,
+jack.jones@business.co,business.co,maya_chen,replied,70,intro to team,0,
+grace.taylor@company.com,company.com,sarah_mitchell,closed_won,61,new exec consolidated tooling,117691,2026-01-19
+frank.wilson@air.inc,air.inc,daniel_okafor,disqualified,83,out of ICP,0,
+grace.smith@air.inc,air.inc,jordan_park,meeting_booked,89,discovery booked,0,
+bob.brown@startup.io,startup.io,luis_romero,closed_won,9,"post-funding budget, fast cycle",14732,2026-02-27
+bob.jones@example.com,example.com,priya_shah,closed_won,42,"competitor replacement, signed annual",68773,2026-01-14
+emily.lee@business.co,business.co,maya_chen,closed_won,74,"good fit, healthy mutual interest",41967,2026-02-05
+david.smith@business.co,business.co,maya_chen,no_response,39,no engagement,0,
+carol.taylor@business.co,business.co,maya_chen,disqualified,84,company too small,0,
+henry.brown@air.inc,air.inc,daniel_okafor,closed_won,19,"competitor replacement, signed annual",27197,2026-02-22
+alice.johnson@company.com,company.com,jordan_park,replied,76,deferred 60d,0,
+henry.chen@company.com,company.com,jordan_park,meeting_booked,30,discovery booked,0,
+jack.lee@company.com,company.com,jordan_park,disqualified,19,out of ICP,0,
+jack.jones@startup.io,startup.io,luis_romero,opp_created,8,"qualified, in eval",0,
+jack.martinez@company.com,company.com,priya_shah,no_response,23,no engagement,0,
+alice.lee@startup.io,startup.io,priya_shah,opp_created,89,"qualified, in eval",0,
+jack.brown@company.com,company.com,jordan_park,meeting_booked,10,discovery booked,0,
+david.chen@business.co,business.co,maya_chen,no_response,52,no engagement,0,
+carol.brown@startup.io,startup.io,priya_shah,no_response,47,no engagement,0,
+frank.brown@startup.io,startup.io,priya_shah,closed_won,72,"post-funding budget, fast cycle",13572,2026-04-24
+jack.wilson@air.inc,air.inc,daniel_okafor,no_response,57,no engagement,0,
+carol.taylor@startup.io,startup.io,jordan_park,no_response,31,no engagement,0,
+jack.smith@air.inc,air.inc,daniel_okafor,closed_won,39,"competitor replacement, signed annual",20591,2026-01-05
+emily.smith@air.inc,air.inc,daniel_okafor,opp_created,35,"qualified, in eval",0,
+frank.anderson@company.com,company.com,priya_shah,disqualified,24,out of ICP,0,
+grace.smith@company.com,company.com,jordan_park,opp_created,83,"qualified, in eval",0,
+emily.brown@startup.io,startup.io,priya_shah,opp_created,27,"qualified, in eval",0,
+ivy.martinez@gmail.com,ivy.martinez@gmail.com,priya_shah,closed_won,22,new exec consolidated tooling,15811,2025-12-09
+bob.martinez@startup.io,startup.io,priya_shah,replied,69,asked for materials,0,
+alice.jones@business.co,business.co,maya_chen,no_response,45,no engagement,0,
+carol.martinez@business.co,business.co,maya_chen,closed_won,48,"good fit, healthy mutual interest",42846,2026-02-07
+emily.jones@business.co,business.co,maya_chen,closed_won,74,"good fit, healthy mutual interest",37806,2026-04-06
+carol.wilson@company.com,company.com,jordan_park,no_response,48,no engagement,0,
+alice.anderson@company.com,company.com,jordan_park,no_response,22,no engagement,0,
+bob.wilson@business.co,business.co,maya_chen,meeting_booked,69,discovery booked,0,
+henry.lee@yahoo.com,umbrella-corp.personal,daniel_okafor,replied,56,asked for materials,0,
+carol.chen@company.com,company.com,jordan_park,disqualified,90,wrong persona,0,
+bob.johnson@business.co,business.co,maya_chen,no_response,47,no engagement,0,
+david.jones@yahoo.com,david.jones@yahoo.com,sarah_mitchell,closed_won,10,"good fit, healthy mutual interest",8172,2026-01-30
+bob.martinez@company.com,company.com,jordan_park,replied,31,intro to team,0,
+alice.jones@gmail.com,alice.jones@gmail.com,daniel_okafor,closed_won,82,"competitor replacement, signed annual",9875,2026-04-11
+frank.lee@yahoo.com,example-corp.personal,sarah_mitchell,no_response,75,out of ICP / no engagement,0,
+emily.lee@startup.io,startup.io,priya_shah,opp_created,37,"qualified, in eval",0,
+jack.brown@business.co,business.co,priya_shah,disqualified,56,out of ICP / no engagement,0,
+bob.wilson@company.com,company.com,priya_shah,no_response,62,out of ICP / no engagement,0,

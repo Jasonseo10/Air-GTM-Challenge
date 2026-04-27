@@ -1,0 +1,4755 @@
+[
+  {
+    "lead_email": "bob.lee@business.co",
+    "lead_name": "Bob Lee",
+    "account_id": "business.co",
+    "company": "GlobalTech",
+    "title": "Head of Sales",
+    "seniority_level": "Director",
+    "outbound_score": 19,
+    "outbound_tier": "Cool",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 56,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "CPG adjacent to DTC",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$45k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_seniority_match",
+        "detail": "both target Director-level",
+        "points": 10
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with operator-IC",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "retail-omnichannel",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for GlobalTech?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "ivy.jones@company.com",
+    "lead_name": "Ivy Jones",
+    "account_id": "company.com",
+    "company": "Startup.io",
+    "title": "Product Lead",
+    "seniority_level": "Senior IC",
+    "outbound_score": 16,
+    "outbound_tier": "Cool",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 42,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells SaaS",
+        "points": 20
+      },
+      {
+        "factor": "deal_band_close",
+        "detail": "~$120k near rep band",
+        "points": 6
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with operator-IC",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Startup.io",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "david.taylor@air.inc",
+    "lead_name": "David Taylor",
+    "account_id": "air.inc",
+    "company": "Air Inc",
+    "title": "VP Marketing",
+    "seniority_level": "VP",
+    "outbound_score": 48,
+    "outbound_tier": "Hot",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "fit_score": 56,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Daniel Okafor sells Media",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "8/15 (53%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_seniority_match",
+        "detail": "both target VP-level",
+        "points": 10
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with exec-sponsor",
+        "points": 7
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Daniel Okafor has displaced Bynder 6\u00d7 before",
+        "points": 10
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "broadcast-media",
+        "points": 2
+      }
+    ],
+    "play_id": null,
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "air.inc",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 74,
+        "payload": {
+          "pct_increase": 99,
+          "channel": "TikTok"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 50,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "channel_expansion_new",
+        "days_ago": 11,
+        "payload": {
+          "new_channel": "Broadcast"
+        }
+      }
+    ],
+    "play_subject": null,
+    "play_opener": null,
+    "channel_priority": []
+  },
+  {
+    "lead_email": "alice.lee@air.inc",
+    "lead_name": "Alice Lee",
+    "account_id": "air.inc",
+    "company": "GlobalTech",
+    "title": "VP Marketing",
+    "seniority_level": "VP",
+    "outbound_score": 48,
+    "outbound_tier": "Hot",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "fit_score": 56,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Daniel Okafor sells Media",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "8/15 (53%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_seniority_match",
+        "detail": "both target VP-level",
+        "points": 10
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with exec-sponsor",
+        "points": 7
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Daniel Okafor has displaced Bynder 6\u00d7 before",
+        "points": 10
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "broadcast-media",
+        "points": 2
+      }
+    ],
+    "play_id": null,
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "air.inc",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 74,
+        "payload": {
+          "pct_increase": 99,
+          "channel": "TikTok"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 50,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "channel_expansion_new",
+        "days_ago": 11,
+        "payload": {
+          "new_channel": "Broadcast"
+        }
+      }
+    ],
+    "play_subject": null,
+    "play_opener": null,
+    "channel_priority": []
+  },
+  {
+    "lead_email": "henry.smith@business.co",
+    "lead_name": "Henry Smith",
+    "account_id": "business.co",
+    "company": "Example Corp",
+    "title": "Senior Engineer",
+    "seniority_level": "Senior IC",
+    "outbound_score": 19,
+    "outbound_tier": "Cool",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 39,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "CPG adjacent to DTC",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$45k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "retail-omnichannel",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Example Corp?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "carol.taylor@company.com",
+    "lead_name": "Carol Taylor",
+    "account_id": "company.com",
+    "company": "Startup.io",
+    "title": "CEO",
+    "seniority_level": "C-Level",
+    "outbound_score": 20,
+    "outbound_tier": "Cool",
+    "rep_id": "sarah_mitchell",
+    "rep_name": "Sarah Mitchell",
+    "fit_score": 36,
+    "fit_breakdown": [
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$120k expected \u2208 rep band $100k\u2013$500k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "6/12 (50%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_seniority_match",
+        "detail": "both target C-Level-level",
+        "points": 10
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "exec-sponsorship-driven fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Startup.io",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "ivy.anderson@startup.io",
+    "lead_name": "Ivy Anderson",
+    "account_id": "startup.io",
+    "company": "Initech",
+    "title": "Data Analyst",
+    "seniority_level": "IC",
+    "outbound_score": 47,
+    "outbound_tier": "Hot",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 36,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells Developer Tools",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "agency_change",
+    "primary_signal": "agency_change",
+    "signals": [
+      {
+        "account_id": "startup.io",
+        "signal_type": "agency_change",
+        "days_ago": 23,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 78,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "funding_recent",
+        "days_ago": 80,
+        "payload": {
+          "round": "Growth",
+          "amount_m_usd": 154,
+          "lead_investor": "Bessemer"
+        }
+      }
+    ],
+    "play_subject": "Agency transition at Initech \u2014 asset handoff thoughts",
+    "play_opener": "Saw the BBDO \u2192 Mother switch. Asset handoffs in agency transitions are where 6-12 months of work gets lost or mis-versioned. We're the system most brands use to own their library through the transition so the new agency starts with structure, not chaos. Worth a chat?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "valid@example.com",
+    "lead_name": "Carol",
+    "account_id": "example.com",
+    "company": "Example Corp",
+    "title": "VP Marketing",
+    "seniority_level": "VP",
+    "outbound_score": 40,
+    "outbound_tier": "Warm",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 64,
+    "fit_breakdown": [
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$70k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_strength_direct",
+        "detail": "Maya Chen sells to VP Marketing",
+        "points": 18
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with exec-sponsor",
+        "points": 7
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Maya Chen has displaced Brandfolder 7\u00d7 before",
+        "points": 10
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "competitor_replace",
+    "primary_signal": "competitor_dam_in_stack",
+    "signals": [
+      {
+        "account_id": "example.com",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 58,
+        "payload": {
+          "competitor": "Brandfolder"
+        }
+      }
+    ],
+    "play_subject": "Brandfolder renewal coming up at Example Corp?",
+    "play_opener": "Most teams renewing Brandfolder this year are quietly mapping alternatives \u2014 usually because of search/findability, AI tagging, or pricing. We've migrated 7 Brandfolder customers in the last 18 months. Want a no-pitch comparison doc?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "alice.chen@air.inc",
+    "lead_name": "Alice Chen",
+    "account_id": "air.inc",
+    "company": "Acme Co",
+    "title": "Senior Engineer",
+    "seniority_level": "Senior IC",
+    "outbound_score": 41,
+    "outbound_tier": "Warm",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "fit_score": 46,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Daniel Okafor sells Media",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "8/15 (53%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Daniel Okafor has displaced Bynder 6\u00d7 before",
+        "points": 10
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "broadcast-media",
+        "points": 2
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "air.inc",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 74,
+        "payload": {
+          "pct_increase": 99,
+          "channel": "TikTok"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 50,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "channel_expansion_new",
+        "days_ago": 11,
+        "payload": {
+          "new_channel": "Broadcast"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Acme Co?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "jack.chen@company.com",
+    "lead_name": "Jack Chen",
+    "account_id": "company.com",
+    "company": "Company",
+    "title": "VP Marketing",
+    "seniority_level": "VP",
+    "outbound_score": 23,
+    "outbound_tier": "Cool",
+    "rep_id": "sarah_mitchell",
+    "rep_name": "Sarah Mitchell",
+    "fit_score": 51,
+    "fit_breakdown": [
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$120k expected \u2208 rep band $100k\u2013$500k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "6/12 (50%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_strength_direct",
+        "detail": "Sarah Mitchell sells to VP Marketing",
+        "points": 18
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with exec-sponsor",
+        "points": 7
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "exec-sponsorship-driven fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Company",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "henry.brown@company.com",
+    "lead_name": "Henry Brown",
+    "account_id": "company.com",
+    "company": "Initech",
+    "title": "CEO",
+    "seniority_level": "C-Level",
+    "outbound_score": 20,
+    "outbound_tier": "Cool",
+    "rep_id": "sarah_mitchell",
+    "rep_name": "Sarah Mitchell",
+    "fit_score": 36,
+    "fit_breakdown": [
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$120k expected \u2208 rep band $100k\u2013$500k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "6/12 (50%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_seniority_match",
+        "detail": "both target C-Level-level",
+        "points": 10
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "exec-sponsorship-driven fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Initech",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "grace.martinez@company.com",
+    "lead_name": "Grace Martinez",
+    "account_id": "company.com",
+    "company": "Initech",
+    "title": "Product Lead",
+    "seniority_level": "Senior IC",
+    "outbound_score": 16,
+    "outbound_tier": "Cool",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 42,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells SaaS",
+        "points": 20
+      },
+      {
+        "factor": "deal_band_close",
+        "detail": "~$120k near rep band",
+        "points": 6
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with operator-IC",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Initech",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "carol.anderson@company.com",
+    "lead_name": "Carol Anderson",
+    "account_id": "company.com",
+    "company": "Air Inc",
+    "title": "Product Lead",
+    "seniority_level": "Senior IC",
+    "outbound_score": 16,
+    "outbound_tier": "Cool",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 42,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells SaaS",
+        "points": 20
+      },
+      {
+        "factor": "deal_band_close",
+        "detail": "~$120k near rep band",
+        "points": 6
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with operator-IC",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Air Inc",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "david.smith@business.co",
+    "lead_name": "David Smith",
+    "account_id": "business.co",
+    "company": "Air Inc",
+    "title": "VP Marketing",
+    "seniority_level": "VP",
+    "outbound_score": 26,
+    "outbound_tier": "Cool",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 64,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "CPG adjacent to DTC",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$45k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_strength_direct",
+        "detail": "Maya Chen sells to VP Marketing",
+        "points": 18
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with exec-sponsor",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "retail-omnichannel",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Air Inc?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "carol.taylor@business.co",
+    "lead_name": "Carol Taylor",
+    "account_id": "business.co",
+    "company": "GlobalTech",
+    "title": "VP Marketing",
+    "seniority_level": "VP",
+    "outbound_score": 26,
+    "outbound_tier": "Cool",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 64,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "CPG adjacent to DTC",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$45k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_strength_direct",
+        "detail": "Maya Chen sells to VP Marketing",
+        "points": 18
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with exec-sponsor",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "retail-omnichannel",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for GlobalTech?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "henry.chen@company.com",
+    "lead_name": "Henry Chen",
+    "account_id": "company.com",
+    "company": "Startup.io",
+    "title": "Head of Sales",
+    "seniority_level": "Director",
+    "outbound_score": 16,
+    "outbound_tier": "Cool",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 52,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells SaaS",
+        "points": 20
+      },
+      {
+        "factor": "deal_band_close",
+        "detail": "~$120k near rep band",
+        "points": 6
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_seniority_match",
+        "detail": "both target Director-level",
+        "points": 10
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with operator-IC",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Startup.io",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "jack.lee@company.com",
+    "lead_name": "Jack Lee",
+    "account_id": "company.com",
+    "company": "Air Inc",
+    "title": "CEO",
+    "seniority_level": "C-Level",
+    "outbound_score": 20,
+    "outbound_tier": "Cool",
+    "rep_id": "sarah_mitchell",
+    "rep_name": "Sarah Mitchell",
+    "fit_score": 36,
+    "fit_breakdown": [
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$120k expected \u2208 rep band $100k\u2013$500k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "6/12 (50%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_seniority_match",
+        "detail": "both target C-Level-level",
+        "points": 10
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "exec-sponsorship-driven fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Air Inc",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "jack.jones@business.co",
+    "lead_name": "Jack Jones",
+    "account_id": "business.co",
+    "company": "Initech",
+    "title": "VP Marketing",
+    "seniority_level": "VP",
+    "outbound_score": 26,
+    "outbound_tier": "Cool",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 64,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "CPG adjacent to DTC",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$45k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_strength_direct",
+        "detail": "Maya Chen sells to VP Marketing",
+        "points": 18
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with exec-sponsor",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "retail-omnichannel",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Initech?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "henry.anderson@gmail.com",
+    "lead_name": "Henry Anderson",
+    "account_id": "umbrella-corp.personal",
+    "company": "Umbrella Corp",
+    "title": "Software Engineer",
+    "seniority_level": "IC",
+    "outbound_score": 36,
+    "outbound_tier": "Warm",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "fit_score": 46,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Daniel Okafor sells Broadcast",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "8/15 (53%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Daniel Okafor has displaced Bynder 6\u00d7 before",
+        "points": 10
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "broadcast-media",
+        "points": 2
+      }
+    ],
+    "play_id": "competitor_replace",
+    "primary_signal": "competitor_dam_in_stack",
+    "signals": [
+      {
+        "account_id": "umbrella-corp.personal",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 28,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "umbrella-corp.personal",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 38,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "umbrella-corp.personal",
+        "signal_type": "agency_change",
+        "days_ago": 9,
+        "payload": {
+          "from_agency": "Wieden+Kennedy",
+          "to_agency": "Gut"
+        }
+      }
+    ],
+    "play_subject": "Bynder renewal coming up at Umbrella Corp?",
+    "play_opener": "Most teams renewing Bynder this year are quietly mapping alternatives \u2014 usually because of search/findability, AI tagging, or pricing. We've migrated 6 Bynder customers in the last 18 months. Want a no-pitch comparison doc?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "bob.martinez@company.com",
+    "lead_name": "Bob Martinez",
+    "account_id": "company.com",
+    "company": "GlobalTech",
+    "title": "VP Marketing",
+    "seniority_level": "VP",
+    "outbound_score": 23,
+    "outbound_tier": "Cool",
+    "rep_id": "sarah_mitchell",
+    "rep_name": "Sarah Mitchell",
+    "fit_score": 51,
+    "fit_breakdown": [
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$120k expected \u2208 rep band $100k\u2013$500k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "6/12 (50%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_strength_direct",
+        "detail": "Sarah Mitchell sells to VP Marketing",
+        "points": 18
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with exec-sponsor",
+        "points": 7
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "exec-sponsorship-driven fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at GlobalTech",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "carol.brown@business.co",
+    "lead_name": "Carol Brown",
+    "account_id": "business.co",
+    "company": "Business Co",
+    "title": "Software Engineer",
+    "seniority_level": "IC",
+    "outbound_score": 19,
+    "outbound_tier": "Cool",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 39,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "CPG adjacent to DTC",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$45k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "retail-omnichannel",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Business Co?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "bob.jones@example.com",
+    "lead_name": "Bob Jones",
+    "account_id": "example.com",
+    "company": "Air Inc",
+    "title": "Senior Engineer",
+    "seniority_level": "Senior IC",
+    "outbound_score": 33,
+    "outbound_tier": "Warm",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 60,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells Marketing Technology",
+        "points": 20
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$70k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "competitor_replace_some",
+        "detail": "4 prior Brandfolder wins",
+        "points": 5
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "competitor_replace",
+    "primary_signal": "competitor_dam_in_stack",
+    "signals": [
+      {
+        "account_id": "example.com",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 58,
+        "payload": {
+          "competitor": "Brandfolder"
+        }
+      }
+    ],
+    "play_subject": "Brandfolder renewal coming up at Air Inc?",
+    "play_opener": "Most teams renewing Brandfolder this year are quietly mapping alternatives \u2014 usually because of search/findability, AI tagging, or pricing. We've migrated 4 Brandfolder customers in the last 18 months. Want a no-pitch comparison doc?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "bob.brown@startup.io",
+    "lead_name": "Bob Brown",
+    "account_id": "startup.io",
+    "company": "Air Inc",
+    "title": "CEO",
+    "seniority_level": "C-Level",
+    "outbound_score": 51,
+    "outbound_tier": "Hot",
+    "rep_id": "luis_romero",
+    "rep_name": "Luis Romero",
+    "fit_score": 35,
+    "fit_breakdown": [
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$10k expected \u2208 rep band $8k\u2013$25k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "22/35 (63%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with founder-owner",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "founder-led-sales",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "velocity-transactional fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "agency_change",
+    "primary_signal": "agency_change",
+    "signals": [
+      {
+        "account_id": "startup.io",
+        "signal_type": "agency_change",
+        "days_ago": 23,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 78,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "funding_recent",
+        "days_ago": 80,
+        "payload": {
+          "round": "Growth",
+          "amount_m_usd": 154,
+          "lead_investor": "Bessemer"
+        }
+      }
+    ],
+    "play_subject": "Agency transition at Air Inc \u2014 asset handoff thoughts",
+    "play_opener": "Saw the BBDO \u2192 Mother switch. Asset handoffs in agency transitions are where 6-12 months of work gets lost or mis-versioned. We're the system most brands use to own their library through the transition so the new agency starts with structure, not chaos. Worth a chat?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "grace.taylor@company.com",
+    "lead_name": "Grace Taylor",
+    "account_id": "company.com",
+    "company": "Air Inc",
+    "title": "VP Marketing",
+    "seniority_level": "VP",
+    "outbound_score": 23,
+    "outbound_tier": "Cool",
+    "rep_id": "sarah_mitchell",
+    "rep_name": "Sarah Mitchell",
+    "fit_score": 51,
+    "fit_breakdown": [
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$120k expected \u2208 rep band $100k\u2013$500k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "6/12 (50%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_strength_direct",
+        "detail": "Sarah Mitchell sells to VP Marketing",
+        "points": 18
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with exec-sponsor",
+        "points": 7
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "exec-sponsorship-driven fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Air Inc",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "carol.martinez@yahoo.com",
+    "lead_name": "Carol Martinez",
+    "account_id": "umbrella-corp.personal",
+    "company": "Umbrella Corp",
+    "title": "Product Lead",
+    "seniority_level": "Senior IC",
+    "outbound_score": 36,
+    "outbound_tier": "Warm",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "fit_score": 39,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Daniel Okafor sells Broadcast",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "8/15 (53%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Daniel Okafor has displaced Bynder 6\u00d7 before",
+        "points": 10
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "broadcast-media",
+        "points": 2
+      }
+    ],
+    "play_id": "competitor_replace",
+    "primary_signal": "competitor_dam_in_stack",
+    "signals": [
+      {
+        "account_id": "umbrella-corp.personal",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 28,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "umbrella-corp.personal",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 38,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "umbrella-corp.personal",
+        "signal_type": "agency_change",
+        "days_ago": 9,
+        "payload": {
+          "from_agency": "Wieden+Kennedy",
+          "to_agency": "Gut"
+        }
+      }
+    ],
+    "play_subject": "Bynder renewal coming up at Umbrella Corp?",
+    "play_opener": "Most teams renewing Bynder this year are quietly mapping alternatives \u2014 usually because of search/findability, AI tagging, or pricing. We've migrated 6 Bynder customers in the last 18 months. Want a no-pitch comparison doc?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "ivy.jones@air.inc",
+    "lead_name": "Ivy Jones",
+    "account_id": "air.inc",
+    "company": "Example Corp",
+    "title": "Product Lead",
+    "seniority_level": "Senior IC",
+    "outbound_score": 41,
+    "outbound_tier": "Warm",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "fit_score": 39,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Daniel Okafor sells Media",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "8/15 (53%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Daniel Okafor has displaced Bynder 6\u00d7 before",
+        "points": 10
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "broadcast-media",
+        "points": 2
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "air.inc",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 74,
+        "payload": {
+          "pct_increase": 99,
+          "channel": "TikTok"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 50,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "channel_expansion_new",
+        "days_ago": 11,
+        "payload": {
+          "new_channel": "Broadcast"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Example Corp?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "alice.wilson@gmail.com",
+    "lead_name": "Alice Wilson",
+    "account_id": "company.personal",
+    "company": "Company",
+    "title": "CTO",
+    "seniority_level": "C-Level",
+    "outbound_score": 21,
+    "outbound_tier": "Cool",
+    "rep_id": "sarah_mitchell",
+    "rep_name": "Sarah Mitchell",
+    "fit_score": 54,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Sarah Mitchell sells Beauty",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "6/12 (50%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_seniority_match",
+        "detail": "both target C-Level-level",
+        "points": 10
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with exec-sponsor",
+        "points": 7
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Sarah Mitchell has displaced Bynder 11\u00d7 before",
+        "points": 10
+      }
+    ],
+    "play_id": "competitor_replace",
+    "primary_signal": "competitor_dam_in_stack",
+    "signals": [
+      {
+        "account_id": "company.personal",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 86,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      }
+    ],
+    "play_subject": "Bynder renewal coming up at Company?",
+    "play_opener": "Most teams renewing Bynder this year are quietly mapping alternatives \u2014 usually because of search/findability, AI tagging, or pricing. We've migrated 11 Bynder customers in the last 18 months. Want a no-pitch comparison doc?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "emily.lee@business.co",
+    "lead_name": "Emily Lee",
+    "account_id": "business.co",
+    "company": "Business Co",
+    "title": "CEO",
+    "seniority_level": "C-Level",
+    "outbound_score": 23,
+    "outbound_tier": "Cool",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 39,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "CPG adjacent to DTC",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$45k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "retail-omnichannel",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Business Co?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "alice.johnson@company.com",
+    "lead_name": "Alice Johnson",
+    "account_id": "company.com",
+    "company": "Example Corp",
+    "title": null,
+    "seniority_level": "Unknown",
+    "outbound_score": 16,
+    "outbound_tier": "Cool",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 38,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells SaaS",
+        "points": 20
+      },
+      {
+        "factor": "deal_band_close",
+        "detail": "~$120k near rep band",
+        "points": 6
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      },
+      {
+        "factor": "past_wins_lift",
+        "detail": "1 past wins in SaaS \u00d7 similar persona (avg $36k)",
+        "points": 3
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Example Corp",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "alice.anderson@company.com",
+    "lead_name": "Alice Anderson",
+    "account_id": "company.com",
+    "company": "GlobalTech",
+    "title": "Product Lead",
+    "seniority_level": "Senior IC",
+    "outbound_score": 16,
+    "outbound_tier": "Cool",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 42,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells SaaS",
+        "points": 20
+      },
+      {
+        "factor": "deal_band_close",
+        "detail": "~$120k near rep band",
+        "points": 6
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with operator-IC",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at GlobalTech",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "jack.jones@startup.io",
+    "lead_name": "Jack Jones",
+    "account_id": "startup.io",
+    "company": "Startup.io",
+    "title": "CEO",
+    "seniority_level": "C-Level",
+    "outbound_score": 51,
+    "outbound_tier": "Hot",
+    "rep_id": "luis_romero",
+    "rep_name": "Luis Romero",
+    "fit_score": 35,
+    "fit_breakdown": [
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$10k expected \u2208 rep band $8k\u2013$25k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "22/35 (63%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with founder-owner",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "founder-led-sales",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "velocity-transactional fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "agency_change",
+    "primary_signal": "agency_change",
+    "signals": [
+      {
+        "account_id": "startup.io",
+        "signal_type": "agency_change",
+        "days_ago": 23,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 78,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "funding_recent",
+        "days_ago": 80,
+        "payload": {
+          "round": "Growth",
+          "amount_m_usd": 154,
+          "lead_investor": "Bessemer"
+        }
+      }
+    ],
+    "play_subject": "Agency transition at Startup.io \u2014 asset handoff thoughts",
+    "play_opener": "Saw the BBDO \u2192 Mother switch. Asset handoffs in agency transitions are where 6-12 months of work gets lost or mis-versioned. We're the system most brands use to own their library through the transition so the new agency starts with structure, not chaos. Worth a chat?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "carol.taylor@startup.io",
+    "lead_name": "Carol Taylor",
+    "account_id": "startup.io",
+    "company": "Startup.io",
+    "title": "Marketing Manager",
+    "seniority_level": "Manager",
+    "outbound_score": 47,
+    "outbound_tier": "Hot",
+    "rep_id": "jordan_park",
+    "rep_name": "Jordan Park",
+    "fit_score": 52,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "Developer Tools adjacent to SaaS",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$10k expected \u2208 rep band $8k\u2013$40k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "4/20 (20%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_strength_direct",
+        "detail": "Jordan Park sells to Manager",
+        "points": 18
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with operator-IC",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "velocity-transactional fits this account",
+        "points": 4
+      },
+      {
+        "factor": "ramping_dampener",
+        "detail": "ramping rep: only routes to layup-reserved accounts",
+        "points": -12
+      }
+    ],
+    "play_id": "agency_change",
+    "primary_signal": "agency_change",
+    "signals": [
+      {
+        "account_id": "startup.io",
+        "signal_type": "agency_change",
+        "days_ago": 23,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 78,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "funding_recent",
+        "days_ago": 80,
+        "payload": {
+          "round": "Growth",
+          "amount_m_usd": 154,
+          "lead_investor": "Bessemer"
+        }
+      }
+    ],
+    "play_subject": "Agency transition at Startup.io \u2014 asset handoff thoughts",
+    "play_opener": "Saw the BBDO \u2192 Mother switch. Asset handoffs in agency transitions are where 6-12 months of work gets lost or mis-versioned. We're the system most brands use to own their library through the transition so the new agency starts with structure, not chaos. Worth a chat?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "carol.wilson@company.com",
+    "lead_name": "Carol Wilson",
+    "account_id": "company.com",
+    "company": "Initech",
+    "title": "Data Analyst",
+    "seniority_level": "IC",
+    "outbound_score": 16,
+    "outbound_tier": "Cool",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 42,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells SaaS",
+        "points": 20
+      },
+      {
+        "factor": "deal_band_close",
+        "detail": "~$120k near rep band",
+        "points": 6
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Initech",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "alice.jones@business.co",
+    "lead_name": "Alice Jones",
+    "account_id": "business.co",
+    "company": "Air Inc",
+    "title": "CEO",
+    "seniority_level": "C-Level",
+    "outbound_score": 23,
+    "outbound_tier": "Cool",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 39,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "CPG adjacent to DTC",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$45k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "retail-omnichannel",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Air Inc?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "alice.chen@startup.io",
+    "lead_name": "Alice Chen",
+    "account_id": "startup.io",
+    "company": "GlobalTech",
+    "title": "Software Engineer",
+    "seniority_level": "IC",
+    "outbound_score": 47,
+    "outbound_tier": "Hot",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 36,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells Developer Tools",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "agency_change",
+    "primary_signal": "agency_change",
+    "signals": [
+      {
+        "account_id": "startup.io",
+        "signal_type": "agency_change",
+        "days_ago": 23,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 78,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "funding_recent",
+        "days_ago": 80,
+        "payload": {
+          "round": "Growth",
+          "amount_m_usd": 154,
+          "lead_investor": "Bessemer"
+        }
+      }
+    ],
+    "play_subject": "Agency transition at GlobalTech \u2014 asset handoff thoughts",
+    "play_opener": "Saw the BBDO \u2192 Mother switch. Asset handoffs in agency transitions are where 6-12 months of work gets lost or mis-versioned. We're the system most brands use to own their library through the transition so the new agency starts with structure, not chaos. Worth a chat?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "bob.johnson@business.co",
+    "lead_name": "Bob Johnson",
+    "account_id": "business.co",
+    "company": "Initech",
+    "title": null,
+    "seniority_level": "Unknown",
+    "outbound_score": 19,
+    "outbound_tier": "Cool",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 39,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "CPG adjacent to DTC",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$45k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "retail-omnichannel",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Initech?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "grace.smith@company.com",
+    "lead_name": "Grace Smith",
+    "account_id": "company.com",
+    "company": "Example Corp",
+    "title": "Data Analyst",
+    "seniority_level": "IC",
+    "outbound_score": 16,
+    "outbound_tier": "Cool",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 42,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells SaaS",
+        "points": 20
+      },
+      {
+        "factor": "deal_band_close",
+        "detail": "~$120k near rep band",
+        "points": 6
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Example Corp",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "carol.chen@company.com",
+    "lead_name": "Carol Chen",
+    "account_id": "company.com",
+    "company": "GlobalTech",
+    "title": "Software Engineer",
+    "seniority_level": "IC",
+    "outbound_score": 16,
+    "outbound_tier": "Cool",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 42,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells SaaS",
+        "points": 20
+      },
+      {
+        "factor": "deal_band_close",
+        "detail": "~$120k near rep band",
+        "points": 6
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at GlobalTech",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "grace.smith@air.inc",
+    "lead_name": "Grace Smith",
+    "account_id": "air.inc",
+    "company": "Startup.io",
+    "title": "Marketing Manager",
+    "seniority_level": "Manager",
+    "outbound_score": 41,
+    "outbound_tier": "Warm",
+    "rep_id": "jordan_park",
+    "rep_name": "Jordan Park",
+    "fit_score": 42,
+    "fit_breakdown": [
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$22k expected \u2208 rep band $8k\u2013$40k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "4/20 (20%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_strength_direct",
+        "detail": "Jordan Park sells to Manager",
+        "points": 18
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with operator-IC",
+        "points": 7
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "velocity-transactional fits this account",
+        "points": 4
+      },
+      {
+        "factor": "ramping_dampener",
+        "detail": "ramping rep: only routes to layup-reserved accounts",
+        "points": -12
+      }
+    ],
+    "play_id": "fit_only_smb",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "air.inc",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 74,
+        "payload": {
+          "pct_increase": 99,
+          "channel": "TikTok"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 50,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "channel_expansion_new",
+        "days_ago": 11,
+        "payload": {
+          "new_channel": "Broadcast"
+        }
+      }
+    ],
+    "play_subject": "Quick one for Startup.io",
+    "play_opener": "Founder-to-founder mode: most your space teams under 100 people are juggling Drive + Slack + Frame for creative. Air replaces the whole stack for $X/mo. 10-min Loom if you want it?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "david.chen@business.co",
+    "lead_name": "David Chen",
+    "account_id": "business.co",
+    "company": "Acme Co",
+    "title": "Senior Engineer",
+    "seniority_level": "Senior IC",
+    "outbound_score": 19,
+    "outbound_tier": "Cool",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 39,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "CPG adjacent to DTC",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$45k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "retail-omnichannel",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Acme Co?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "carol.brown@startup.io",
+    "lead_name": "Carol Brown",
+    "account_id": "startup.io",
+    "company": "Startup.io",
+    "title": "Head of Sales",
+    "seniority_level": "Director",
+    "outbound_score": 47,
+    "outbound_tier": "Hot",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 46,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells Developer Tools",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_seniority_match",
+        "detail": "both target Director-level",
+        "points": 10
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with operator-IC",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "agency_change",
+    "primary_signal": "agency_change",
+    "signals": [
+      {
+        "account_id": "startup.io",
+        "signal_type": "agency_change",
+        "days_ago": 23,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 78,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "funding_recent",
+        "days_ago": 80,
+        "payload": {
+          "round": "Growth",
+          "amount_m_usd": 154,
+          "lead_investor": "Bessemer"
+        }
+      }
+    ],
+    "play_subject": "Agency transition at Startup.io \u2014 asset handoff thoughts",
+    "play_opener": "Saw the BBDO \u2192 Mother switch. Asset handoffs in agency transitions are where 6-12 months of work gets lost or mis-versioned. We're the system most brands use to own their library through the transition so the new agency starts with structure, not chaos. Worth a chat?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "emily.jones@air.inc",
+    "lead_name": "Emily Jones",
+    "account_id": "air.inc",
+    "company": "Startup.io",
+    "title": "Designer",
+    "seniority_level": "IC",
+    "outbound_score": 41,
+    "outbound_tier": "Warm",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "fit_score": 39,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Daniel Okafor sells Media",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "8/15 (53%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Daniel Okafor has displaced Bynder 6\u00d7 before",
+        "points": 10
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "broadcast-media",
+        "points": 2
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "air.inc",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 74,
+        "payload": {
+          "pct_increase": 99,
+          "channel": "TikTok"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 50,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "channel_expansion_new",
+        "days_ago": 11,
+        "payload": {
+          "new_channel": "Broadcast"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Startup.io?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "bob.wilson@business.co",
+    "lead_name": "Bob Wilson",
+    "account_id": "business.co",
+    "company": "Air Inc",
+    "title": "Head of Sales",
+    "seniority_level": "Director",
+    "outbound_score": 19,
+    "outbound_tier": "Cool",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 56,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "CPG adjacent to DTC",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$45k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_seniority_match",
+        "detail": "both target Director-level",
+        "points": 10
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with operator-IC",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "retail-omnichannel",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Air Inc?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "alice.lee@startup.io",
+    "lead_name": "Alice Lee",
+    "account_id": "startup.io",
+    "company": "Example Corp",
+    "title": "Senior Engineer",
+    "seniority_level": "Senior IC",
+    "outbound_score": 47,
+    "outbound_tier": "Hot",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 36,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells Developer Tools",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "agency_change",
+    "primary_signal": "agency_change",
+    "signals": [
+      {
+        "account_id": "startup.io",
+        "signal_type": "agency_change",
+        "days_ago": 23,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 78,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "funding_recent",
+        "days_ago": 80,
+        "payload": {
+          "round": "Growth",
+          "amount_m_usd": 154,
+          "lead_investor": "Bessemer"
+        }
+      }
+    ],
+    "play_subject": "Agency transition at Example Corp \u2014 asset handoff thoughts",
+    "play_opener": "Saw the BBDO \u2192 Mother switch. Asset handoffs in agency transitions are where 6-12 months of work gets lost or mis-versioned. We're the system most brands use to own their library through the transition so the new agency starts with structure, not chaos. Worth a chat?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "emily.brown@startup.io",
+    "lead_name": "Emily Brown",
+    "account_id": "startup.io",
+    "company": "Startup.io",
+    "title": "Data Analyst",
+    "seniority_level": "IC",
+    "outbound_score": 47,
+    "outbound_tier": "Hot",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 36,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells Developer Tools",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "agency_change",
+    "primary_signal": "agency_change",
+    "signals": [
+      {
+        "account_id": "startup.io",
+        "signal_type": "agency_change",
+        "days_ago": 23,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 78,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "funding_recent",
+        "days_ago": 80,
+        "payload": {
+          "round": "Growth",
+          "amount_m_usd": 154,
+          "lead_investor": "Bessemer"
+        }
+      }
+    ],
+    "play_subject": "Agency transition at Startup.io \u2014 asset handoff thoughts",
+    "play_opener": "Saw the BBDO \u2192 Mother switch. Asset handoffs in agency transitions are where 6-12 months of work gets lost or mis-versioned. We're the system most brands use to own their library through the transition so the new agency starts with structure, not chaos. Worth a chat?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "emily.jones@business.co",
+    "lead_name": "Emily Jones",
+    "account_id": "business.co",
+    "company": "Air Inc",
+    "title": "Senior Engineer",
+    "seniority_level": "Senior IC",
+    "outbound_score": 19,
+    "outbound_tier": "Cool",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 39,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "CPG adjacent to DTC",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$45k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "retail-omnichannel",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Air Inc?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "jack.brown@company.com",
+    "lead_name": "Jack Brown",
+    "account_id": "company.com",
+    "company": "GlobalTech",
+    "title": "Data Analyst",
+    "seniority_level": "IC",
+    "outbound_score": 16,
+    "outbound_tier": "Cool",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 42,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells SaaS",
+        "points": 20
+      },
+      {
+        "factor": "deal_band_close",
+        "detail": "~$120k near rep band",
+        "points": 6
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at GlobalTech",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "frank.wilson@air.inc",
+    "lead_name": "Frank Wilson",
+    "account_id": "air.inc",
+    "company": "Company",
+    "title": "Designer",
+    "seniority_level": "IC",
+    "outbound_score": 41,
+    "outbound_tier": "Warm",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "fit_score": 39,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Daniel Okafor sells Media",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "8/15 (53%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Daniel Okafor has displaced Bynder 6\u00d7 before",
+        "points": 10
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "broadcast-media",
+        "points": 2
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "air.inc",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 74,
+        "payload": {
+          "pct_increase": 99,
+          "channel": "TikTok"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 50,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "channel_expansion_new",
+        "days_ago": 11,
+        "payload": {
+          "new_channel": "Broadcast"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Company?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "frank.anderson@company.com",
+    "lead_name": "Frank Anderson",
+    "account_id": "company.com",
+    "company": "Air Inc",
+    "title": "CTO",
+    "seniority_level": "C-Level",
+    "outbound_score": 20,
+    "outbound_tier": "Cool",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 53,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells SaaS",
+        "points": 20
+      },
+      {
+        "factor": "deal_band_close",
+        "detail": "~$120k near rep band",
+        "points": 6
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_strength_direct",
+        "detail": "Priya Shah sells to Director Marketing",
+        "points": 18
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Air Inc",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "henry.brown@air.inc",
+    "lead_name": "Henry Brown",
+    "account_id": "air.inc",
+    "company": "Initech",
+    "title": "Head of Sales",
+    "seniority_level": "Director",
+    "outbound_score": 41,
+    "outbound_tier": "Warm",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "fit_score": 49,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Daniel Okafor sells Media",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "8/15 (53%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_seniority_match",
+        "detail": "both target Director-level",
+        "points": 10
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Daniel Okafor has displaced Bynder 6\u00d7 before",
+        "points": 10
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "broadcast-media",
+        "points": 2
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "air.inc",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 74,
+        "payload": {
+          "pct_increase": 99,
+          "channel": "TikTok"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 50,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "channel_expansion_new",
+        "days_ago": 11,
+        "payload": {
+          "new_channel": "Broadcast"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Initech?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "frank.brown@startup.io",
+    "lead_name": "Frank Brown",
+    "account_id": "startup.io",
+    "company": "Acme Co",
+    "title": "Senior Engineer",
+    "seniority_level": "Senior IC",
+    "outbound_score": 47,
+    "outbound_tier": "Hot",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 36,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells Developer Tools",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "agency_change",
+    "primary_signal": "agency_change",
+    "signals": [
+      {
+        "account_id": "startup.io",
+        "signal_type": "agency_change",
+        "days_ago": 23,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 78,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "funding_recent",
+        "days_ago": 80,
+        "payload": {
+          "round": "Growth",
+          "amount_m_usd": 154,
+          "lead_investor": "Bessemer"
+        }
+      }
+    ],
+    "play_subject": "Agency transition at Acme Co \u2014 asset handoff thoughts",
+    "play_opener": "Saw the BBDO \u2192 Mother switch. Asset handoffs in agency transitions are where 6-12 months of work gets lost or mis-versioned. We're the system most brands use to own their library through the transition so the new agency starts with structure, not chaos. Worth a chat?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "carol.martinez@business.co",
+    "lead_name": "Carol Martinez",
+    "account_id": "business.co",
+    "company": "Company",
+    "title": "Marketing Manager",
+    "seniority_level": "Manager",
+    "outbound_score": 19,
+    "outbound_tier": "Cool",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 46,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "CPG adjacent to DTC",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$45k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with operator-IC",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "retail-omnichannel",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "fit_only_smb",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_subject": "Quick one for Company",
+    "play_opener": "Founder-to-founder mode: most your space teams under 100 people are juggling Drive + Slack + Frame for creative. Air replaces the whole stack for $X/mo. 10-min Loom if you want it?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "emily.smith@air.inc",
+    "lead_name": "Emily Smith",
+    "account_id": "air.inc",
+    "company": "Air Inc",
+    "title": "Data Analyst",
+    "seniority_level": "IC",
+    "outbound_score": 41,
+    "outbound_tier": "Warm",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "fit_score": 46,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Daniel Okafor sells Media",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "8/15 (53%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Daniel Okafor has displaced Bynder 6\u00d7 before",
+        "points": 10
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "broadcast-media",
+        "points": 2
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "air.inc",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 74,
+        "payload": {
+          "pct_increase": 99,
+          "channel": "TikTok"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 50,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "channel_expansion_new",
+        "days_ago": 11,
+        "payload": {
+          "new_channel": "Broadcast"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Air Inc?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "emily.lee@startup.io",
+    "lead_name": "Emily Lee",
+    "account_id": "startup.io",
+    "company": "Startup.io",
+    "title": "CTO",
+    "seniority_level": "C-Level",
+    "outbound_score": 51,
+    "outbound_tier": "Hot",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 50,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells Developer Tools",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_strength_direct",
+        "detail": "Priya Shah sells to Director Marketing",
+        "points": 18
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      },
+      {
+        "factor": "past_wins_lift",
+        "detail": "1 past wins in Developer Tools \u00d7 similar persona (avg $42k)",
+        "points": 3
+      }
+    ],
+    "play_id": "agency_change",
+    "primary_signal": "agency_change",
+    "signals": [
+      {
+        "account_id": "startup.io",
+        "signal_type": "agency_change",
+        "days_ago": 23,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 78,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "funding_recent",
+        "days_ago": 80,
+        "payload": {
+          "round": "Growth",
+          "amount_m_usd": 154,
+          "lead_investor": "Bessemer"
+        }
+      }
+    ],
+    "play_subject": "Agency transition at Startup.io \u2014 asset handoff thoughts",
+    "play_opener": "Saw the BBDO \u2192 Mother switch. Asset handoffs in agency transitions are where 6-12 months of work gets lost or mis-versioned. We're the system most brands use to own their library through the transition so the new agency starts with structure, not chaos. Worth a chat?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "jack.martinez@company.com",
+    "lead_name": "Jack Martinez",
+    "account_id": "company.com",
+    "company": "Initech",
+    "title": "CTO",
+    "seniority_level": "C-Level",
+    "outbound_score": 20,
+    "outbound_tier": "Cool",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 53,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells SaaS",
+        "points": 20
+      },
+      {
+        "factor": "deal_band_close",
+        "detail": "~$120k near rep band",
+        "points": 6
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_strength_direct",
+        "detail": "Priya Shah sells to Director Marketing",
+        "points": 18
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Initech",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "bob.wilson@company.com",
+    "lead_name": "Bob Wilson",
+    "account_id": "company.com",
+    "company": "Company",
+    "title": "Data Analyst",
+    "seniority_level": "IC",
+    "outbound_score": 16,
+    "outbound_tier": "Cool",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 42,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells SaaS",
+        "points": 20
+      },
+      {
+        "factor": "deal_band_close",
+        "detail": "~$120k near rep band",
+        "points": 6
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "exec_hire_marketing",
+    "primary_signal": "exec_hire_marketing",
+    "signals": [
+      {
+        "account_id": "company.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Taylor Brooks"
+        }
+      }
+    ],
+    "play_subject": "Welcome / quick intro for the new chapter at Company",
+    "play_opener": "Saw Taylor Brooks just joined as CMO. New marketing leaders almost always inherit a creative library in disarray \u2014 usually one of the first 90-day fixes. Wanted to put Air on your radar early; happy to skip the demo and just send a Loom of how Sweetgreen runs theirs.",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "jack.wilson@air.inc",
+    "lead_name": "Jack Wilson",
+    "account_id": "air.inc",
+    "company": "Air Inc",
+    "title": "Designer",
+    "seniority_level": "IC",
+    "outbound_score": 41,
+    "outbound_tier": "Warm",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "fit_score": 39,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Daniel Okafor sells Media",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "8/15 (53%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Daniel Okafor has displaced Bynder 6\u00d7 before",
+        "points": 10
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "broadcast-media",
+        "points": 2
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "air.inc",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 74,
+        "payload": {
+          "pct_increase": 99,
+          "channel": "TikTok"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 50,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "channel_expansion_new",
+        "days_ago": 11,
+        "payload": {
+          "new_channel": "Broadcast"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Air Inc?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "jack.smith@air.inc",
+    "lead_name": "Jack Smith",
+    "account_id": "air.inc",
+    "company": "Acme Co",
+    "title": "Senior Engineer",
+    "seniority_level": "Senior IC",
+    "outbound_score": 41,
+    "outbound_tier": "Warm",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "fit_score": 46,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Daniel Okafor sells Media",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "8/15 (53%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Daniel Okafor has displaced Bynder 6\u00d7 before",
+        "points": 10
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "broadcast-media",
+        "points": 2
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "air.inc",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 74,
+        "payload": {
+          "pct_increase": 99,
+          "channel": "TikTok"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 50,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "air.inc",
+        "signal_type": "channel_expansion_new",
+        "days_ago": 11,
+        "payload": {
+          "new_channel": "Broadcast"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Acme Co?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "bob.martinez@startup.io",
+    "lead_name": "Bob Martinez",
+    "account_id": "startup.io",
+    "company": "Acme Co",
+    "title": "Head of Sales",
+    "seniority_level": "Director",
+    "outbound_score": 47,
+    "outbound_tier": "Hot",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 46,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells Developer Tools",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_seniority_match",
+        "detail": "both target Director-level",
+        "points": 10
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with operator-IC",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "agency_change",
+    "primary_signal": "agency_change",
+    "signals": [
+      {
+        "account_id": "startup.io",
+        "signal_type": "agency_change",
+        "days_ago": 23,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 78,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "startup.io",
+        "signal_type": "funding_recent",
+        "days_ago": 80,
+        "payload": {
+          "round": "Growth",
+          "amount_m_usd": 154,
+          "lead_investor": "Bessemer"
+        }
+      }
+    ],
+    "play_subject": "Agency transition at Acme Co \u2014 asset handoff thoughts",
+    "play_opener": "Saw the BBDO \u2192 Mother switch. Asset handoffs in agency transitions are where 6-12 months of work gets lost or mis-versioned. We're the system most brands use to own their library through the transition so the new agency starts with structure, not chaos. Worth a chat?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "jack.brown@business.co",
+    "lead_name": "Jack Brown",
+    "account_id": "business.co",
+    "company": "Example Corp",
+    "title": null,
+    "seniority_level": "Unknown",
+    "outbound_score": 19,
+    "outbound_tier": "Cool",
+    "rep_id": "maya_chen",
+    "rep_name": "Maya Chen",
+    "fit_score": 39,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_adjacent",
+        "detail": "CPG adjacent to DTC",
+        "points": 8
+      },
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$45k expected \u2208 rep band $25k\u2013$80k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "12/25 (48%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "retail-omnichannel",
+        "points": 2
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "consultative-multithread fits this account",
+        "points": 4
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "ad_spend_ramp",
+    "signals": [
+      {
+        "account_id": "business.co",
+        "signal_type": "ad_spend_ramp",
+        "days_ago": 49,
+        "payload": {
+          "pct_increase": 109,
+          "channel": "Google"
+        }
+      },
+      {
+        "account_id": "business.co",
+        "signal_type": "agency_change",
+        "days_ago": 80,
+        "payload": {
+          "from_agency": "BBDO",
+          "to_agency": "Mother"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for Example Corp?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "david.jones@yahoo.com",
+    "lead_name": "David Jones",
+    "account_id": "david.jones@yahoo.com",
+    "company": null,
+    "title": "VP Marketing",
+    "seniority_level": "VP",
+    "outbound_score": 19,
+    "outbound_tier": "Cool",
+    "rep_id": "sarah_mitchell",
+    "rep_name": "Sarah Mitchell",
+    "fit_score": 52,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Sarah Mitchell sells Beauty",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "6/12 (50%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_strength_direct",
+        "detail": "Sarah Mitchell sells to VP Marketing",
+        "points": 18
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with exec-sponsor",
+        "points": 7
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "rebrand_or_campaign",
+    "signals": [
+      {
+        "account_id": "david.jones@yahoo.com",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 87,
+        "payload": {
+          "campaign_or_rebrand": "rebrand",
+          "detected_via": "press release"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for your team?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "ivy.martinez@gmail.com",
+    "lead_name": "Ivy Martinez",
+    "account_id": "ivy.martinez@gmail.com",
+    "company": null,
+    "title": "Designer",
+    "seniority_level": "IC",
+    "outbound_score": 26,
+    "outbound_tier": "Cool",
+    "rep_id": "priya_shah",
+    "rep_name": "Priya Shah",
+    "fit_score": 36,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Priya Shah sells Developer Tools",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "18/25 (72%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with operator-IC",
+        "points": 7
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "B2B-SaaS",
+        "points": 2
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "agency_change",
+    "signals": [
+      {
+        "account_id": "ivy.martinez@gmail.com",
+        "signal_type": "agency_change",
+        "days_ago": 48,
+        "payload": {
+          "from_agency": "Anomaly",
+          "to_agency": "Battery"
+        }
+      },
+      {
+        "account_id": "ivy.martinez@gmail.com",
+        "signal_type": "creative_hiring_spike",
+        "days_ago": 50,
+        "payload": {
+          "role_count_30d": 7,
+          "roles": [
+            "Designer",
+            "Brand Lead",
+            "Social Manager"
+          ]
+        }
+      },
+      {
+        "account_id": "ivy.martinez@gmail.com",
+        "signal_type": "exec_hire_marketing",
+        "days_ago": 74,
+        "payload": {
+          "exec_title": "CMO",
+          "exec_name": "Jamie Park"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for your team?",
+    "channel_priority": [
+      "email"
+    ]
+  },
+  {
+    "lead_email": "henry.lee@yahoo.com",
+    "lead_name": "Henry Lee",
+    "account_id": "umbrella-corp.personal",
+    "company": "Umbrella Corp",
+    "title": "Head of Sales",
+    "seniority_level": "Director",
+    "outbound_score": 36,
+    "outbound_tier": "Warm",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "fit_score": 49,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Daniel Okafor sells Broadcast",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "8/15 (53%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_seniority_match",
+        "detail": "both target Director-level",
+        "points": 10
+      },
+      {
+        "factor": "competitor_replace_specialist",
+        "detail": "Daniel Okafor has displaced Bynder 6\u00d7 before",
+        "points": 10
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "broadcast-media",
+        "points": 2
+      }
+    ],
+    "play_id": "competitor_replace",
+    "primary_signal": "competitor_dam_in_stack",
+    "signals": [
+      {
+        "account_id": "umbrella-corp.personal",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 28,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      },
+      {
+        "account_id": "umbrella-corp.personal",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 38,
+        "payload": {
+          "campaign_or_rebrand": "tentpole campaign",
+          "detected_via": "press release"
+        }
+      },
+      {
+        "account_id": "umbrella-corp.personal",
+        "signal_type": "agency_change",
+        "days_ago": 9,
+        "payload": {
+          "from_agency": "Wieden+Kennedy",
+          "to_agency": "Gut"
+        }
+      }
+    ],
+    "play_subject": "Bynder renewal coming up at Umbrella Corp?",
+    "play_opener": "Most teams renewing Bynder this year are quietly mapping alternatives \u2014 usually because of search/findability, AI tagging, or pricing. We've migrated 6 Bynder customers in the last 18 months. Want a no-pitch comparison doc?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "ivy.chen@gmail.com",
+    "lead_name": "Ivy Chen",
+    "account_id": "company.personal",
+    "company": "Company",
+    "title": "Marketing Manager",
+    "seniority_level": "Manager",
+    "outbound_score": 17,
+    "outbound_tier": "Cool",
+    "rep_id": "jordan_park",
+    "rep_name": "Jordan Park",
+    "fit_score": 42,
+    "fit_breakdown": [
+      {
+        "factor": "deal_band_fit",
+        "detail": "~$10k expected \u2208 rep band $8k\u2013$40k",
+        "points": 15
+      },
+      {
+        "factor": "capacity_open",
+        "detail": "4/20 (20%)",
+        "points": 5
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "persona_strength_direct",
+        "detail": "Jordan Park sells to Manager",
+        "points": 18
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with operator-IC",
+        "points": 7
+      },
+      {
+        "factor": "selling_style_match",
+        "detail": "velocity-transactional fits this account",
+        "points": 4
+      },
+      {
+        "factor": "ramping_dampener",
+        "detail": "ramping rep: only routes to layup-reserved accounts",
+        "points": -12
+      }
+    ],
+    "play_id": "competitor_replace",
+    "primary_signal": "competitor_dam_in_stack",
+    "signals": [
+      {
+        "account_id": "company.personal",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 86,
+        "payload": {
+          "competitor": "Bynder"
+        }
+      }
+    ],
+    "play_subject": "Bynder renewal coming up at Company?",
+    "play_opener": "Most teams renewing Bynder this year are quietly mapping alternatives \u2014 usually because of search/findability, AI tagging, or pricing. We've migrated 0 Bynder customers in the last 18 months. Want a no-pitch comparison doc?",
+    "channel_priority": [
+      "email",
+      "linkedin"
+    ]
+  },
+  {
+    "lead_email": "alice.jones@gmail.com",
+    "lead_name": "Alice Jones",
+    "account_id": "alice.jones@gmail.com",
+    "company": null,
+    "title": "Senior Engineer",
+    "seniority_level": "Senior IC",
+    "outbound_score": 29,
+    "outbound_tier": "Cool",
+    "rep_id": "daniel_okafor",
+    "rep_name": "Daniel Okafor",
+    "fit_score": 41,
+    "fit_breakdown": [
+      {
+        "factor": "vertical_match",
+        "detail": "Daniel Okafor sells Sports",
+        "points": 20
+      },
+      {
+        "factor": "capacity_moderate",
+        "detail": "8/15 (53%)",
+        "points": 2
+      },
+      {
+        "factor": "language_match",
+        "detail": "en",
+        "points": 5
+      },
+      {
+        "factor": "buyer_archetype_affinity",
+        "detail": "rep thrives with technical-buyer",
+        "points": 7
+      },
+      {
+        "factor": "competitor_replace_some",
+        "detail": "3 prior Brandfolder wins",
+        "points": 5
+      },
+      {
+        "factor": "domain_expertise",
+        "detail": "pro-sports",
+        "points": 2
+      }
+    ],
+    "play_id": "fit_only_warm",
+    "primary_signal": "rebrand_or_campaign",
+    "signals": [
+      {
+        "account_id": "alice.jones@gmail.com",
+        "signal_type": "rebrand_or_campaign",
+        "days_ago": 30,
+        "payload": {
+          "campaign_or_rebrand": "category launch",
+          "detected_via": "ad library"
+        }
+      },
+      {
+        "account_id": "alice.jones@gmail.com",
+        "signal_type": "competitor_dam_in_stack",
+        "days_ago": 55,
+        "payload": {
+          "competitor": "Brandfolder"
+        }
+      }
+    ],
+    "play_subject": "your space brands & creative ops",
+    "play_opener": "Reaching out because we work with a lot of your space teams at your size \u2014 Sweetgreen, etc. Most have the same creative library pain (versioning, brand consistency, channel-sized variants). 15-min chat to see if it resonates for your team?",
+    "channel_priority": [
+      "email"
+    ]
+  }
+]

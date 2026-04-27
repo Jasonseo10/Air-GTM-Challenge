@@ -1226,6 +1226,14 @@ export default function App() {
                 GTM · Lead Pipeline
               </div>
             </div>
+            <a
+              href="/routing"
+              className="ml-3 hidden items-center gap-1.5 rounded-lg border border-border/60 bg-background/40 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/65 backdrop-blur transition-colors hover:border-primary/40 hover:bg-primary/10 hover:text-primary sm:inline-flex"
+              title="Open the outbound routing dashboard"
+            >
+              Outbound Routing
+              <ArrowUpRight className="h-3 w-3" strokeWidth={2} />
+            </a>
           </div>
           <div className="hidden items-center gap-0.5 md:flex">
             {steps.map((s, i) => {

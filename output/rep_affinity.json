@@ -1,0 +1,232 @@
+{
+  "maya_chen": {
+    "CPG": {
+      "Director": {
+        "n": 2,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      },
+      "Other": {
+        "n": 5,
+        "won_n": 1,
+        "win_rate": 0.2,
+        "avg_acv": 37806.0
+      },
+      "VP": {
+        "n": 3,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      },
+      "C-Level": {
+        "n": 2,
+        "won_n": 1,
+        "win_rate": 0.5,
+        "avg_acv": 41967.0
+      },
+      "Manager": {
+        "n": 1,
+        "won_n": 1,
+        "win_rate": 1.0,
+        "avg_acv": 42846.0
+      }
+    },
+    "Marketing Technology": {
+      "VP": {
+        "n": 1,
+        "won_n": 1,
+        "win_rate": 1.0,
+        "avg_acv": 88027.0
+      }
+    }
+  },
+  "daniel_okafor": {
+    "Media": {
+      "VP": {
+        "n": 2,
+        "won_n": 1,
+        "win_rate": 0.5,
+        "avg_acv": 26935.0
+      },
+      "Other": {
+        "n": 7,
+        "won_n": 4,
+        "win_rate": 0.5714285714285714,
+        "avg_acv": 24919.75
+      },
+      "Director": {
+        "n": 1,
+        "won_n": 1,
+        "win_rate": 1.0,
+        "avg_acv": 27197.0
+      }
+    },
+    "Broadcast": {
+      "Other": {
+        "n": 2,
+        "won_n": 1,
+        "win_rate": 0.5,
+        "avg_acv": 13417.0
+      },
+      "Director": {
+        "n": 1,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      }
+    },
+    "Sports": {
+      "Other": {
+        "n": 1,
+        "won_n": 1,
+        "win_rate": 1.0,
+        "avg_acv": 9875.0
+      }
+    }
+  },
+  "jordan_park": {
+    "SaaS": {
+      "C-Level": {
+        "n": 3,
+        "won_n": 1,
+        "win_rate": 0.3333333333333333,
+        "avg_acv": 101952.0
+      },
+      "Other": {
+        "n": 9,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      },
+      "Director": {
+        "n": 2,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      },
+      "VP": {
+        "n": 1,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      }
+    },
+    "Media": {
+      "Manager": {
+        "n": 1,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      }
+    },
+    "Developer Tools": {
+      "Manager": {
+        "n": 1,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      }
+    }
+  },
+  "priya_shah": {
+    "Developer Tools": {
+      "Other": {
+        "n": 6,
+        "won_n": 4,
+        "win_rate": 0.6666666666666666,
+        "avg_acv": 13951.0
+      },
+      "Director": {
+        "n": 2,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      },
+      "C-Level": {
+        "n": 1,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      }
+    },
+    "E-commerce": {
+      "VP": {
+        "n": 1,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      }
+    },
+    "Marketing Technology": {
+      "Other": {
+        "n": 1,
+        "won_n": 1,
+        "win_rate": 1.0,
+        "avg_acv": 68773.0
+      }
+    },
+    "SaaS": {
+      "C-Level": {
+        "n": 2,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      },
+      "Other": {
+        "n": 1,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      }
+    },
+    "CPG": {
+      "Other": {
+        "n": 1,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      }
+    }
+  },
+  "sarah_mitchell": {
+    "SaaS": {
+      "VP": {
+        "n": 2,
+        "won_n": 2,
+        "win_rate": 1.0,
+        "avg_acv": 117950.5
+      },
+      "Other": {
+        "n": 1,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      }
+    },
+    "Beauty": {
+      "C-Level": {
+        "n": 1,
+        "won_n": 0,
+        "win_rate": 0.0,
+        "avg_acv": 0
+      },
+      "VP": {
+        "n": 1,
+        "won_n": 1,
+        "win_rate": 1.0,
+        "avg_acv": 8172.0
+      }
+    }
+  },
+  "luis_romero": {
+    "Developer Tools": {
+      "C-Level": {
+        "n": 2,
+        "won_n": 1,
+        "win_rate": 0.5,
+        "avg_acv": 14732.0
+      }
+    }
+  }
+}

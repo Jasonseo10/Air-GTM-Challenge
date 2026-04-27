@@ -1,0 +1,192 @@
+{
+  "description": "Sales rep roster for outbound routing. Hard-fit fields (segment, verticals, deal_size_band, capacity) plus qualitative-fit fields (prior_companies, domain_expertise_tags, selling_style, buyer_archetype_affinity, competitor_replace_experience, past_wins) are consumed by src/outbound/match.py. The past_wins list is updated automatically by src/outbound/feedback.py after a closed-loop refit.",
+  "reps": [
+    {
+      "rep_id": "maya_chen",
+      "name": "Maya Chen",
+      "segment": "Mid-Market",
+      "verticals": ["DTC", "Food & Beverage", "Retail", "E-commerce"],
+      "persona_strength": ["VP Marketing", "Director Marketing", "Marketing Ops", "Head of Brand"],
+      "deal_size_band_usd": [25000, 80000],
+      "languages": ["en"],
+      "timezone": "America/New_York",
+      "tenure_months": 18,
+      "capacity_max": 25,
+      "capacity_current": 12,
+      "prior_companies": ["Brandfolder", "Hubspot"],
+      "prior_roles": ["SDR", "Marketing Coordinator"],
+      "domain_expertise_tags": ["shopify-ecosystem", "DTC-food", "creator-economy", "retail-omnichannel"],
+      "selling_style": "consultative-multithread",
+      "buyer_archetype_affinity": ["operator-IC", "exec-sponsor"],
+      "competitor_replace_experience": {
+        "Brandfolder": 7,
+        "Bynder": 4,
+        "Dropbox": 12,
+        "Frontify": 1
+      },
+      "past_wins": [
+        {"vertical": "DTC", "persona": "VP Marketing", "acv_usd": 42000},
+        {"vertical": "Food & Beverage", "persona": "Director Marketing", "acv_usd": 51000},
+        {"vertical": "DTC", "persona": "Head of Brand", "acv_usd": 38000},
+        {"vertical": "Retail", "persona": "VP Marketing", "acv_usd": 60000}
+      ],
+      "pursuit_stage_strength": {"opener": 0.85, "discovery": 0.78, "negotiation": 0.62, "close": 0.70}
+    },
+    {
+      "rep_id": "daniel_okafor",
+      "name": "Daniel Okafor",
+      "segment": "Enterprise",
+      "verticals": ["Media", "Entertainment", "Sports", "Broadcast"],
+      "persona_strength": ["Creative Director", "Head of Creative", "VP Creative", "Design Ops"],
+      "deal_size_band_usd": [80000, 300000],
+      "languages": ["en"],
+      "timezone": "America/Los_Angeles",
+      "tenure_months": 42,
+      "capacity_max": 15,
+      "capacity_current": 8,
+      "prior_companies": ["Adobe", "Frame.io"],
+      "prior_roles": ["Creative Director", "AE"],
+      "domain_expertise_tags": ["broadcast-media", "pro-sports", "olympic-brands", "post-production"],
+      "selling_style": "exec-sponsorship-driven",
+      "buyer_archetype_affinity": ["exec-sponsor", "technical-buyer"],
+      "competitor_replace_experience": {
+        "Frontify": 5,
+        "Bynder": 6,
+        "Brandfolder": 3,
+        "Dropbox": 4
+      },
+      "past_wins": [
+        {"vertical": "Media", "persona": "Creative Director", "acv_usd": 145000},
+        {"vertical": "Sports", "persona": "Head of Creative", "acv_usd": 220000},
+        {"vertical": "Entertainment", "persona": "VP Creative", "acv_usd": 180000}
+      ],
+      "pursuit_stage_strength": {"opener": 0.72, "discovery": 0.88, "negotiation": 0.85, "close": 0.82}
+    },
+    {
+      "rep_id": "priya_shah",
+      "name": "Priya Shah",
+      "segment": "Mid-Market",
+      "verticals": ["SaaS", "Developer Tools", "Marketing Technology", "Fintech"],
+      "persona_strength": ["Marketing Ops", "RevOps", "Director Marketing", "Head of Demand"],
+      "deal_size_band_usd": [25000, 80000],
+      "languages": ["en", "hi"],
+      "timezone": "America/New_York",
+      "tenure_months": 22,
+      "capacity_max": 25,
+      "capacity_current": 18,
+      "prior_companies": ["Mutiny", "Salesforce"],
+      "prior_roles": ["SDR", "Marketing Ops Analyst"],
+      "domain_expertise_tags": ["B2B-SaaS", "demand-gen-stack", "MarTech-integrations"],
+      "selling_style": "consultative-multithread",
+      "buyer_archetype_affinity": ["operator-IC", "technical-buyer"],
+      "competitor_replace_experience": {
+        "Brandfolder": 4,
+        "Frontify": 2,
+        "Dropbox": 8,
+        "Bynder": 1
+      },
+      "past_wins": [
+        {"vertical": "SaaS", "persona": "Marketing Ops", "acv_usd": 36000},
+        {"vertical": "Developer Tools", "persona": "Director Marketing", "acv_usd": 42000},
+        {"vertical": "Marketing Technology", "persona": "Head of Demand", "acv_usd": 55000}
+      ],
+      "pursuit_stage_strength": {"opener": 0.80, "discovery": 0.82, "negotiation": 0.65, "close": 0.68}
+    },
+    {
+      "rep_id": "luis_romero",
+      "name": "Luis Romero",
+      "segment": "SMB",
+      "verticals": ["Agency", "E-commerce", "Creative Operations"],
+      "persona_strength": ["Founder", "Owner", "Head of Marketing", "Creative Lead"],
+      "deal_size_band_usd": [8000, 25000],
+      "languages": ["en", "es"],
+      "timezone": "America/Chicago",
+      "tenure_months": 14,
+      "capacity_max": 35,
+      "capacity_current": 22,
+      "prior_companies": ["Shopify", "Webflow"],
+      "prior_roles": ["SDR", "Account Manager"],
+      "domain_expertise_tags": ["shopify-ecosystem", "agency-workflows", "founder-led-sales"],
+      "selling_style": "velocity-transactional",
+      "buyer_archetype_affinity": ["founder-owner"],
+      "competitor_replace_experience": {
+        "Dropbox": 18,
+        "Brandfolder": 2,
+        "Frontify": 1,
+        "Bynder": 0
+      },
+      "past_wins": [
+        {"vertical": "Agency", "persona": "Founder", "acv_usd": 14000},
+        {"vertical": "E-commerce", "persona": "Head of Marketing", "acv_usd": 18000},
+        {"vertical": "Agency", "persona": "Creative Lead", "acv_usd": 11000},
+        {"vertical": "E-commerce", "persona": "Owner", "acv_usd": 16000}
+      ],
+      "pursuit_stage_strength": {"opener": 0.88, "discovery": 0.70, "negotiation": 0.55, "close": 0.75}
+    },
+    {
+      "rep_id": "sarah_mitchell",
+      "name": "Sarah Mitchell",
+      "segment": "Enterprise",
+      "verticals": ["CPG", "Fashion", "Beauty", "Food & Beverage"],
+      "persona_strength": ["CMO", "C-Level", "VP Marketing", "Head of Brand"],
+      "deal_size_band_usd": [100000, 500000],
+      "languages": ["en"],
+      "timezone": "America/New_York",
+      "tenure_months": 60,
+      "capacity_max": 12,
+      "capacity_current": 6,
+      "prior_companies": ["Bynder", "Aprimo"],
+      "prior_roles": ["AE", "Senior AE"],
+      "domain_expertise_tags": ["CPG-enterprise", "fashion-luxury", "beauty-DTC", "retail-enterprise"],
+      "selling_style": "exec-sponsorship-driven",
+      "buyer_archetype_affinity": ["exec-sponsor"],
+      "competitor_replace_experience": {
+        "Bynder": 11,
+        "Brandfolder": 5,
+        "Frontify": 3,
+        "Aprimo": 4,
+        "Dropbox": 2
+      },
+      "past_wins": [
+        {"vertical": "CPG", "persona": "CMO", "acv_usd": 250000},
+        {"vertical": "Fashion", "persona": "VP Marketing", "acv_usd": 180000},
+        {"vertical": "Beauty", "persona": "CMO", "acv_usd": 320000},
+        {"vertical": "CPG", "persona": "Head of Brand", "acv_usd": 140000}
+      ],
+      "pursuit_stage_strength": {"opener": 0.65, "discovery": 0.85, "negotiation": 0.92, "close": 0.88}
+    },
+    {
+      "rep_id": "jordan_park",
+      "name": "Jordan Park",
+      "segment": "SMB",
+      "verticals": ["SaaS", "E-commerce", "Agency"],
+      "persona_strength": ["Manager", "Senior IC", "Head of Marketing"],
+      "deal_size_band_usd": [8000, 40000],
+      "languages": ["en", "ko"],
+      "timezone": "America/Los_Angeles",
+      "tenure_months": 3,
+      "capacity_max": 20,
+      "capacity_current": 4,
+      "prior_companies": ["Asana"],
+      "prior_roles": ["SDR"],
+      "domain_expertise_tags": ["B2B-SaaS", "shopify-ecosystem"],
+      "selling_style": "velocity-transactional",
+      "buyer_archetype_affinity": ["operator-IC"],
+      "competitor_replace_experience": {
+        "Dropbox": 1,
+        "Brandfolder": 0,
+        "Bynder": 0,
+        "Frontify": 0
+      },
+      "past_wins": [],
+      "pursuit_stage_strength": {"opener": 0.62, "discovery": 0.55, "negotiation": 0.40, "close": 0.50},
+      "ramp_status": "ramping",
+      "needs_assist": true
+    }
+  ],
+  "fairness": {
+    "min_share_pct_per_rep_in_band": 10,
+    "max_capacity_utilization_pct": 95,
+    "ramping_rep_layup_share_pct": 15
+  }
+}
