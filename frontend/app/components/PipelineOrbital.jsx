@@ -3,10 +3,10 @@ import { useState, useEffect, useRef } from "react";
 
 /* ════════════════════ DESIGN TOKENS (mirrors page.js) ════════════════════ */
 const C = {
-  bg: "#FAFAF7", surface: "#FFFFFF", surfaceAlt: "#F5F4F0",
-  border: "#E8E6DF", borderLight: "#F0EEE8",
-  text: "#1A1A18", textMd: "#5C5B56", textLt: "#9C9A93",
-  accent: "#2D5A3D", accentLight: "#E8F0EB", accentMd: "#4A8B62",
+  bg: "#FCFBF8", surface: "#FDFCFB", surfaceAlt: "#F4F0E6",
+  border: "#E4E0DB", borderLight: "#F0EBE6",
+  text: "#141C2E", textMd: "#585F6E", textLt: "#A1A4AB",
+  accent: "#1892EA", accentLight: "#E4F2FD", accentMd: "#6AB5F1",
 };
 const F = {
   body: "var(--font-inter), -apple-system, sans-serif",

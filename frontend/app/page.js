@@ -29,7 +29,7 @@ const PIPELINE_STAGES = [
   },
   {
     id: 3, title: "Score", icon: "score", duration: "~20ms",
-    description: "10 ICP criteria weighted to 100%. Each lead gets a 0-100 score and a tier (HOT / WARM / COOL / LOW). Adjust weights live on the results screen.",
+    description: "13 ICP signals across 4 categories (intent / fit / persona / expansion) weighted to 100%. Each lead gets a 0-100 score and a tier (HOT / WARM / COOL / LOW). Adjust weights live on the results screen.",
     relatedIds: [2, 4],
   },
   {
@@ -46,86 +46,159 @@ const TARGET_INDUSTRIES = new Set([
   "Developer Tools", "E-commerce",
 ]);
 
+// 13 signals across 4 categories (intent / fit / persona / expansion) — the
+// same category split the Python rule engine uses. Weights sum to 100 and
+// mirror the point totals in config/scoring_rules.json so the dashboard and
+// the pipeline never disagree on a tier.
 const DEF_W = {
-  pageVisits:      { label: "Pricing / Demo Page Visits",        w: 10 },
-  signupIntent:    { label: "Signup / Payment Intent",           w: 15 },
-  creditUsage:     { label: "Free-Credit Usage",                 w: 10 },
-  assetUploads:    { label: "Asset Upload Volume",               w: 10 },
-  teamCollab:      { label: "Team Collaboration Depth",          w: 10 },
-  companySize:     { label: "Company Size Fit",                  w: 10 },
-  industryMatch:   { label: "Industry Match",                    w: 10 },
-  mktgCreative:    { label: "Marketing / Creative Team",         w: 10 },
-  channelExpansion:{ label: "Channel Expansion",                 w: 10 },
-  creativeHiring:  { label: "Creative Hiring Signals",           w: 5  },
+  // INTENT — what the prospect is doing (weighted heaviest; PLG-first)
+  pricingPage:         { label: "Pricing / Demo Page Visits",      w: 10, category: "intent" },
+  signupIntent:        { label: "Signup Intent (validated)",       w: 15, category: "intent" },
+  creditUsage:         { label: "Credit Usage (PQL)",              w: 10, category: "intent" },
+  assetUploads:        { label: "Asset Upload Volume",             w: 8,  category: "intent" },
+  teamAdoption:        { label: "Team Collaboration Depth",        w: 8,  category: "intent" },
+  warmReferral:        { label: "Warm Referral / Event",           w: 6,  category: "intent" },
+  // FIT — who the company is
+  companySize:         { label: "Company Size Fit",                w: 9,  category: "fit" },
+  industryStack:       { label: "Industry + Stack Match",          w: 10, category: "fit" },
+  // PERSONA — who the person is
+  buyerPersona:        { label: "Buyer Persona (mktg/creative)",   w: 7,  category: "persona" },
+  founderLed:          { label: "Founder-Led (SMB C-Suite)",       w: 4,  category: "persona" },
+  // EXPANSION — whitespace + growth (contrarian)
+  channelActivity:     { label: "Channel Activity / Whitespace",   w: 5,  category: "expansion" },
+  creativeHiring:      { label: "Creative Hiring Signals",         w: 4,  category: "expansion" },
+  activatedEnterprise: { label: "Activated Enterprise",            w: 4,  category: "expansion" },
 };
 
+const CATEGORY_ORDER = ["intent", "fit", "persona", "expansion"];
+
 function scoreLead(lead, W) {
-  let total = 0;
   const b = {};
-  const pv = lead.pricing_page_views || 0; const pvW = W.pageVisits.w;
-  if (pv >= 20) b.pageVisits = pvW;
-  else if (pv >= 10) b.pageVisits = Math.round(pvW * 0.7);
-  else if (pv >= 3) b.pageVisits = Math.round(pvW * 0.4);
-  else b.pageVisits = Math.round(pvW * 0.15);
+  const byCategory = { intent: 0, fit: 0, persona: 0, expansion: 0 };
 
-  const siW = W.signupIntent.w;
   const src = (lead.source || "").toLowerCase();
-  if (lead.has_signup_intent && src.includes("product signup")) b.signupIntent = siW;
-  else if (lead.has_signup_intent) b.signupIntent = Math.round(siW * 0.7);
-  else if (src.includes("event") || src.includes("referral")) b.signupIntent = Math.round(siW * 0.4);
-  else b.signupIntent = Math.round(siW * 0.15);
+  const sz = lead.company_size_min || 0;
+  const au = lead.asset_uploads || 0;
+  const ti = lead.teammate_invites || 0;
+  const cu = lead.credit_usage_pct || 0;
+  const ch = lead.active_channels || 0;
+  const cj = lead.creative_job_postings || 0;
+  const ind = lead.industry || "";
+  const sen = (lead.seniority_level || "").toLowerCase();
+  const seniorRoles = ["c-level", "vp", "director"];
+  const hasMktg = !!lead.has_marketing_title;
+  const isBiz = !!lead.is_business_email;
+  const hasCreativeStack = !!lead.has_creative_stack;
+  const techMod = lead.tech_modernity_score || 0;
 
-  const cu = lead.credit_usage_pct || 0; const cuW = W.creditUsage.w;
+  // ─── INTENT ─────────────────────────────────────────────────────────────
+  const pvW = W.pricingPage.w;
+  const pv = lead.pricing_page_views || 0;
+  if (pv >= 20) b.pricingPage = pvW;
+  else if (pv >= 10) b.pricingPage = Math.round(pvW * 0.7);
+  else if (pv >= 3) b.pricingPage = Math.round(pvW * 0.4);
+  else b.pricingPage = Math.round(pvW * 0.15);
+
+  // Conditional: validated signup = Product Signup + credit usage >= 50%.
+  // Signup alone is cheap; signup backed by usage is categorically stronger.
+  const siW = W.signupIntent.w;
+  const isProductSignup = src.includes("product signup");
+  if (isProductSignup && cu >= 50) b.signupIntent = siW;
+  else if (isProductSignup) b.signupIntent = Math.round(siW * 0.75);
+  else if (lead.has_signup_intent) b.signupIntent = Math.round(siW * 0.5);
+  else b.signupIntent = Math.round(siW * 0.1);
+
+  const cuW = W.creditUsage.w;
   if (cu >= 80) b.creditUsage = cuW;
   else if (cu >= 50) b.creditUsage = Math.round(cuW * 0.7);
   else if (cu >= 20) b.creditUsage = Math.round(cuW * 0.4);
-  else b.creditUsage = Math.round(cuW * 0.15);
+  else b.creditUsage = Math.round(cuW * 0.1);
 
-  const au = lead.asset_uploads || 0; const auW = W.assetUploads.w;
+  const auW = W.assetUploads.w;
   if (au >= 200) b.assetUploads = auW;
   else if (au >= 50) b.assetUploads = Math.round(auW * 0.7);
-  else if (au >= 10) b.assetUploads = Math.round(auW * 0.4);
+  else if (au >= 10) b.assetUploads = Math.round(auW * 0.3);
   else b.assetUploads = Math.round(auW * 0.1);
 
-  const ti = lead.teammate_invites || 0; const tiW = W.teamCollab.w;
-  if (ti >= 10) b.teamCollab = tiW;
-  else if (ti >= 5) b.teamCollab = Math.round(tiW * 0.7);
-  else if (ti >= 2) b.teamCollab = Math.round(tiW * 0.4);
-  else b.teamCollab = Math.round(tiW * 0.15);
+  const taW = W.teamAdoption.w;
+  if (ti >= 10) b.teamAdoption = taW;
+  else if (ti >= 5) b.teamAdoption = Math.round(taW * 0.7);
+  else if (ti >= 2) b.teamAdoption = Math.round(taW * 0.4);
+  else b.teamAdoption = Math.round(taW * 0.1);
 
-  const sz = lead.company_size_min || 0; const szW = W.companySize.w;
-  if (sz >= 1000) b.companySize = szW;
-  else if (sz >= 201) b.companySize = Math.round(szW * 0.7);
-  else if (sz >= 51) b.companySize = Math.round(szW * 0.4);
-  else b.companySize = Math.round(szW * 0.15);
+  // Conditional: warm referral only counts fully if from a business email.
+  // A referral from a gmail.com address is unverifiable.
+  const wrW = W.warmReferral.w;
+  if (src.includes("referral") && isBiz) b.warmReferral = wrW;
+  else if (src.includes("referral")) b.warmReferral = Math.round(wrW * 0.5);
+  else if (src.includes("event")) b.warmReferral = Math.round(wrW * 0.5);
+  else b.warmReferral = 0;
 
-  const ind = lead.industry || ""; const indW = W.industryMatch.w;
-  if (TARGET_INDUSTRIES.has(ind)) b.industryMatch = indW;
-  else b.industryMatch = Math.round(indW * 0.2);
+  // ─── FIT ────────────────────────────────────────────────────────────────
+  // Mid-market is ideal fit; enterprise and SMB are partial.
+  const szW = W.companySize.w;
+  if (sz >= 201 && sz <= 999) b.companySize = szW;
+  else if (sz >= 1000) b.companySize = Math.round(szW * 0.8);
+  else if (sz >= 51) b.companySize = Math.round(szW * 0.6);
+  else if (sz >= 1) b.companySize = Math.round(szW * 0.3);
+  else b.companySize = 0;
 
-  const mcW = W.mktgCreative.w;
-  const hasMktg = lead.has_marketing_title || false;
-  const sen = (lead.seniority_level || "").toLowerCase();
-  const seniorRoles = ["c-level", "vp", "director"];
-  if (hasMktg && seniorRoles.includes(sen)) b.mktgCreative = mcW;
-  else if (hasMktg) b.mktgCreative = Math.round(mcW * 0.6);
-  else if (seniorRoles.includes(sen)) b.mktgCreative = Math.round(mcW * 0.4);
-  else b.mktgCreative = Math.round(mcW * 0.1);
+  // Industry + technographic stack, compound: detected creative stack on top
+  // of a target industry beats either signal alone.
+  const isW = W.industryStack.w;
+  const industryMatch = TARGET_INDUSTRIES.has(ind);
+  if (industryMatch && hasCreativeStack) b.industryStack = isW;
+  else if (industryMatch) b.industryStack = Math.round(isW * 0.75);
+  else if (hasCreativeStack) b.industryStack = Math.round(isW * 0.5);
+  else b.industryStack = Math.round(isW * 0.15);
 
-  const ch = lead.active_channels || 0; const chW = W.channelExpansion.w;
-  if (ch >= 6) b.channelExpansion = chW;
-  else if (ch >= 4) b.channelExpansion = Math.round(chW * 0.7);
-  else if (ch >= 2) b.channelExpansion = Math.round(chW * 0.4);
-  else b.channelExpansion = Math.round(chW * 0.15);
+  // ─── PERSONA ────────────────────────────────────────────────────────────
+  const bpW = W.buyerPersona.w;
+  if (hasMktg && seniorRoles.includes(sen)) b.buyerPersona = bpW;
+  else if (hasMktg) b.buyerPersona = Math.round(bpW * 0.55);
+  else if (seniorRoles.includes(sen)) b.buyerPersona = Math.round(bpW * 0.4);
+  else b.buyerPersona = Math.round(bpW * 0.1);
 
-  const cj = lead.creative_job_postings || 0; const cjW = W.creativeHiring.w;
-  if (cj >= 8) b.creativeHiring = cjW;
-  else if (cj >= 3) b.creativeHiring = Math.round(cjW * 0.7);
-  else if (cj >= 1) b.creativeHiring = Math.round(cjW * 0.4);
-  else b.creativeHiring = Math.round(cjW * 0.1);
+  // Conditional: founder-led boost ONLY at <50 employees. Above that
+  // threshold the real buyer is a functional leader and this rule would
+  // double-count with persona.
+  const flW = W.founderLed.w;
+  if (sen === "c-level" && sz > 0 && sz < 50) b.founderLed = flW;
+  else if (sen === "c-level") b.founderLed = Math.round(flW * 0.3);
+  else b.founderLed = 0;
 
-  Object.values(b).forEach((v) => { total += v; });
-  return { s: Math.round(total), b };
+  // ─── EXPANSION ──────────────────────────────────────────────────────────
+  // Dual meaning: high activity OR enterprise whitespace both score.
+  const caW = W.channelActivity.w;
+  if (ch >= 6) b.channelActivity = caW;
+  else if (ch >= 4) b.channelActivity = Math.round(caW * 0.7);
+  else if (sz >= 1000 && ch <= 2) b.channelActivity = Math.round(caW * 0.6); // whitespace
+  else if (ch >= 2) b.channelActivity = Math.round(caW * 0.3);
+  else b.channelActivity = 0;
+
+  const chW = W.creativeHiring.w;
+  if (cj >= 8) b.creativeHiring = chW;
+  else if (cj >= 3) b.creativeHiring = Math.round(chW * 0.6);
+  else if (cj >= 1) b.creativeHiring = Math.round(chW * 0.3);
+  else b.creativeHiring = 0;
+
+  // Activated enterprise: 1000+ AND 200+ uploads AND 5+ teammates. Rare and
+  // extremely high-confidence — size + usage together, not either alone.
+  // Falls back to "modern stack" signal if the strict condition misses.
+  const aeW = W.activatedEnterprise.w;
+  if (sz >= 1000 && au >= 200 && ti >= 5) b.activatedEnterprise = aeW;
+  else if (techMod >= 60) b.activatedEnterprise = Math.round(aeW * 0.7);
+  else if (techMod >= 30) b.activatedEnterprise = Math.round(aeW * 0.3);
+  else b.activatedEnterprise = 0;
+
+  let total = 0;
+  Object.entries(b).forEach(([key, pts]) => {
+    total += pts;
+    const cat = W[key]?.category || "fit";
+    byCategory[cat] = (byCategory[cat] || 0) + pts;
+  });
+
+  return { s: Math.round(total), b, byCategory };
 }
 
 function tierOf(score) {
@@ -377,30 +450,61 @@ function DetailPanel({ lead, sc, W, onBack, onExportLead }) {
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-border/70 to-transparent" />
             </div>
-            <div className="space-y-3">
-              {Object.entries(W).map(([k, cfg]) => {
-                const earned = sc.b[k] || 0;
-                const max = cfg.w;
-                const pct = max > 0 ? (earned / max) * 100 : 0;
-                const barColor = pct >= 80 ? "hsl(var(--mint))" : pct >= 50 ? "hsl(var(--amber))" : "hsl(var(--ember))";
+            <div className="mb-5 grid grid-cols-4 gap-2">
+              {CATEGORY_ORDER.map((cat) => {
+                const v = (sc.byCategory && sc.byCategory[cat]) || 0;
+                const maxForCat = Object.entries(W)
+                  .filter(([, cfg]) => cfg.category === cat)
+                  .reduce((s, [, cfg]) => s + cfg.w, 0);
                 return (
-                  <div key={k}>
-                    <div className="mb-1.5 flex items-center justify-between">
-                      <span className="text-[11px] text-foreground/70">{cfg.label}</span>
-                      <span className="font-mono text-[11px] font-medium tabular-nums text-foreground">
-                        {earned}<span className="text-foreground/40">/{max}</span>
-                      </span>
+                  <div key={cat} className="rounded-lg border border-border/40 bg-background/30 px-2 py-2">
+                    <div className="font-mono text-[9px] uppercase tracking-[0.22em] text-foreground/45">
+                      {cat}
                     </div>
-                    <div className="h-[3px] w-full overflow-hidden rounded-full bg-muted/50">
-                      <div
-                        className="h-full rounded-full"
-                        style={{
-                          width: `${pct}%`,
-                          background: barColor,
-                          transition: "width .7s cubic-bezier(.16,1,.3,1)",
-                          boxShadow: `0 0 8px ${barColor}`,
-                        }}
-                      />
+                    <div className="mt-1 font-mono text-sm font-semibold tabular-nums text-foreground">
+                      {v}<span className="text-foreground/35">/{maxForCat}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="space-y-4">
+              {CATEGORY_ORDER.map((cat) => {
+                const entries = Object.entries(W).filter(([, cfg]) => cfg.category === cat);
+                if (entries.length === 0) return null;
+                return (
+                  <div key={cat}>
+                    <div className="mb-2 font-mono text-[9px] uppercase tracking-[0.22em] text-foreground/40">
+                      {cat}
+                    </div>
+                    <div className="space-y-3">
+                      {entries.map(([k, cfg]) => {
+                        const earned = sc.b[k] || 0;
+                        const max = cfg.w;
+                        const pct = max > 0 ? (earned / max) * 100 : 0;
+                        const barColor = pct >= 80 ? "hsl(var(--mint))" : pct >= 50 ? "hsl(var(--amber))" : "hsl(var(--ember))";
+                        return (
+                          <div key={k}>
+                            <div className="mb-1.5 flex items-center justify-between">
+                              <span className="text-[11px] text-foreground/70">{cfg.label}</span>
+                              <span className="font-mono text-[11px] font-medium tabular-nums text-foreground">
+                                {earned}<span className="text-foreground/40">/{max}</span>
+                              </span>
+                            </div>
+                            <div className="h-[3px] w-full overflow-hidden rounded-full bg-muted/50">
+                              <div
+                                className="h-full rounded-full"
+                                style={{
+                                  width: `${pct}%`,
+                                  background: barColor,
+                                  transition: "width .7s cubic-bezier(.16,1,.3,1)",
+                                  boxShadow: `0 0 8px ${barColor}`,
+                                }}
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 );
@@ -1322,12 +1426,31 @@ export default function App() {
                 </span>
               </div>
               <p className="mb-5 text-xs leading-relaxed text-foreground/55">
-                Tune each signal's contribution. Scores recompute live once the pipeline finishes.
+                Tune each signal's contribution. Signals are grouped by category — intent (product usage), fit (firmographic), persona (buyer profile), and expansion (whitespace + growth). Scores recompute live.
               </p>
-              <div className="space-y-3">
-                {Object.entries(W).map(([k, cfg]) => (
-                  <Slider key={k} label={cfg.label} value={cfg.w} onChange={(v) => updW(k, v)} />
-                ))}
+              <div className="space-y-5">
+                {CATEGORY_ORDER.map((cat) => {
+                  const entries = Object.entries(W).filter(([, cfg]) => cfg.category === cat);
+                  if (entries.length === 0) return null;
+                  const catTotal = entries.reduce((s, [, cfg]) => s + cfg.w, 0);
+                  return (
+                    <div key={cat}>
+                      <div className="mb-2 flex items-center justify-between">
+                        <span className="font-mono text-[9px] uppercase tracking-[0.26em] text-foreground/45">
+                          {cat}
+                        </span>
+                        <span className="font-mono text-[9px] tabular-nums text-foreground/35">
+                          {catTotal}%
+                        </span>
+                      </div>
+                      <div className="space-y-3">
+                        {entries.map(([k, cfg]) => (
+                          <Slider key={k} label={cfg.label} value={cfg.w} onChange={(v) => updW(k, v)} />
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
               <div
                 className={cn(

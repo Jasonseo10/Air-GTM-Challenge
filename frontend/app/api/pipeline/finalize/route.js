@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { spawn } from "child_process";
 import { readFile } from "fs/promises";
 import path from "path";
+import { PYTHON_BIN } from "../../../../lib/python";
 
 const ROOT = path.resolve(process.cwd(), "..");
 
@@ -37,7 +38,7 @@ export async function POST(request) {
 
   return new Promise((resolve) => {
     try {
-    const proc = spawn("py", [
+    const proc = spawn(PYTHON_BIN, [
       "finalize_helper.py",
       csvPath,
       "--today", "2026-04-15",
